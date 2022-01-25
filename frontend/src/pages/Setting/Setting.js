@@ -1,6 +1,6 @@
 import { Container } from '../../assets/styles/globalStyles';
 const Setting = () => {
-  return <div></div>;
+  return <div>Setting</div>;
 };
 
 export default Setting;
