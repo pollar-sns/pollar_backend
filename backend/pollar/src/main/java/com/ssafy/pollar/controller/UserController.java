@@ -61,6 +61,8 @@ public class UserController {
         if(userService.emailCheck(userEmail)){
 
         }
-        return new ResponseEntity<Boolean>()
+
+        return new ResponseEntity<Boolean>(checkflag,HttpStatus.OK);
+
     }
 }
