@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/user")
@@ -65,4 +68,26 @@ public class UserController {
         return new ResponseEntity<Boolean>(checkflag,HttpStatus.OK);
 
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String,Object>> login(@RequestBody UserDto userDto){
+        Map<String,Object> resultMap = new HashMap<>();
+        HttpStatus status = null;
+        try {
+            if(userService.login(userDto)){
+                String token ="";
+                resultMap.put("access-token",token);
+                resultMap.put("message",SUCCESS);
+            }else{
+                resultMap.put("message",FAIL);
+            }
+            status = HttpStatus.ACCEPTED;
+        }catch (Exception e){
+            resultMap.put("message", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String,Object>>(resultMap,status);
+    }
+
+    
 }

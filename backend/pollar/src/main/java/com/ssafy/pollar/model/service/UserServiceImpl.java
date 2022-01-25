@@ -76,5 +76,18 @@ public class UserServiceImpl implements UserService{
         }
     }
 
+    @Override
+    public boolean login(UserDto userDto) throws Exception {
+        if(userDto.getUserId() == null || userDto.getPassword()==null){
+            return false;
+        }else{
+            if(!userRepository.findByUserIdAndPassword(userDto.getUserId(),userDto.getPassword()).isPresent()){
+                return false;
+            }else{
+                return true;
+            }
+        }
+    }
+
 
 }

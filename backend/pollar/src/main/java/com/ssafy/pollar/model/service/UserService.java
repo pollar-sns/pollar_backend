@@ -8,4 +8,5 @@ public interface UserService {
     boolean idCheck(String userId) throws Exception;
     boolean nicknameCheck(String userNickname) throws Exception;
     boolean emailCheck(String userEmail) throws Exception;
+    boolean login(UserDto userDto) throws Exception;
 }
