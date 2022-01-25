@@ -89,5 +89,5 @@ public class UserController {
         return new ResponseEntity<Map<String,Object>>(resultMap,status);
     }
 
-    
+
 }
