@@ -1,22 +1,37 @@
 import axios from 'axios';
 
+//? Service for user authentication
+
 // TODO
 // const API_URL = 'http://localhost:8080/api/auth/';
 const API_URL = 'http://localhost:8080/api/user/';
 // const API_URL = '(deployed)'
-
-const register = (username, email, password) => {
-  return axios.post(API_URL + 'signup', {
-    username,
-    email,
-    password,
+/* 회원가입 시 중복검사 */
+const checkId = (userId) => {
+  return axios.get(API_URL + 'idcheck', {
+    userId,
   });
 };
 
-const login = (username, password) => {
+/* 회원가입 */
+const signup = (userId, password, userNickname, userEmail, userBirthday, userSex, categories) => {
+  return axios.post(API_URL + 'signup', {
+    userId,
+    password,
+    userNickname,
+    userEmail,
+    userBirthday,
+    userSex,
+    categories,
+  });
+};
+
+/* 로그인 */
+// POST {username, password} & save JWT to local storage
+const login = (userId, password) => {
   return axios
     .post(API_URL + 'signin', {
-      username,
+      userId,
       password,
     })
     .then((response) => {
@@ -27,12 +42,14 @@ const login = (username, password) => {
     });
 };
 
+/* 로그아웃 */
+// remove JWT from LocalStorage
 const logout = () => {
   localStorage.removeItem('user');
 };
 
 export default {
-  register,
+  signup,
   login,
   logout,
 };

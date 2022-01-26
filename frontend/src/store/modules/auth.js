@@ -22,7 +22,7 @@ export const checkUser = createAction(CHECK_USER, api.checkUser);
 const initialState = {
   logged: false,
   user: {
-    username: false,
+    userId: false,
   },
 };
 

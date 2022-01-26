@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Container } from '../../assets/styles/globalStyles';
 
-export const SignupContainer = styled(Container)`
+export const ErrorContainer = styled(Container)`
   height: 800px;
   padding: 100px;
   display: flex;
@@ -12,6 +12,9 @@ export const SignupContainer = styled(Container)`
   flex-direction: row;
   // align-items: flex-start;
   top: 0;
-
   ${Container}
 `;
+
+export const PageNotFoundError = styled.h1``;
+
+export const InternalServerError = styled.h1``;
