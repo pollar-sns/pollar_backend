@@ -1,5 +1,6 @@
 package com.ssafy.pollar.controller;
 
+import com.ssafy.pollar.jwt.JwtTokenProvider;
 import com.ssafy.pollar.model.dto.UserDto;
 import com.ssafy.pollar.model.service.UserService;
 import com.sun.org.apache.xpath.internal.operations.Bool;
@@ -23,6 +24,7 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    private final JwtTokenProvider jwtTokenProvider;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
@@ -75,7 +77,7 @@ public class UserController {
         HttpStatus status = null;
         try {
             if(userService.login(userDto)){
-                String token ="";
+                String token = jwtTokenProvider.createToken("userId",userDto.getUserId());
                 resultMap.put("access-token",token);
                 resultMap.put("message",SUCCESS);
             }else{
@@ -88,6 +90,13 @@ public class UserController {
         }
         return new ResponseEntity<Map<String,Object>>(resultMap,status);
     }
-
-
+    
+    @PostMapping("/findid")
+    public ResponseEntity<String> findid(@RequestParam String userEmail) throws Exception {
+        boolean checkflag = false;
+        if(userService.emailCheck(userEmail)){
+            //이메일로 아이디 전송, 이메일 api 개발후 진행
+        }
+        return null;
+    }
 }
