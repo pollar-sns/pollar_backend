@@ -1,10 +1,14 @@
 package com.ssafy.pollar.domain.entity;
 
+import com.ssafy.pollar.model.dto.CategoryDto;
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 public class Category {
 
     @Id
@@ -18,6 +22,12 @@ public class Category {
     @OneToMany(mappedBy = "voteCategory")
     private List<VoteCategory> voteCategories = new ArrayList<>();
 
-    @Column(name = "categoryName" ,length = 20)
-    private String categoryName;
+    @Column(name = "categoryNameBig" ,length = 20)
+    private String categoryNameBig;
+
+    @Column(name = "categoryNameSmall" ,length = 20)
+    private String categoryNameSmall;
+
+
+
 }
