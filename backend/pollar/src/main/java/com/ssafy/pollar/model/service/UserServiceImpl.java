@@ -6,19 +6,16 @@ import com.ssafy.pollar.domain.entity.UserCategory;
 import com.ssafy.pollar.model.dto.UserDto;
 import com.ssafy.pollar.model.repository.CategoryRepository;
 import com.ssafy.pollar.model.repository.UserRepository;
-import com.ssafy.pollar.model.repository.userCategoryRepository;
+import com.ssafy.pollar.model.repository.UserCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
-    private final userCategoryRepository userCategoryRepository;
+    private final UserCategoryRepository userCategoryRepository;
     private final CategoryRepository categoryRepository;
 
     //sts guestbook5  mysql ssafyweb 참고해서 category list로 dto에 넣기

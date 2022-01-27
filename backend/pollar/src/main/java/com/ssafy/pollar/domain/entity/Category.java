@@ -16,7 +16,7 @@ public class Category {
     @Column(name = "categoryId")
     private long categoryId;
 
-    @OneToMany(mappedBy = "userCategory")
+    @OneToMany(mappedBy = "category")
     private List<UserCategory> UserCategories = new ArrayList<>();
 
     @OneToMany(mappedBy = "voteCategory")
