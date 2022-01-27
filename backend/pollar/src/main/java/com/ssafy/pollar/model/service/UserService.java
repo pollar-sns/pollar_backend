@@ -10,4 +10,6 @@ public interface UserService {
     boolean emailCheck(String userEmail) throws Exception;
     void modifyUserInfo(UserDto userDto) throws Exception;
     void deleteUserInfo(String userId) throws Exception;
+    boolean login(UserDto userDto) throws Exception;
+
 }
