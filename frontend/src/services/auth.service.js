@@ -2,28 +2,26 @@ import axios from 'axios';
 
 //? Service for user authentication
 
-// TODO
-// const API_URL = 'http://localhost:8080/api/auth/';
-const API_URL = 'http://localhost:8080/api/user/';
+// TODO http-common.js
+//// const API_URL = 'http://localhost:8080/auth/';
+const API_URL = 'http://localhost:8080/user/';
 // const API_URL = '(deployed)'
-/* 회원가입 시 중복검사 */
-const checkId = (userId) => {
-  return axios.get(API_URL + 'idcheck', {
-    userId,
-  });
-};
 
 /* 회원가입 */
 const signup = (userId, password, userNickname, userEmail, userBirthday, userSex, categories) => {
-  return axios.post(API_URL + 'signup', {
-    userId,
-    password,
-    userNickname,
-    userEmail,
-    userBirthday,
-    userSex,
-    categories,
-  });
+  return axios
+    .post(API_URL + 'signup', {
+      userId,
+      password,
+      userNickname,
+      userEmail,
+      userBirthday,
+      userSex,
+      categories,
+    })
+    .then((response) => {
+      console.log(response);
+    });
 };
 
 /* 로그인 */
@@ -36,6 +34,7 @@ const login = (userId, password) => {
     })
     .then((response) => {
       if (response.data.accessToken) {
+        // JWT token 저장
         localStorage.setItem('user', JSON.stringify(response.data));
       }
       return response.data;

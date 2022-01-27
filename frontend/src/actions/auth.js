@@ -13,7 +13,7 @@ import AuthService from '../services/auth.service';
  * @returns Promise객체 (for Components using them)
  */
 export const signup = (userId, password, userNickname, userEmail, userBirthday, userSex, categories) => (dispatch) => {
-  return AuthService.register(userId, password, userNickname, userEmail, userBirthday, userSex, categories).then(
+  return AuthService.signup(userId, password, userNickname, userEmail, userBirthday, userSex, categories).then(
     (response) => {
       dispatch({
         type: SIGNUP_SUCCESS,

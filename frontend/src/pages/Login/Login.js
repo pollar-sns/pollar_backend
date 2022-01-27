@@ -101,6 +101,18 @@ const Login = (props) => {
             )}
             <CheckButton style={{ display: 'none' }} ref={checkBtn} />
           </Form>
+          {/* Social Login */}
+          {/* <LoginWith>OR LOGIN WITH</LoginWith>
+        <HorizontalRule />
+        <IconsContainer>
+          <Icon color={GoogleBackground}>
+            <FaGoogle />
+          </Icon>
+          <Icon color={KakaoBackground}>
+            <FaComment />
+          </Icon>
+        </IconsContainer>
+        <ForgotPassword>Forgot Password ?</ForgotPassword> */}
         </div>
       </div>
     </LoginContainer>

@@ -4,18 +4,18 @@ import '../../assets/styles/neumorphism.css';
 import React, { useState, useEffect } from 'react';
 
 import UserService from '../../services/user.service';
+import PollService from '../../services/poll.service';
 
 function Home() {
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    UserService.getPublicContent().then(
+    PollService.getTrendingPoll().then(
       (response) => {
         setContent(response.data);
       },
       (error) => {
         const _content = (error.response && error.response.data) || error.message || error.toString();
-
         setContent(_content);
       }
     );
