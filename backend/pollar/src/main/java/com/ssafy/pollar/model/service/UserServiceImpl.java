@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService{
     private final userCategoryRepository userCategoryRepository;
     private final CategoryRepository categoryRepository;
 
-    //sts guestbook5  mysql ssafyweb 참고해서 category list로 dto에 넣기
+
 
     @Override
     public void signup(UserDto userDto) throws Exception {
 
-//        List<UserCategory> temp = new ArrayList<>();
+
         User user = User.builder()
 //                .uid(userDto.getUid())
                 .userId(userDto.getUserId())
@@ -77,6 +77,7 @@ public class UserServiceImpl implements UserService{
         }
     }
 
+    //회원정보 수정
     @Override
     public void modifyUserInfo(UserDto userDto) throws Exception{
         User usercur = userRepository.findByUserId(userDto.getUserId()).get();
@@ -91,14 +92,7 @@ public class UserServiceImpl implements UserService{
                 .userSex((userDto.getUserSex()))
                 .userProfilePhoto(userDto.getUserProfilePhoto())
                 .build();
-//        User user =User.builder()
-//                .uid(userDto.getUid())
-//                .userId(userDto.getUserId())
-//                .userNickname(userDto.getUserNickname())
-//                .userEmail(userDto.getUserEmail())
-//                .userBirthday(userDto.getUserBirthday())
-//                .userSex(userDto.getUserSex())
-//                .build();
+
         // User에 user 정보 저장
         userRepository.save(user);
     }
@@ -106,7 +100,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUserInfo(String userId) throws Exception {
         Optional<User> user = userRepository.findByUserId(userId);
-//        String uid = user.get().getUid();
+
         userRepository.delete(user.get());
     }
 
