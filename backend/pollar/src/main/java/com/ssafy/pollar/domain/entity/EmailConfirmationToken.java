@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 public class EmailConfirmationToken {
+    // Email을 인증 할때 발행하는 토큰을 저장하는 Table
+    // 만료시간을 만들어서 만료시간 이후에 인증불가 처리를 할 예정이다.
 
     @Id
     @GeneratedValue(generator = "uuid2")

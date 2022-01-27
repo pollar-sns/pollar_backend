@@ -27,14 +27,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtUserDetailsService jwtUserDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
 
+    // 프론트에서 보내준 토큰을 헤더로 확인하여 필터링하는 메서드
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        final String requestTokenHeader = request.getHeader("Authorization");
-        System.out.println(requestTokenHeader);
+        final String requestTokenHeader = request.getHeader("Authorization"); // 헤더의 Authorization 확인
+        System.out.println(requestTokenHeader); // 현재 헤더 확인
         String username = null;
         String jwtToken = null;
 
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {// 헤더가 존재하고 Bearer로 보낸경우
             jwtToken = requestTokenHeader.substring(7);
             try {
                 username = jwtTokenProvider.getUserPk(jwtToken);
@@ -49,7 +50,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
-
+            //토큰의 유효성 판단
             if(jwtTokenProvider.validateToken(jwtToken)) {
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null ,userDetails.getAuthorities());
@@ -60,20 +61,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request,response);
     }
-
-//    @Override
-//    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-//        // 헤더에서 JWT 를 받아옵니다.
-//        String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
-//        // 유효한 토큰인지 확인합니다.
-//        if (token != null && jwtTokenProvider.validateToken(token)) {
-//            // 토큰이 유효하면 토큰으로부터 유저 정보를 받아옵니다.
-//            Authentication authentication = jwtTokenProvider.getAuthentication(token);
-//            // SecurityContext 에 Authentication 객체를 저장합니다.
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//        }
-//        chain.doFilter(request, response);
-//    }
-
 
 }

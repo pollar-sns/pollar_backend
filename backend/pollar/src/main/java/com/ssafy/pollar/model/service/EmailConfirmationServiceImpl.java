@@ -15,6 +15,7 @@ public class EmailConfirmationServiceImpl implements EmailConfirmationService {
     private final EmailSenderService emailSenderService;
     private  static final long EMAIL_TOKEN_EXPIRATION_TIME = 5L; //5분
 
+    // 이메일 인증을 위해 이메일 생성 메서드
     @Override
     public String createEmailConfirmationToken(String userEmail) throws Exception {
         EmailConfirmationToken emailConfirmationToken = EmailConfirmationToken.builder()
