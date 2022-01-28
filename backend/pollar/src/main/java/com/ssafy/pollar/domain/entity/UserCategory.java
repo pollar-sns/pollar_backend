@@ -16,11 +16,11 @@ public class UserCategory {
     private long userCategoryId;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "uid")
     private User userCategory;
 
     @ManyToOne
-    @JoinColumn(name = "Category")
+    @JoinColumn(name = "categoryId")
     private Category category;
 
 

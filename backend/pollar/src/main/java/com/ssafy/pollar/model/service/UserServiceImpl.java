@@ -6,9 +6,10 @@ import com.ssafy.pollar.domain.entity.UserCategory;
 import com.ssafy.pollar.model.dto.UserDto;
 import com.ssafy.pollar.model.repository.CategoryRepository;
 import com.ssafy.pollar.model.repository.UserRepository;
-import com.ssafy.pollar.model.repository.userCategoryRepository;
+import com.ssafy.pollar.model.repository.UserCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
-    private final userCategoryRepository userCategoryRepository;
+    private final UserCategoryRepository userCategoryRepository;
     private final CategoryRepository categoryRepository;
 
 
