@@ -1,14 +1,13 @@
 package com.ssafy.pollar.domain.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
+@RequiredArgsConstructor
 @Entity
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 public class VoteCategory {
     @Id
