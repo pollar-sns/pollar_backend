@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ public class Vote {
     private boolean voteType;
 
     @Column(name = "voteExpirationTime", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")  // 투표 마감 시간. 일단 현재시간을 기본값으로 줌. 그러나 들어가지 않음
-    private Date voteExpirationTime;
+    private LocalDateTime voteExpirationTime;
 
     @Column(name = "userAnonymouseType")    // 투표 작성자 익명성 여부
     private boolean userAnonymouseType;
@@ -40,7 +41,7 @@ public class Vote {
     @Column(name = "voteAnonymouseType")    // 투표 참여자 익명성 여부
     private boolean voteAnonymouseType;
 
-    @Column(name = "voteCreateTime", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")  // 피드 만든 시간. 디폴드 들어가지 않고있음
+    @CreationTimestamp  // 현재시간 입력
     private LocalDateTime voteCreateTime;
 
     @OneToMany(mappedBy = "voteCategory")   // 투표에 포함된 카테고리 리스트

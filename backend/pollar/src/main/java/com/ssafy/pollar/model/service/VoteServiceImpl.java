@@ -6,8 +6,9 @@ import com.ssafy.pollar.model.repository.VoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
+import java.time.LocalDateTime;
+
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class VoteServiceImpl implements VoteService {
                 .voteType(voteDto.getVoteType())
                 .userAnonymouseType(voteDto.getUserAnonymouseType())
                 .voteAnonymouseType(voteDto.getVoteAnonymouseType())
+                .voteExpirationTime(LocalDateTime.now().plusDays(7))    // 현재시간에서 7일 더함
                 .build();
         voteRepository.save(vote);  // DB에 전달 받은 vote 정보 저장
     }
