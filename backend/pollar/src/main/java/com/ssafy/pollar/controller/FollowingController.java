@@ -4,6 +4,7 @@ import com.ssafy.pollar.domain.entity.Following;
 import com.ssafy.pollar.jwt.service.JwtUserDetailsService;
 import com.ssafy.pollar.model.dto.FollowingDto;
 import com.ssafy.pollar.model.service.FollowingService;
+import io.swagger.annotations.ApiOperation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,8 +25,9 @@ public class FollowingController {
     private static final String FAIL = "fail";
 
     // User follow 요청 통신
+    @ApiOperation(value = "팔로우 하기")
     @PostMapping("/following")
-    public ResponseEntity<String> followsend(@RequestBody FollowingDto followingDto){
+    public ResponseEntity<String> followsend(@RequestHeader String accesstoken, @RequestBody FollowingDto followingDto){
         String result = "";
         HttpStatus status = null;
         try {
@@ -42,8 +44,9 @@ public class FollowingController {
     }
 
     // User unfollow 요청 통신 아직 비활성
+    @ApiOperation(value = "언팔로우 하기")
     @PostMapping("/unfollow")
-    public ResponseEntity<String> unfollow(@RequestBody FollowingDto followingDto){
+    public ResponseEntity<String> unfollow(@RequestHeader String accesstoken ,@RequestBody FollowingDto followingDto){
         String result = "";
         HttpStatus status = null;
         try {
@@ -60,16 +63,18 @@ public class FollowingController {
     }
 
     // follower 유저들을 통신하는기능
+    @ApiOperation(value = "팔로워 목록을 확인")
     @GetMapping("/followerlist")
-    public ResponseEntity<List<?>> followerlist(@RequestParam String userId) throws Exception {
+    public ResponseEntity<List<?>> followerlist(@RequestHeader String accesstoken , @RequestParam String userId) throws Exception {
         List<FollowingDto> followerlist= null;
         followerlist = followingService.followerlist(userId);
         return new ResponseEntity<>(followerlist,HttpStatus.OK);
     }
 
     // followee 유저들을 통신하는 기능
+    @ApiOperation(value = "팔로잉 목록을 확인")
     @GetMapping("/followeelist")
-    public ResponseEntity<List<?>> followeelist(@RequestParam String userId) throws Exception {
+    public ResponseEntity<List<?>> followeelist(@RequestHeader String accesstoken , @RequestParam String userId) throws Exception {
         List<FollowingDto> followeelist= null;
         followeelist = followingService.followeelist(userId);
         return new ResponseEntity<>(followeelist,HttpStatus.OK);

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.nio.file.Files;
@@ -30,10 +31,8 @@ public class UserServiceImpl implements UserService{
     @Value("${file.path}")
     private String uploadFolder;
 
-
     @Override
     public void signup(UserDto userDto) throws Exception {
-
 
         User user = User.builder()
 //                .uid(userDto.getUid())
@@ -160,13 +159,36 @@ public class UserServiceImpl implements UserService{
 
             System.out.println("저장전?");
             userRepository.save(user);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
     }
 
+    @Override
+    public String findid(String userEmail) throws Exception {
+        String userId = userRepository.findByUserEmail(userEmail).get().getUserId();
+        return userId;
+    }
+
+    // 비밀번호 변경
+    @Transactional
+    @Override
+    public void modifyPassword(UserDto userDto) throws Exception {
+        User usercur = userRepository.findByUserId(userDto.getUserId()).get();
+
+        User user = User.builder()
+                .uid(usercur.getUid())
+                .userId(usercur.getUserId())
+                .password(userDto.getPassword())
+                .userNickname((usercur.getUserNickname()))
+                .userEmail((usercur.getUserEmail()))
+                .userBirthday((usercur.getUserBirthday()))
+                .userSex((usercur.getUserSex()))
+                .userProfilePhoto(usercur.getUserProfilePhoto())
+                .build();
+
+        // User에 user 정보 저장
+        userRepository.save(user);
+    }
 
 }

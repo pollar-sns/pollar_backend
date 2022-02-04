@@ -32,7 +32,7 @@ public class EmailConfirmationToken {
     private LocalDateTime expirationDate;
 
     @Column
-    private boolean exprired;
+    private Boolean exprired;
 
     @Column
     private String userEmail;
@@ -40,6 +40,5 @@ public class EmailConfirmationToken {
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createTime;
-
 
 }
