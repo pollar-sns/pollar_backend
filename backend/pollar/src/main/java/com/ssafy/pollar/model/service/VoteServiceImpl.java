@@ -6,6 +6,9 @@ import com.ssafy.pollar.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.time.LocalDateTime;
 
@@ -74,5 +77,16 @@ public class VoteServiceImpl implements VoteService {
     public VoteDto detail(Long voteId) throws Exception {   // 피드 상세보기
         Optional<Vote> vote = voteRepository.findById(voteId);  // 아이디로 해당 투표 찾기
         return new VoteDto(vote.get());     // 해당 투표를 dto로 변환 후 리턴
+    }
+
+    @Override
+    public List<VoteDto> getVoteList() throws Exception {
+        List<Vote> list = voteRepository.findAll();
+        List<VoteDto> dtoList = new ArrayList<>();
+        for (Vote vote: list) {
+            VoteDto dto = new VoteDto(vote);
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 }

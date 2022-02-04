@@ -4,6 +4,7 @@ import com.ssafy.pollar.domain.entity.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @ApiModel(value = "VoteDto : 피드정보", description = "피드의 상세 정보를 나타낸다.")
 public class VoteDto {
 
@@ -26,6 +28,7 @@ public class VoteDto {
         this.userAnonymousType = vote.getUserAnonymouseType();
         this.voteAnonymousType = vote.getVoteAnonymouseType();
         this.voteCreateTime = vote.getVoteCreateTime();
+        this.author=vote.getAuthor().getUserId();
     }
 
     @ApiModelProperty(position = 1, value = "피드 아이디", notes="자동으로 생성되므로 작성 보내지 않는다")
