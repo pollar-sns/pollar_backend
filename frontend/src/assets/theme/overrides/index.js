@@ -12,6 +12,7 @@ import Autocomplete from './Autocomplete';
 // @ziu974
 import Toolbar from './Toolbar';
 import Tab from './Tab';
+import Avatar from './Avatar';
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +29,7 @@ export default function ComponentsOverrides(theme) {
     IconButton(theme),
     Autocomplete(theme),
     Toolbar(theme),
-    Tab(theme)
+    Tab(theme),
+    Avatar(theme)
   );
 }

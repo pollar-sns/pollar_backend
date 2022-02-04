@@ -49,7 +49,7 @@ const typography = {
     ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
   },
   h4: {
-    fontWeight: 400, // @eazae
+    fontWeight: 600,
     lineHeight: 1.5,
     fontSize: pxToRem(20),
     ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
@@ -92,11 +92,11 @@ const typography = {
     fontWeight: 700,
     lineHeight: 1.5,
     fontSize: pxToRem(12),
-    letterSpacing: 1.1,
+    letterSpacing: 0.2,
     textTransform: 'uppercase',
   },
   button: {
-    fontWeight: 700,
+    fontWeight: 600,
     lineHeight: 24 / 14,
     fontSize: pxToRem(14),
     textTransform: 'capitalize',

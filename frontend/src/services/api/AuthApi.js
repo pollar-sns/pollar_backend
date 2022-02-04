@@ -12,24 +12,23 @@ const USER = '/user/';
 // };
 
 export const signup = async (user) => {
-  const response = await instance
-    .post(USER + 'signup', {
-      userId: user.userId,
-      password: user.password,
-      userNickname: user.userNickname,
-      userEmail: user.userEmail,
-      userBirthday: user.userBirthday,
-      userSex: user.userSex,
-      categories: user.categories,
-      userProfilePhoto: user.userProfilePhoto
-    });
+  const response = await instance.post(USER + 'signup', {
+    userId: user.userId,
+    password: user.password,
+    userNickname: user.userNickname,
+    userEmail: user.userEmail,
+    userBirthday: user.userBirthday,
+    userSex: user.userSex,
+    categories: user.categories,
+    userProfilePhoto: user.userProfilePhoto,
+  });
   // console.log(response.config.data);
 };
 
 /* 로그인 */
 export const login = async (userData) => {
   const response = await instance.post('/user/login', userData);
-  if (response.data['access-token']) {
+  if (response.data.accessToken) {
     // save JWT token
     localStorage.setItem('user', JSON.stringify(response.data));
   }
