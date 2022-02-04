@@ -9,6 +9,7 @@ import com.ssafy.pollar.model.repository.UserRepository;
 import com.ssafy.pollar.model.repository.UserCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.ArrayList;
@@ -23,11 +24,8 @@ public class UserServiceImpl implements UserService{
     private final UserCategoryRepository userCategoryRepository;
     private final CategoryRepository categoryRepository;
 
-
-
     @Override
     public void signup(UserDto userDto) throws Exception {
-
 
         User user = User.builder()
 //                .uid(userDto.getUid())
@@ -117,6 +115,33 @@ public class UserServiceImpl implements UserService{
             }
         }
 
+    }
+
+    @Override
+    public String findid(String userEmail) throws Exception {
+        String userId = userRepository.findByUserEmail(userEmail).get().getUserId();
+        return userId;
+    }
+
+    // 비밀번호 변경
+    @Transactional
+    @Override
+    public void modifyPassword(UserDto userDto) throws Exception {
+        User usercur = userRepository.findByUserId(userDto.getUserId()).get();
+
+        User user = User.builder()
+                .uid(usercur.getUid())
+                .userId(usercur.getUserId())
+                .password(userDto.getPassword())
+                .userNickname((usercur.getUserNickname()))
+                .userEmail((usercur.getUserEmail()))
+                .userBirthday((usercur.getUserBirthday()))
+                .userSex((usercur.getUserSex()))
+                .userProfilePhoto(usercur.getUserProfilePhoto())
+                .build();
+
+        // User에 user 정보 저장
+        userRepository.save(user);
     }
 
 

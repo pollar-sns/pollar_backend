@@ -11,5 +11,7 @@ public interface UserService {
     void modifyUserInfo(UserDto userDto) throws Exception;
     void deleteUserInfo(String userId) throws Exception;
     boolean login(UserDto userDto) throws Exception;
+    String findid(String userEmail) throws Exception;
+    void modifyPassword(UserDto userDto) throws Exception;
 
 }
