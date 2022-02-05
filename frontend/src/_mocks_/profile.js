@@ -1,5 +1,5 @@
 const profile = {
-  userId: 'scenezhe',
+  userId: 'sampleID',
   userNickname: '닉네임',
   aboutMe: "Hello, I'm Annonymous",
   photoURL: '',

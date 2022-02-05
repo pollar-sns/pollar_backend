@@ -76,9 +76,9 @@ function Profile({ profileInfo }) {
                   <SettingsIcon fontSize="small" />
                 </IconButton>
                 <Button variant="outlined" size="small">
-                  ...
+                  Settings
                 </Button>
-                <Button variant="outlined" size="small">
+                <Button variant="outlined" size="small" disabled>
                   &nbsp;View&nbsp;Statistics&nbsp;
                 </Button>
 

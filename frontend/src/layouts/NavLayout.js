@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 //
 import Navbar from '../components/navbar/Navbar';
 import Footer from '../components/footer/Footer';
+import { Container } from '@mui/material';
 // import DashboardSidebar from './DashboardSidebar';
 
 // ----------------------------------------------------------------------
@@ -39,12 +40,14 @@ export default function NavLayout() {
 
   return (
     <RootStyle>
-      <Navbar onOpenSidebar={() => setOpen(true)} />
-      {/* <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} /> */}
-      <MainStyle>
-        <Outlet />
-      </MainStyle>
-      <Footer />
+      <Container maxWidth="lg">
+        <Navbar onOpenSidebar={() => setOpen(true)} />
+        {/* <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} /> */}
+        <MainStyle>
+          <Outlet />
+        </MainStyle>
+        <Footer />
+      </Container>
     </RootStyle>
   );
 }

@@ -1,5 +1,5 @@
 // @mui material components
-import { Box, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
@@ -8,7 +8,8 @@ import Stack from '@mui/material/Stack';
 function Footer() {
   return (
     <Box component="footer" py={6}>
-      <Container>
+      <Container maxWidth="lg">
+        <Divider />
         <Grid container>
           <Grid
             item
@@ -16,7 +17,8 @@ function Footer() {
             lg={4}
             textAlign={{ xs: 'center', lg: 'left' }}
             mr="auto"
-            mb={{ xs: 3, lg: 0 }}
+            my={{ xs: 3, lg: 2 }}
+            mx={10}
           >
             {/* <Typography variant="h6" textTransform="uppercase" mb={{ xs: 2, lg: 3 }}>
               Material Design
@@ -28,7 +30,7 @@ function Footer() {
               spacing={3}
               justifyContent={{ xs: 'center', lg: 'flex-start' }}
               pl={0}
-              mb={3}
+              mb={1}
               sx={{ listStyle: 'none' }}
             >
               <Box component="li">
@@ -38,8 +40,10 @@ function Footer() {
                   opacity={0.8}
                   component={Link}
                   href="https://www.pollar.com"
-                  target="_blank"
+                  underline="none"
+                  target="_parent"
                   rel="noreferrer"
+                  color="text.disabled"
                 >
                   Home
                 </Typography>
@@ -51,10 +55,12 @@ function Footer() {
                   opacity={0.8}
                   component={Link}
                   href="https://www.creative-tim.com/presentation"
-                  target="_blank"
+                  underline="none"
+                  target="_block"
                   rel="noreferrer"
+                  color="text.disabled"
                 >
-                  About
+                  About our Team
                 </Typography>
               </Box>
               <Box component="li">
@@ -64,10 +70,12 @@ function Footer() {
                   opacity={0.8}
                   component={Link}
                   href="https://www.creative-tim.com/blog"
+                  underline="none"
                   target="_blank"
                   rel="noreferrer"
+                  color="text.disabled"
                 >
-                  Blog
+                  Contact Us
                 </Typography>
               </Box>
               <Box component="li">
@@ -77,14 +85,16 @@ function Footer() {
                   opacity={0.8}
                   component={Link}
                   href="https://lab.ssafy.com/s06-webmobile2-sub2/S06P12A407"
+                  underline="none"
                   target="_blank"
                   rel="noreferrer"
+                  color="text.disabled"
                 >
                   Github
                 </Typography>
               </Box>
             </Stack>
-            <Typography variant="button" opacity={0.8}>
+            <Typography variant="caption" opacity={0.8}>
               All rights reserved. Copyright ©{' '}
               <script>document.write(new Date().getFullYear())</script>2022 Material Design.
             </Typography>

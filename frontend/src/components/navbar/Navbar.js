@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import menu2Fill from '@iconify/icons-eva/menu-2-fill';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Box, AppBar, Toolbar, IconButton, Button, Typography } from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton, Button, Typography, Container } from '@mui/material';
 // components
 import MobileHidden from '../common/MobileHidden';
 //
@@ -61,52 +61,54 @@ export default function Navbar({ onOpenSidebar }) {
 
   return (
     <RootStyle>
-      <ToolbarStyle>
-        <MobileHidden width="lgUp">
-          <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }}>
-            <Icon icon={menu2Fill} />
-          </IconButton>
-        </MobileHidden>
+      <Container maxWidth="lg">
+        <ToolbarStyle>
+          <MobileHidden width="lgUp">
+            <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }}>
+              <Icon icon={menu2Fill} />
+            </IconButton>
+          </MobileHidden>
 
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar
-            position="static"
-            sx={{
-              boxShadow: 'none',
-              backgroundColor: 'transparent',
-            }}
-          >
-            <Toolbar sx={{ backgroundColor: 'transparent' }}>
-              <NavLogo component={Link} to="/">
-                {/* <NavIcon /> */}
-                <Box component="img" src={logo} sx={{ width: 35, height: 35 }} />
-                <Typography variant="h3" sx={{ pl: 1, pr: 2, fontStyle: 'bold' }}>
-                  Pollar
-                </Typography>
-              </NavLogo>
-              <NavSection navConfig={sidebarConfig} />
+          <Box sx={{ flexGrow: 1 }}>
+            <AppBar
+              position="static"
+              sx={{
+                boxShadow: 'none',
+                backgroundColor: 'transparent',
+              }}
+            >
+              <Toolbar sx={{ backgroundColor: 'transparent' }}>
+                <NavLogo component={Link} to="/">
+                  {/* <NavIcon /> */}
+                  <Box component="img" src={logo} sx={{ width: 35, height: 35 }} />
+                  <Typography variant="h3" sx={{ pl: 1, pr: 2, fontStyle: 'bold' }}>
+                    Pollar
+                  </Typography>
+                </NavLogo>
+                <NavSection navConfig={sidebarConfig} />
 
-              <Searchbar />
-              <Box sx={{ flexGrow: 1 }} />
-              {loggedUser.userId ? (
-                <>
-                  <NotificationsPopover />
-                  <AccountPopover />
-                </>
-              ) : (
-                <>
-                  <Button href="/users/login" variant="text" color="primary">
-                    Login
-                  </Button>
-                  <Button href="/users/signup" variant="contained">
-                    Sign Up
-                  </Button>
-                </>
-              )}
-            </Toolbar>
-          </AppBar>
-        </Box>
-      </ToolbarStyle>
+                <Searchbar />
+                <Box sx={{ flexGrow: 1 }} />
+                {loggedUser.userId ? (
+                  <>
+                    <NotificationsPopover />
+                    <AccountPopover />
+                  </>
+                ) : (
+                  <>
+                    <Button href="/users/login" variant="text" color="primary">
+                      Login
+                    </Button>
+                    <Button href="/users/signup" variant="contained">
+                      Sign Up
+                    </Button>
+                  </>
+                )}
+              </Toolbar>
+            </AppBar>
+          </Box>
+        </ToolbarStyle>
+      </Container>
     </RootStyle>
   );
 }
