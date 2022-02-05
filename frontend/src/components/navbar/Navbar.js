@@ -9,7 +9,6 @@ import MobileHidden from '../common/MobileHidden';
 //
 import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
-import LanguagePopover from './LanguagePopover';
 import NotificationsPopover from './NotificationsPopover';
 // recoil
 import { useRecoilState } from 'recoil';
@@ -85,7 +84,7 @@ export default function Navbar({ onOpenSidebar }) {
                     Pollar
                   </Typography>
                 </NavLogo>
-                <NavSection navConfig={sidebarConfig} />
+                <NavSection navConfig={sidebarConfig} mr={10} />
 
                 <Searchbar />
                 <Box sx={{ flexGrow: 1 }} />

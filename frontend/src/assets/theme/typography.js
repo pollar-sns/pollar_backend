@@ -22,11 +22,11 @@ const FONT_PRIMARY = 'Public Sans, sans-serif';
 // const FONT_PRIMARY = '';
 
 // @eazae
-const FONT_POLLAR = 'Droid Sans';
+const FONT_POLLAR = 'Roboto Slab, serif';
 
 const typography = {
   // [@eazae] join(): Adds all the elements of an array into a string, separated by the specified separator string.
-  fontFamily: [FONT_PRIMARY, FONT_POLLAR].join(','),
+  fontFamily: [FONT_POLLAR, FONT_PRIMARY].join(','),
   fontWeightRegular: 400,
   fontWeightMedium: 600,
   fontWeightBold: 700,
@@ -79,14 +79,17 @@ const typography = {
   body1: {
     lineHeight: 1.5,
     fontSize: pxToRem(16),
+    fontFamily: FONT_PRIMARY,
   },
   body2: {
     lineHeight: 22 / 14,
     fontSize: pxToRem(14),
+    fontFamily: FONT_PRIMARY,
   },
   caption: {
     lineHeight: 1.5,
     fontSize: pxToRem(12),
+    fontFamily: FONT_PRIMARY,
   },
   overline: {
     fontWeight: 700,
@@ -94,12 +97,14 @@ const typography = {
     fontSize: pxToRem(12),
     letterSpacing: 0.2,
     textTransform: 'uppercase',
+    fontFamily: FONT_PRIMARY,
   },
   button: {
-    fontWeight: 600,
+    fontWeight: 500,
     lineHeight: 24 / 14,
     fontSize: pxToRem(14),
     textTransform: 'capitalize',
+    fontFamily: FONT_PRIMARY,
   },
 };
 

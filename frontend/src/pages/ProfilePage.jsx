@@ -20,28 +20,28 @@ export default function ProfilePage() {
   return (
     <>
       <Box bgColor="white">
-        {/* <Container> */}
-        <Card
-          sx={{
-            p: 2,
-            mx: { xs: 2, lg: 3 },
-            mt: 8,
-            mb: 4,
-            backgroundColor: '#fff6',
-            // backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
-            backdropFilter: 'saturate(200%) blur(30px)',
-            /* offset-x | offset-y | blur-radius | spread-radius | color */
-            boxShadow: '2px 2px 20px 10px rgba(0, 0, 0, 0.1)',
-            overflow: 'visible',
-          }}
-        >
-          <Profile />
+        <Container>
+          <Card
+            sx={{
+              p: 2,
+              mx: { xs: 2, lg: 3 },
+              mt: 8,
+              mb: 4,
+              backgroundColor: '#fff6',
+              // backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
+              backdropFilter: 'saturate(200%) blur(30px)',
+              /* offset-x | offset-y | blur-radius | spread-radius | color */
+              boxShadow: '2px 2px 20px 10px rgba(0, 0, 0, 0.1)',
+              overflow: 'visible',
+            }}
+          >
+            <Profile />
 
-          <Box bgColor="white" minHeight="60vh">
-            <Posts />
-          </Box>
-        </Card>
-        {/* </Container> */}
+            <Box bgColor="white" minHeight="60vh">
+              <Posts />
+            </Box>
+          </Card>
+        </Container>
       </Box>
     </>
   );

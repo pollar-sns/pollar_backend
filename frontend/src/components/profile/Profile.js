@@ -15,10 +15,24 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import profilePicture from '../../assets/images/profile.jpeg';
 import profile from '../../_mocks_/profile';
 import ImageUploadButton from '../common/ImageUploadButton';
+import FollowListModal from './FollowListModal';
+import { useState } from 'react';
 
 function Profile({ profileInfo }) {
   // todo DELETE (mock data)
   profileInfo = profile;
+
+  const [openFollowListModal, setOpenFollowListModal] = useState(false);
+  // 팔로잉, 팔로워 모달 창을 open 시 focus할 tab
+  const [modalListType, setModalListType] = useState();
+
+  const handleOpenFollowModal = (type) => {
+    // type: 'following' | 'follower'
+    setModalListType(type);
+    // 모달창을 open
+    setOpenFollowListModal((curr) => !curr);
+  };
+
   return (
     <Box component="section" pt={{ xs: 6, sm: 12 }} pb={{ xs: 3, sm: 6 }}>
       <Container>
@@ -72,10 +86,15 @@ function Profile({ profileInfo }) {
                 spacing={0.5}
                 mt={{ xs: 3, sm: 6 }}
               >
-                <IconButton color="primary" aria-label="add an alarm" size="small">
+                <IconButton
+                  href="/users/settings"
+                  color="primary"
+                  aria-label="add an alarm"
+                  size="small"
+                >
                   <SettingsIcon fontSize="small" />
                 </IconButton>
-                <Button variant="outlined" size="small">
+                <Button href="/users/settings" variant="outlined" size="small">
                   Settings
                 </Button>
                 <Button variant="outlined" size="small" disabled>
@@ -103,7 +122,7 @@ function Profile({ profileInfo }) {
                   >
                     Follower
                   </Typography>
-                  <Button size="small">
+                  <Button size="small" onClick={() => handleOpenFollowModal('follower')}>
                     <Typography component="span" variant="h4" fontWeight="bold" color="secondary">
                       {profileInfo.followerCount}
                     </Typography>
@@ -118,17 +137,17 @@ function Profile({ profileInfo }) {
                   >
                     Following
                   </Typography>
-                  <Button size="small">
+                  <Button size="small" onClick={() => handleOpenFollowModal('following')}>
                     <Typography component="span" variant="h4" fontWeight="bold" color="secondary">
                       {profileInfo.followingCount}
                     </Typography>
                   </Button>
                 </Stack>
-                {/* </Grid> */}
               </Stack>
             </Stack>
           </Stack>
           {/* <ImageUploadButton /> */}
+          <FollowListModal openModal={openFollowListModal} type={modalListType} />
         </Grid>
       </Container>
     </Box>

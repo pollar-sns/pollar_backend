@@ -22,12 +22,32 @@ function Posts() {
               aria-label="profile feed list tab"
               sx={{ width: '40%' }}
             >
-              <Tab label="Uploaded" value="1" />
-              <Tab label="Voted" value="2" />
-              <Tab label="Liked" value="3" />
+              <Tab label="Uploads" value="1" />
+              <Tab label="Votes" value="2" />
+              <Tab label="Likes" value="3" />
             </TabList>
           </Box>
-          <Box sx={{ backgroundColor: '#fff', mx: { xs: -2, lg: -3 }, mt: -0.5 }}>
+          <Box
+            sx={{
+              backgroundColor: '#fff',
+              //? sm 이후로는(up)동일한 값을 적용하려면 그냥 sm까지만 적용하면 된다
+              /* (xs, extra-small: 0px
+              sm, small: 600px
+              md, medium: 900px
+              lg, large: 1200px
+              xl, extra-large: 1536px
+              */
+              mx: { xs: -4, sm: -5 },
+              mt: -0.5,
+              mb: -10,
+              height: '60vh',
+              boxShadow: 10,
+              borderBottomLeftRadius: 20,
+              borderBottomRightRadius: 20,
+              px: 10,
+              py: 2,
+            }}
+          >
             <TabPanel value="1">Uploaded</TabPanel>
             <TabPanel value="2">Voted</TabPanel>
             <TabPanel value="3">

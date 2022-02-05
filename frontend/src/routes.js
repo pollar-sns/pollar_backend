@@ -18,7 +18,7 @@ export default function Router() {
   return useRoutes([
     {
       path: '/users',
-      element: <NavLayout />,
+      element: <FullLayout />,
       children: [
         { path: 'signup', element: <SignupPage /> },
         { path: 'login', element: <LoginPage /> },
@@ -45,7 +45,6 @@ export default function Router() {
       element: <NavLayout />,
       children: [
         { path: '/', element: <HomePage /> },
-        { path: 'profile', element: <ProfilePage /> },
         { path: 'about', element: <AboutPage /> },
         { path: 'trending', element: <TrendingPage /> },
       ],
