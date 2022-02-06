@@ -1,7 +1,7 @@
 // material
-import { Box, Grid, Container, Typography, Stack } from '@mui/material';
+import { Box, Grid, Container, Typography, Stack } from "@mui/material";
 // components
-import Page from '../components/Page';
+import Page from "../components/Page";
 // import {
 //   AppTasks,
 //   AppNewUsers,
@@ -16,7 +16,7 @@ import Page from '../components/Page';
 //   AppCurrentSubject,
 //   AppConversionRates,
 // } from '../components/_dashboard/app';
-import homeImg from '../assets/images/grad_img.png';
+import homeImg from "../assets/images/grad_img.png";
 
 // ----------------------------------------------------------------------
 
@@ -35,8 +35,7 @@ export default function HomePage() {
                 Anywhere
               </Typography>
               <Typography variant="inherit" color="primary.light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi, nunc a in vel
-                feugiat.
+                프로젝트 CICD 테스트
               </Typography>
             </Stack>
           </Grid>
