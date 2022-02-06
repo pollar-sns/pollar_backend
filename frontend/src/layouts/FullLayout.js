@@ -47,7 +47,7 @@ export default function FullLayout() {
     <>
       <RootStyle>
         <Container maxWidth="lg">
-          <Navbar onOpenSidebar={() => setOpen(true)} />
+          <Navbar onOpenSidebar={() => setOpen(true)} isFullLayout={true} />
           <MainStyle>
             <Outlet />
           </MainStyle>

@@ -2,10 +2,9 @@ import { Link as RouterLink } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 import { Card, Stack, Link, Container, Typography } from '@mui/material';
-// layouts
-// import NavLayout from '../layouts/NavLayout';
 // components
 import Page from '../components/Page';
+import MobileHidden from '../components/common/MobileHidden';
 import AuthSocial from '../components/login/AuthSocial';
 import LoginForm from '../components/login/LoginForm';
 
@@ -50,7 +49,7 @@ export default function Login() {
               sx={{
                 px: 8,
                 py: 10,
-                backgroundColor: '#fffb',
+                backgroundColor: '#fffd',
                 backdropFilter: 'saturate(200%) blur(30px)',
                 boxShadow: '2px 2px 20px 10px rgba(0, 0, 0, 0.1)',
                 overflow: 'visible',
@@ -66,7 +65,7 @@ export default function Login() {
               <LoginForm />
               <Typography variant="body2" align="center" sx={{ mt: 3 }}>
                 Don’t have an account?&nbsp;
-                <Link variant="subtitle2" component={RouterLink} to="register">
+                <Link variant="subtitle2" component={RouterLink} to="../signup">
                   Get started
                 </Link>
               </Typography>

@@ -5,6 +5,26 @@ import { Box, Icon, Tab, Typography } from '@mui/material';
 import { useState } from 'react';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 
+const style = {
+  backgroundColor: '#fff',
+  //? sm 이후로는(up)동일한 값을 적용하려면 그냥 sm까지만 적용하면 된다
+  /* (xs, extra-small: 0px
+  sm, small: 600px
+  md, medium: 900px
+  lg, large: 1200px
+  xl, extra-large: 1536px
+  */
+  mx: { xs: -4, sm: -5 },
+  mt: -0.5,
+  mb: -10,
+  height: '60vh',
+  boxShadow: 10,
+  borderBottomLeftRadius: 20,
+  borderBottomRightRadius: 20,
+  px: 10,
+  py: 2,
+};
+
 function Posts() {
   const [value, setValue] = useState('1');
 
@@ -27,27 +47,7 @@ function Posts() {
               <Tab label="Likes" value="3" />
             </TabList>
           </Box>
-          <Box
-            sx={{
-              backgroundColor: '#fff',
-              //? sm 이후로는(up)동일한 값을 적용하려면 그냥 sm까지만 적용하면 된다
-              /* (xs, extra-small: 0px
-              sm, small: 600px
-              md, medium: 900px
-              lg, large: 1200px
-              xl, extra-large: 1536px
-              */
-              mx: { xs: -4, sm: -5 },
-              mt: -0.5,
-              mb: -10,
-              height: '60vh',
-              boxShadow: 10,
-              borderBottomLeftRadius: 20,
-              borderBottomRightRadius: 20,
-              px: 10,
-              py: 2,
-            }}
-          >
+          <Box sx={style}>
             <TabPanel value="1">Uploaded</TabPanel>
             <TabPanel value="2">Voted</TabPanel>
             <TabPanel value="3">

@@ -4,13 +4,11 @@ import { Box, Grid, Container, Typography, Stack, Button } from '@mui/material';
 import Page from '../components/Page';
 import homeImg from '../assets/images/grad_img.png';
 
-import Footer from '../components/footer/Footer';
-
 // ----------------------------------------------------------------------
 
 export default function HomePage() {
   return (
-    <Page title="Dashboard | Minimal-UI">
+    <Page title="Home">
       <Container maxWidth="md">
         <Grid container spacing={2} my={10}>
           <Grid item xs={12} sm={6} md={6}>
@@ -34,7 +32,6 @@ export default function HomePage() {
           </Grid>
         </Grid>
       </Container>
-      <Footer />
     </Page>
   );
 }

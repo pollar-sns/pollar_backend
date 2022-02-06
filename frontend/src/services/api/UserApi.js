@@ -13,23 +13,21 @@ const USER = '/user/';
 
 /* 아이디 중복검사 */
 export const checkId = async (userId) => {
-  const response = await instance
-    .get(USER + 'idcheck', {
-      params: {
-        userId: userId,
-      },
-    });
+  const response = await instance.get(USER + 'idcheck', {
+    params: {
+      userId: userId,
+    },
+  });
   return response.data;
 };
 
 /* 닉네임 중복검사 */
 export const checkNickname = async (userNickname) => {
-  const response = await instance
-    .get(USER + 'nickcheck', {
-      params: {
-        userNickname:userNickname,
-      }
-    });
+  const response = await instance.get(USER + 'nickcheck', {
+    params: {
+      userNickname: userNickname,
+    },
+  });
   console.log(response);
   return response.data;
 };
@@ -37,10 +35,10 @@ export const checkNickname = async (userNickname) => {
 /* 이메일 중복검사 */
 // 여기는 왜 post일까
 const checkEmail = async (userEmail) => {
-  const response = await instance
-    .post(USER + 'emailcheck', {
-      userEmail,
-    });
+  const response = await instance.post(USER + 'emailcheck', {
+    userEmail,
+  });
   console.log(response);
 };
 
+/* 회원정보 수정 */

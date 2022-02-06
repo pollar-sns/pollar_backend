@@ -8,6 +8,11 @@ export const getAllCategories = async () => {
   return response.data;
 };
 
-// export default {
-//   getAllCategories,
-// };
+/* 유저가 선택한 카테고리 목록 반환 */
+export const getUserCategories = async (userId) => {
+  const response = await instance.get(COMMON + `/user/${userId}`);
+  console.log(response);
+  return response.data;
+};
+
+/*  */

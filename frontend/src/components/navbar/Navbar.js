@@ -30,7 +30,7 @@ const APPBAR_DESKTOP = 92;
 
 const RootStyle = styled(AppBar)(({ theme }) => ({
   boxShadow: 'none',
-  backdropFilter: 'blur(6px)',
+  backdropFilter: 'blur(1px)',
   WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
   backgroundColor: alpha(theme.palette.background.default, 0.72),
   // [theme.breakpoints.up('lg')]: {
@@ -53,13 +53,13 @@ Navbar.propTypes = {
   onOpenSidebar: PropTypes.func,
 };
 
-export default function Navbar({ onOpenSidebar }) {
+export default function Navbar({ onOpenSidebar, isFullLayout }) {
   const [loggedUser, setLoggedUser] = useRecoilState(loggedUserState);
   // todo 문제점: 새로고침 시 recoil state 날라감 (line 90)
   // JWT 검사로 변경 필요
 
   return (
-    <RootStyle>
+    <RootStyle sx={isFullLayout ? { backgroundColor: 'transparent' } : null}>
       <Container maxWidth="lg">
         <ToolbarStyle>
           <MobileHidden width="lgUp">
@@ -78,7 +78,6 @@ export default function Navbar({ onOpenSidebar }) {
             >
               <Toolbar sx={{ backgroundColor: 'transparent' }}>
                 <NavLogo component={Link} to="/">
-                  {/* <NavIcon /> */}
                   <Box component="img" src={logo} sx={{ width: 35, height: 35 }} />
                   <Typography variant="h3" sx={{ pl: 1, pr: 2, fontStyle: 'bold' }}>
                     Pollar

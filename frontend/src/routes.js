@@ -28,6 +28,11 @@ export default function Router() {
       ],
     },
     {
+      path: '/settings',
+      element: <NavLayout />,
+      children: [{ path: '', element: <SettingsPage /> }],
+    },
+    {
       path: '/polls',
       element: <NavLayout />,
       children: [

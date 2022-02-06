@@ -6,6 +6,9 @@ function createGradient(color1, color2) {
   return `linear-gradient(to bottom, ${color1}, ${color2})`;
 }
 
+//@eazae
+const BACKGROUND = '#F5F5FA';
+
 // SETUP COLORS
 const GREY = {
   0: '#FFFFFF',
@@ -48,7 +51,7 @@ const INFO = {
   lighter: '#D0F2FF',
   light: '#74CAFF',
   main: '#8585bc',
-  dark: '#0C53B7',
+  dark: '#5D5FEF',
   darker: '#04297A',
   contrastText: '#fff',
 };
@@ -64,14 +67,14 @@ const WARNING = {
   lighter: '#FFF7CD',
   light: '#FFE16A',
   main: '#FFC107',
-  dark: '#B78103',
+  dark: '#EF7147',
   darker: '#7A4F01',
   contrastText: GREY[800],
 };
 const ERROR = {
   lighter: '#FFE7D9',
   light: '#FFA48D',
-  main: '#FF4842',
+  main: '#EA4962',
   dark: '#B72136',
   darker: '#7A0C2E',
   contrastText: '#fff',
@@ -106,7 +109,7 @@ const palette = {
   chart: CHART_COLORS,
   divider: GREY[500_24],
   text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
-  background: { paper: '#fff', default: '#F5F5FA', neutral: GREY[200] },
+  background: { paper: '#fff', default: BACKGROUND, neutral: GREY[200] },
   action: {
     active: GREY[600],
     hover: GREY[500_8],

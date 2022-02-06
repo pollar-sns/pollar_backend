@@ -4,6 +4,7 @@ import { signup } from '../../services/api/AuthApi';
 // import { user } from './Index'
 import { Navigate, useNavigate } from 'react-router-dom';
 import SelectInteserts from './SelectInterests';
+import { getUserCategories } from '../../services/api/CategoryApi';
 
 function InterestForm(props) {
   const { setNext, user, setUser } = props;
@@ -14,13 +15,14 @@ function InterestForm(props) {
     e.preventDefault();
 
     try {
-      const result = await signup(user);
-      console.log(result.message);
-      if (result.message == 'success') {
-        navigate('/login');
-      } else {
-        setMessage('회원가입 실패 ');
-      }
+      await getUserCategories('hello');
+      //   const result = await signup(user);
+      //   console.log(result.message);
+      //   if (result.message == 'success') {
+      //     navigate('/login');
+      //   } else {
+      //     setMessage('회원가입 실패 ');
+      //   }
     } catch (error) {
       setMessage('회원가입 성공');
     }

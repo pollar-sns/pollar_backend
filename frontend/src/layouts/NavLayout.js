@@ -41,12 +41,12 @@ export default function NavLayout() {
   return (
     <RootStyle>
       <Container maxWidth="lg">
-        <Navbar onOpenSidebar={() => setOpen(true)} />
+        <Navbar onOpenSidebar={() => setOpen(true)} isFullLayout={false} />
         {/* <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} /> */}
         <MainStyle>
           <Outlet />
+          <Footer />
         </MainStyle>
-        <Footer />
       </Container>
     </RootStyle>
   );

@@ -1,15 +1,5 @@
 // @mui material components
-import {
-  Box,
-  Typography,
-  Button,
-  Container,
-  Grid,
-  Icon,
-  Avatar,
-  Stack,
-  IconButton,
-} from '@mui/material';
+import { Box, Typography, Button, Container, Grid, Avatar, Stack, Chip } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 // Images
 import profilePicture from '../../assets/images/profile.jpeg';
@@ -18,9 +8,10 @@ import ImageUploadButton from '../common/ImageUploadButton';
 import FollowListModal from './FollowListModal';
 import { useState } from 'react';
 
-function Profile({ profileInfo }) {
+function Profile({ profileInfo, isOwnerAccount }) {
   // todo DELETE (mock data)
   profileInfo = profile;
+  const isOwner = true;
 
   const [openFollowListModal, setOpenFollowListModal] = useState(false);
   // 팔로잉, 팔로워 모달 창을 open 시 focus할 tab
@@ -53,12 +44,31 @@ function Profile({ profileInfo }) {
               sx={{ width: '10rem', height: '10rem' }}
             />
             <Stack alignItems="flex-start" sx={{ width: '100%' }}>
-              <Typography variant="h4" color="primary.dark">
-                @{profileInfo.userNickname}
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography variant="h3" color="primary.dark" sx={{ mr: 1, mb: 0 }}>
+                  {profileInfo.userNickname}
+                </Typography>
+                <Stack direction="row" spacing={1}>
+                  {profileInfo.interests.map((item, index) => (
+                    <Chip key={index} label={item} color="info" size="small" variant="outlined" />
+                  ))}
+                  {/* 관심분야 수정으로 바로 갈 수 있는 버튼 */}
+                  {/* <Chip label="..." color="info" size="small" variant="outlined" /> */}
+                  {/* 
+                  <IconButton
+                    href="/users/settings"
+                    color="primary"
+                    aria-label="edit interests"
+                    size="small"
+                  >
+                    <SettingsIcon fontSize="small" />
+                  </IconButton> */}
+                </Stack>
+              </Stack>
+              <Typography variant="caption" color="text.disabled" sx={{ ml: 0.5 }}>
+                @{profileInfo.userId}
               </Typography>
-              <Typography variant="body1" color="text.disabled">
-                {profileInfo.userId}
-              </Typography>
+
               <Grid container spacing={3} mt={-1}>
                 <Grid item>
                   <Typography component="span" variant="body2" fontWeight="bold" color="secondary">
@@ -86,23 +96,16 @@ function Profile({ profileInfo }) {
                 spacing={0.5}
                 mt={{ xs: 3, sm: 6 }}
               >
-                <IconButton
-                  href="/users/settings"
-                  color="primary"
-                  aria-label="add an alarm"
-                  size="small"
-                >
-                  <SettingsIcon fontSize="small" />
-                </IconButton>
-                <Button href="/users/settings" variant="outlined" size="small">
-                  Settings
-                </Button>
                 <Button variant="outlined" size="small" disabled>
                   &nbsp;View&nbsp;Statistics&nbsp;
                 </Button>
-
-                {true ? (
-                  <Button variant="contained" disableElevation size="small">
+                {/* 본인의 계정 프로필인지에 따라서, 팔로잉을 하고 있는 계정의 프로필인지에 따라서 레이아웃 변화 */}
+                {!isOwner ? (
+                  <Button href="/users/settings" variant="contained" size="small">
+                    Settings
+                  </Button>
+                ) : true ? (
+                  <Button variant="contained" disableElevation size="small" color="secondary">
                     &nbsp;+&nbsp;Follow&nbsp;
                   </Button>
                 ) : (
