@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService{
     private final UserCategoryRepository userCategoryRepository;
     private final CategoryRepository categoryRepository;
 
+//    @Value("${custom.path.upload-images}")
     @Value("${file.path}")
     private String uploadFolder;
 
@@ -148,7 +149,8 @@ public class UserServiceImpl implements UserService{
         User usercur = userRepository.findByUserId(userDto.getUserId()).get();
         // 통신 I/O
         try {
-            Files.write(imageFilePath, userProfilePhoto.getBytes());
+//            Files.write(imageFilePath, userProfilePhoto.getBytes());
+            userProfilePhoto.transferTo(imageFilePath);
             System.out.println("사진은 저장 완료");
             User user = User.builder()
                     .uid(usercur.getUid())
