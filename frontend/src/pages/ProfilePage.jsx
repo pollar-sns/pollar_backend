@@ -1,9 +1,11 @@
 import Container from '@mui/material/Container';
 
-import { Box, Tab } from '@mui/material';
+import { Box, Card } from '@mui/material';
 import { useState } from 'react';
-import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { useParams } from 'react-router-dom';
+
+import Posts from '../components/profile/Posts';
+import Profile from '../components/profile/Profile';
 
 export default function ProfilePage() {
   const { userId } = useParams();
@@ -16,25 +18,31 @@ export default function ProfilePage() {
     setValue(newValue);
   };
   return (
-    <Container>
-      <Box sx={{ width: '100%', typography: 'body1' }}>
-        <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList
-              onChange={handleChange}
-              aria-label="lab API tabs example"
-              sx={{ width: '100%' }}
-            >
-              <Tab label="Uploaded" value="1" />
-              <Tab label="Voted" value="2" />
-              <Tab label="Liked" value="3" />
-            </TabList>
-          </Box>
-          <TabPanel value="1">Uploaded</TabPanel>
-          <TabPanel value="2">Voted</TabPanel>
-          <TabPanel value="3">Liked</TabPanel>
-        </TabContext>
+    <>
+      <Box bgColor="white">
+        <Container>
+          <Card
+            sx={{
+              p: 2,
+              mx: { xs: 2, lg: 3 },
+              mt: 8,
+              mb: 4,
+              backgroundColor: '#fff6',
+              // backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
+              backdropFilter: 'saturate(200%) blur(30px)',
+              /* offset-x | offset-y | blur-radius | spread-radius | color */
+              boxShadow: '2px 2px 20px 10px rgba(0, 0, 0, 0.1)',
+              overflow: 'visible',
+            }}
+          >
+            <Profile />
+
+            <Box bgColor="white" minHeight="60vh">
+              <Posts />
+            </Box>
+          </Card>
+        </Container>
       </Box>
-    </Container>
+    </>
   );
 }

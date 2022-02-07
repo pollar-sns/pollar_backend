@@ -18,7 +18,7 @@ export default function Router() {
   return useRoutes([
     {
       path: '/users',
-      element: <NavLayout />,
+      element: <FullLayout />,
       children: [
         { path: 'signup', element: <SignupPage /> },
         { path: 'login', element: <LoginPage /> },
@@ -26,6 +26,11 @@ export default function Router() {
         { path: 'profile/:userId', element: <ProfilePage /> },
         { path: 'settings', element: <SettingsPage /> },
       ],
+    },
+    {
+      path: '/settings',
+      element: <NavLayout />,
+      children: [{ path: '', element: <SettingsPage /> }],
     },
     {
       path: '/polls',
@@ -45,7 +50,6 @@ export default function Router() {
       element: <NavLayout />,
       children: [
         { path: '/', element: <HomePage /> },
-        { path: 'profile', element: <ProfilePage /> },
         { path: 'about', element: <AboutPage /> },
         { path: 'trending', element: <TrendingPage /> },
       ],

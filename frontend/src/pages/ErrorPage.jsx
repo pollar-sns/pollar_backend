@@ -43,7 +43,7 @@ export default function ErrorPage() {
             />
           </motion.div> */}
 
-          <Button to="/" size="large" variant="contained" component={RouterLink}>
+          <Button to="/" size="large" variant="contained" component={RouterLink} sx={{ my: 5 }}>
             Go to Home
           </Button>
         </Box>
