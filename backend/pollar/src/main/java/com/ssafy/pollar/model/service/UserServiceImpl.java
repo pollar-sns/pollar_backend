@@ -133,6 +133,10 @@ public class UserServiceImpl implements UserService{
         System.out.println("-----------------------------------");
         System.out.println("이미지 파일 이름: " + imageFileName);
 
+        Path currentPath = Paths.get("");
+        String path = currentPath.toAbsolutePath().toString();
+        System.out.println("현재 작업 경로: " + path);
+
         Path imageFilePath = Paths.get(uploadFolder + imageFileName);
 
 //        String user = userRepository.findByUserId(userId).get().getUid();
