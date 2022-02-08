@@ -1,6 +1,7 @@
 package com.ssafy.pollar.controller;
 
 import com.ssafy.pollar.domain.entity.Vote;
+import com.ssafy.pollar.model.dto.UserDto;
 import com.ssafy.pollar.model.dto.VoteDto;
 import com.ssafy.pollar.model.service.VoteService;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -25,8 +27,8 @@ public class VoteController {
     private static final String SUCCESS = "success";
     @ApiOperation(value = "피드생성", notes = "피드 정보를 입력한다.")
     @PostMapping("/create")
-    public ResponseEntity<String> createVote(@RequestBody @ApiParam(value = "피드 작성시 필요한 피드정보", required = true) VoteDto voteDto)throws Exception {
-        voteService.create(voteDto);
+    public ResponseEntity<String> profileImageUrlUpdate(@RequestPart(value = "voteDto") VoteDto voteDto, @RequestPart(value = "votePhotos", required = false) List<MultipartFile> votePhotos) throws Exception {
+        voteService.create(voteDto, votePhotos);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);  // status 200과 success라는 문자열을 반환
     }
 
