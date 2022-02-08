@@ -7,6 +7,7 @@ import com.ssafy.pollar.model.dto.UserDto;
 import com.ssafy.pollar.model.repository.CategoryRepository;
 import com.ssafy.pollar.model.repository.UserRepository;
 import com.ssafy.pollar.model.repository.UserCategoryRepository;
+import com.ssafy.pollar.util.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
@@ -30,13 +31,15 @@ import java.nio.file.StandardOpenOption;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
     private final UserCategoryRepository userCategoryRepository;
     private final CategoryRepository categoryRepository;
+
+    private final S3Uploader s3Uploader;
 
 //    @Value("${custom.path.upload-images}")
 //    @Value("${file.path}")
@@ -138,95 +141,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public void modifyProfile(UserDto userDto, MultipartFile userProfilePhoto) throws Exception {
         UUID uuid = UUID.randomUUID();
-        System.out.println("-----------------------------------");
-        System.out.println(userProfilePhoto.getResource());
-        System.out.println(userProfilePhoto.getOriginalFilename());
-        System.out.println(userProfilePhoto.getInputStream());
-        System.out.println(userProfilePhoto.getBytes());
-
-        String imageFileName = "123.jpeg";
-        System.out.println("-----------------------------------");
-        System.out.println("이미지 파일 이름: " + imageFileName);
-        System.out.println("-----------------------------------");
-//        System.out.println("저장할 경로: " + uploadFolder);
-//        Path currentPath = Paths.get("");
-//        String path = currentPath.toAbsolutePath().toString();
-//        System.out.println("현재 작업 경로: " + path);
-
-//        Path filePath = Paths.get(imageFileName);
-
-//        File fi = new File(imageFileName);
-//        final BufferedWriter out = Files.newBufferedWriter(filePath, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
 
 
-//        String user = userRepository.findByUserId(userId).get().getUid();
-//        String uid = userDto.getUserId().substring(1);
-//        System.out.println(uid);
-
-//        User user = userRepository.findByUserId(userId).get();
-//        Optional<User> user = userRepository.findByUserId(userDto.getUserId());
         User usercur = userRepository.findByUserId(userDto.getUserId()).get();
         // 통신 I/O
         try {
-
-//            File folder = new File(uploadFolder);
-//            if(!folder.exists()) {
-//                folder.mkdirs();
-//            }
-            Path imageFilePath = Paths.get(imageFileName);
-            //파일권한적용
-//            imageFilePath.setWritable(true); //쓰기가능설정
-//            imageFilePath.setReadable(true);	//읽기가능설정
 //            Files.write(imageFilePath, userProfilePhoto.getBytes());
-//            userProfilePhoto.transferTo(imageFilePath);
-//            System.out.println("사진은 저장 완료");
-
-//            if(!Files.isDirectory(Paths.get(uploadFolder))) {
-//            Files.createDirectories(Paths.get(uploadFolder));
-
-
-//            final BufferedWriter out = Files.newBufferedWriter(
-//                    imageFilePath,
-//                    StandardCharsets.UTF_8,
-//                    StandardOpenOption.CREATE,
-//                    StandardOpenOption.APPEND);
-
-            System.out.println("-----------------------------------");
-            System.out.println("저장 완료");
-            System.out.println("-----------------------------------");
-            Files.write(imageFilePath, userProfilePhoto.getBytes());
-//            byte[] image = Files.readAllBytes(imageFilePath);
-//            System.out.println(image);
-            // 업로드까지 간다음에 안에 파일들을 불러오자
-            // uploadFolder
-//            ListFile(uploadFolder);
-
-//            BufferedImage image = ImageIO.read(userProfilePhoto);
-//            System.out.println(image);
-//            ImageIO.write(image , "jpg", new File("c:\\test\\image.jpg"));
-//            userProfilePhoto.transferTo(imageFilePath);
-            String path = imageFilePath.toAbsolutePath().toString();
-            System.out.println("-----------------------------------");
-            System.out.println("저장 한 경로: " + path);
-            System.out.println("-----------------------------------");
-//            System.out.println("저장 한 경로에서 파일 가져와 출력: " + out.toString());
-
-//            ListFile(uploadFolder);
-            File f = new File(".");
-            System.out.println(f.getAbsolutePath()); // 현재 디렉토리 경로
-//            File dir = new File(uploadFolder);
-//            String[] filenames = dir.list();
-//            for(String filename : filenames) {
-//                System.out.println("filename: " + filename);
-//            }
-//            if(!Files.exists(imageFilePath)) {
-//            Files.createFile(imageFilePath);
-//            }
-
-//            Files.createDirectories(imageFilePath.getParent());
-
-
-
+//            s3Uploader.upload(userProfilePhoto, "profile");
+            String imgPath = s3Uploader.upload(userProfilePhoto, "profile");
+            System.out.println("==============================================");
+            System.out.println("저장된 s3 경로 : " + imgPath);
+            System.out.println("==============================================");
             // db의 id 컬럼값으로 파일을 가져옴
             User user = User.builder()
                     .uid(usercur.getUid())
@@ -236,10 +161,9 @@ public class UserServiceImpl implements UserService{
                     .userEmail((usercur.getUserEmail()))
                     .userBirthday((usercur.getUserBirthday()))
                     .userSex((usercur.getUserSex()))
-                    .userProfilePhoto(String.valueOf(imageFilePath))
+                    .userProfilePhoto(imgPath)
                     .build();
 
-            System.out.println("저장전?");
             userRepository.save(user);
         } catch (Exception e) {
             e.printStackTrace();
