@@ -27,7 +27,7 @@ public class VoteController {
     private static final String SUCCESS = "success";
     @ApiOperation(value = "피드생성", notes = "피드 정보를 입력한다.")
     @PostMapping("/create")
-    public ResponseEntity<String> profileImageUrlUpdate(@RequestPart(value = "voteDto") VoteDto voteDto, @RequestPart(value = "votePhotos", required = false) List<MultipartFile> votePhotos) throws Exception {
+    public ResponseEntity<String> createVote(@RequestPart(value = "voteDto") VoteDto voteDto, @RequestPart(value = "votePhotos", required = false) List<MultipartFile> votePhotos) throws Exception {
         voteService.create(voteDto, votePhotos);
         return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);  // status 200과 success라는 문자열을 반환
     }
