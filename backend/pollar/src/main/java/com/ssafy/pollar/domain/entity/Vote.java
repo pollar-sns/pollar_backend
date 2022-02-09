@@ -21,7 +21,7 @@ public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 아이디 auto increment로 자동 저장
     @Column(name = "voteId")
-    private Long voteId;
+    private long voteId;
 
     @Column(name = "voteName",length = 255)     // 피드 제목
     private String voteName;
@@ -47,8 +47,8 @@ public class Vote {
     @OneToMany(mappedBy = "voteCategory")   // 투표에 포함된 카테고리 리스트
     private List<VoteCategory> voteCategories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "voteParticipate")    // 투표 참여자 리스트
-    private List<VoteParticipate> voteParticipates = new ArrayList<>();
+//    @OneToMany(mappedBy = "voteParticipate")    // 투표 참여자 리스트
+//    private List<VoteParticipate> voteParticipates = new ArrayList<>();
 
     @OneToMany(mappedBy = "voteLike")   // 좋아요 한 사람 리스트
     private List<VoteLike> voteLikes = new ArrayList<>();
