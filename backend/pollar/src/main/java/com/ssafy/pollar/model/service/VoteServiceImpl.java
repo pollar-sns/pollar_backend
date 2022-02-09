@@ -6,9 +6,13 @@ import com.ssafy.pollar.model.dto.SelectionDto;
 import com.ssafy.pollar.model.dto.VoteDto;
 import com.ssafy.pollar.model.repository.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,8 +31,11 @@ public class VoteServiceImpl implements VoteService {
     private final VoteLikeRepository voteLikeRepository;
     private final VoteParticipateRepository voteParticipateRepository;
 
+    @Value("${file.path}")
+    private String uploadFolder;
+
     @Override
-    public void create(VoteDto voteDto) throws Exception {  // 피드 생성
+    public void create(VoteDto voteDto, List<MultipartFile> votePhotos) throws Exception {  // 피드 생성
 
         //userid로 작성자 User 객체 받아오기
         User author = userRepository.findByUserId(voteDto.getAuthor()).get();
@@ -52,18 +59,31 @@ public class VoteServiceImpl implements VoteService {
         voteRepository.save(vote);  // DB에 전달 받은 vote 정보 저장
 
         // 투표 선택지 등록
-        //글
-        for (SelectionDto selection : voteDto.getVoteSelects() ) {
-            VoteSelect voteSelect = VoteSelect.builder()
-                    .voteSelect(vote)
-                    .selectionTitle(selection.getSelectionTitle())
-                    .content(selection.getContent())
-                    .build();
-            voteSelectRepository.save(voteSelect);
+        if(vote.getVoteType()) {   // 텍스트 투표 일때
+            for (SelectionDto selection : voteDto.getVoteSelects() ) {
+                VoteSelect voteSelect = VoteSelect.builder()
+                        .voteSelect(vote)
+                        .selectionTitle(selection.getSelectionTitle())
+                        .content(selection.getContent())
+                        .build();
+                voteSelectRepository.save(voteSelect);
+            }
+        } else {    // 이미지 투표일때. 사진 저장까지 하면서 선택지 등록 해야됨
+            for(int i = 0; i < 2; i ++) {
+                String imageFileName = "vote" + "_" + votePhotos.get(i).getOriginalFilename();
+                Path imageFilePath = Paths.get(uploadFolder + imageFileName);
+                try {
+                    Files.write(imageFilePath, votePhotos.get(i).getBytes());   // votePhotos 리스트에서 이미지 순서대로 저장
+                    VoteSelect voteSelect = VoteSelect.builder()
+                            .voteSelect(vote)
+                            .content(imageFilePath.toString())      // 경로도 되어있기 때문에 toString을 이용하여 string 타입으로 넣어준다
+                            .build();
+                    voteSelectRepository.save(voteSelect);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
-
-        //사진
-
 
         //투표 카테고리 등록
         for (Long cate: voteDto.getVoteCategories()) {
