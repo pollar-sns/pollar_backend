@@ -32,6 +32,18 @@ function createIntstanceWithAuth() {
 
   // return setInterceptors(instance);
 }
+export function createMultipartInstance() {
+  return axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      "Access-Control-Allow-Credentials": true
+    },
+  });
+}
+
+
 
 export const instance = createInstance();
 export const instanceWithAuth = createIntstanceWithAuth();
+export const fileInstance = createMultipartInstance();

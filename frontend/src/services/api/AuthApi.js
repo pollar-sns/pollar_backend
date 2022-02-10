@@ -11,11 +11,10 @@ export const signup = async (user) => {
     userNickname: user.userNickname,
     userEmail: user.userEmail,
     userBirthday: user.userBirthday,
-    userSex: user.userSex,
+    userGender: user.userGender,
     categories: user.categories,
     userProfilePhoto: user.userProfilePhoto,
   });
-  // console.log(response.config.data);
 };
 
 /* 로그인 */

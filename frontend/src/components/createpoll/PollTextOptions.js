@@ -1,70 +1,66 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
-import { useEffect } from 'react';
 
 function PollTextOptions(props) {
   const { vote, setVote } = props;
 
-  const [voteList, setVoteList] = useState([0]);
+  const [textList, setTextList] = useState([0]);
 
-  const createVoteList = (item) => {
-    let voteArr = [...voteList];
+  const createTextList = (item) => {
+    let voteArr = [...textList];
     let counter = voteArr.slice(-1)[0];
     counter += 1;
 
     voteArr.push(counter);
-    setVoteList(voteArr);
+    setTextList(voteArr);
+  };
+
+  const changeList = () => {
     setVote({
       ...vote,
-      voteSelects: voteArr,
+      voteSelects: textList,
     });
   };
 
   return (
     <>
-      {voteList &&
-        voteList.map((item, i) => (
+      {textList &&
+        textList.map((item, i) => (
           <>
             <TextField
+              paddingBottom={1}
               key={i}
               id="vote-list"
               label={`${i + 1}번 선택지`}
               required
               fullWidth
               placeholder="투표 선택지 입력"
-              // value={vote.voteSelects[i]}
-              onBlur={(e) => {
+              onChange={(e) => {
                 setVote({
                   ...vote,
-                  voteList: (voteList[i] = e.target.value),
+                  textList: (textList[i] = e.target.value),
                 });
-                console.log(voteList);
+                changeList();
               }}
             />
-            <br />
-            <br />
           </>
         ))}
-
-      {voteList.length > 2 && (
+      <br />
+      <br />
+      {textList.length > 2 && (
         <Button
-        onClick={(e) => {
-          setVote({
-            ...vote,
-            voteList: voteList.pop(),
-          });
-        }}
+          onClick={(e) => {
+            setVote({
+              ...vote,
+              textList: textList.pop(),
+            });
+          }}
         >
           Delete Options
         </Button>
       )}
-      {voteList.length < 4 && (
-        <Button
-          variant="contained"
-          // onClick={}
-          className="option-button"
-          onClick={createVoteList}
-        >
+      {textList.length < 4 && (
+        <Button variant="contained" className="option-button" onClick={createTextList}>
           + Add more options
         </Button>
       )}

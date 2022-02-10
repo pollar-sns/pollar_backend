@@ -1,3 +1,5 @@
 export default function PollDetailPage() {
-  return <></>;
+  return <>
+
+  </>;
 }

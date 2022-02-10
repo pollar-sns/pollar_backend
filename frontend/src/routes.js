@@ -12,6 +12,7 @@ import ProfilePage from './pages/ProfilePage';
 import SignupPage from './pages/SignupPage';
 import TrendingPage from './pages/TrendingPage';
 import SettingsPage from './pages/SettingsPage';
+import PollDetailPage from './pages/PollDetailPage'
 
 export default function Router() {
   // The useRoutes hook is the functional equivalent of <Routes>, but it uses JavaScript objects instead of <Route> elements to define your routes. These objects have the same properties as normal <Route> elements, but they don't require JSX.
@@ -39,6 +40,7 @@ export default function Router() {
         { path: '', element: <PollsPage /> },
         { path: ':type', element: <PollsPage /> },
         { path: 'create', element: <PollCreatePage /> },
+        { path: 'detail', element: <PollDetailPage /> },
       ],
     },
     {

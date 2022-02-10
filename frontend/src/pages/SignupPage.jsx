@@ -10,7 +10,7 @@ import AuthSocial from '../components/login/AuthSocial';
 import MobileHidden from '../components/common/MobileHidden';
 // import RegisterForm from '../components/signup/RegisterForm';
 // import SelectInterests from '../components/signup/SelectInterests';
-import Index from '../components/signup/Index'
+import Index from '../components/signup/Index';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -61,44 +61,43 @@ export default function SignupPage() {
 
       <Container>
         <ContentStyle>
-        <Card
-              sx={{
-                px: 8,
-                py: 10,
-                backgroundColor: '#fffd',
-                backdropFilter: 'saturate(200%) blur(30px)',
-                boxShadow: '2px 2px 20px 10px rgba(0, 0, 0, 0.1)',
-                overflow: 'visible',
-              }}
-            >
-          <Box sx={{ mb: 5 }}>
-            
-            <Typography variant="h3" gutterBottom color="primary">
-              Sign Up
+          <Card
+            sx={{
+              px: 8,
+              py: 10,
+              backgroundColor: '#fffd',
+              backdropFilter: 'saturate(200%) blur(30px)',
+              boxShadow: '2px 2px 20px 10px rgba(0, 0, 0, 0.1)',
+              overflow: 'visible',
+            }}
+          >
+            <Box sx={{ mb: 5 }}>
+              <Typography variant="h3" gutterBottom color="primary">
+                Sign Up
+              </Typography>
+              <Typography sx={{ color: 'text.secondary' }}>Join us in Pollar!</Typography>
+            </Box>
+
+            {/* <AuthSocial /> */}
+
+            {/* <RegisterForm /> */}
+            <Index />
+
+            <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
+              By registering, I agree to Minimal&nbsp;
+              <Link underline="always" sx={{ color: 'text.primary' }}>
+                Terms of Service
+              </Link>
+              &nbsp;and&nbsp;
+              <Link underline="always" sx={{ color: 'text.primary' }}>
+                Privacy Policy
+              </Link>
+              .
             </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>Join us in Pollar!</Typography>
-          </Box>
 
-          {/* <AuthSocial /> */}
+            {/* <SelectInterests /> */}
 
-          {/* <RegisterForm /> */}
-          <Index/>
-
-          <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
-            By registering, I agree to Minimal&nbsp;
-            <Link underline="always" sx={{ color: 'text.primary' }}>
-              Terms of Service
-            </Link>
-            &nbsp;and&nbsp;
-            <Link underline="always" sx={{ color: 'text.primary' }}>
-              Privacy Policy
-            </Link>
-            .
-          </Typography>
-
-          {/* <SelectInterests /> */}
-
-          {/* <MobileHidden width="smUp">
+            {/* <MobileHidden width="smUp">
             <Typography variant="subtitle2" sx={{ mt: 3, textAlign: 'center' }}>
               Already have an account?&nbsp;
               <Link to="/login" component={RouterLink}>
@@ -106,12 +105,12 @@ export default function SignupPage() {
               </Link>
             </Typography>
           </MobileHidden> */}
-          <Typography variant="subtitle2" sx={{ mt: 3, textAlign: 'center' }}>
-            Already have an account?&nbsp;
-            <Link to="/login" component={RouterLink}>
-              Login
-            </Link>
-          </Typography>
+            <Typography variant="subtitle2" sx={{ mt: 3, textAlign: 'center' }}>
+              Already have an account?&nbsp;
+              <Link to="/login" component={RouterLink}>
+                Login
+              </Link>
+            </Typography>
           </Card>
         </ContentStyle>
       </Container>
