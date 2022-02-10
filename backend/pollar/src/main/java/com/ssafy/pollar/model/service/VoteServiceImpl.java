@@ -113,7 +113,7 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public List<VoteDto> getVoteList() throws Exception {
-        List<Vote> list = voteRepository.findAll();
+        List<Vote> list = voteRepository.findByOrderByVoteCreateTimeDesc();
         List<VoteDto> dtoList = new ArrayList<>();
         for (Vote vote: list) {
             VoteDto dto = new VoteDto(vote);

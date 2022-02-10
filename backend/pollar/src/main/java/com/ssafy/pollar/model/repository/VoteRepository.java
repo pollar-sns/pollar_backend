@@ -19,5 +19,6 @@ public interface VoteRepository extends JpaRepository<Vote,Long> {
     @Query(value = "select v from Vote v join v.voteCategories vc where vc.category =?1")
     List<Vote> getUserInterestVoteList(Category cate);
 
+    List<Vote> findByOrderByVoteCreateTimeDesc();
 
 }
