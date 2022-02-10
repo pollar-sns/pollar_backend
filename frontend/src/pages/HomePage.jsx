@@ -3,6 +3,7 @@ import { Box, Grid, Container, Typography, Stack, Button } from '@mui/material';
 // components
 import Page from '../components/Page';
 import homeImg from '../assets/images/grad_img.png';
+import ImageUploadButton from '../components/common/ImageUploadButton';
 
 // ----------------------------------------------------------------------
 
@@ -20,6 +21,7 @@ export default function HomePage() {
               </Typography>
               <Typography variant="inherit" color="primary.light">
                 프로젝트 CICD 테스트
+                <ImageUploadButton />
               </Typography>
             </Stack>
             <Button variant="contained" color="info">
