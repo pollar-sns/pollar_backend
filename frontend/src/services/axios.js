@@ -10,7 +10,6 @@ function createInstance() {
   });
 }
 
-<<<<<<< HEAD
 // multipart(파일) 용 axios 객체 생성
 export function createMultipartInstance() {
   return axios.create({
@@ -22,8 +21,6 @@ export function createMultipartInstance() {
   });
 }
 
-=======
->>>>>>> 073aaf4d46d4cb613d479ee6e2b0f89772bdc951
 // header에 jwt가 있는 axios 객체 생성
 export function createIntstanceWithAuth() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -38,7 +35,6 @@ export function createIntstanceWithAuth() {
     });
   } else {
     console.log(user);
-<<<<<<< HEAD
     alert('로그인 안된 사용자. 이 페이지에 접근불가');
   }
 
@@ -56,16 +52,11 @@ export function createIntstanceWithAuth() {
   // });
 
   // return setInterceptors(instance);
-=======
     // alert('로그인 안된 사용자. 이 페이지에 접근불가');
   }
->>>>>>> 073aaf4d46d4cb613d479ee6e2b0f89772bdc951
-}
+
 
 export const instance = createInstance();
 //? ERROR: localStorage에 'user'가 없을 경우, 아래 방식처럼 하면 처음에 함수가 무조건 실행되며 초기화되기 때문에 else{...} 부분에 걸린다
 //// export const instanceWithAuth = createIntstanceWithAuth();
-<<<<<<< HEAD
 export const fileInstance = createMultipartInstance();
-=======
->>>>>>> 073aaf4d46d4cb613d479ee6e2b0f89772bdc951
