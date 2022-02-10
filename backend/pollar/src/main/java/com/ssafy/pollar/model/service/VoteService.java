@@ -25,4 +25,6 @@ public interface VoteService {
     List<VoteDto> getUserParticipateVoteList(String userId)throws Exception;
     long getUserParticipateVoteCount(String userId)throws Exception;
     List<VoteDto> getUserLikeVoteList(String userId)throws Exception;
+    List<VoteDto> getUserInterestVoteList(String userId) throws Exception;
+    List<VoteDto> getUserFollowVoteList(String userId) throws Exception;
 }

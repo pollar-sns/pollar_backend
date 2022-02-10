@@ -1,5 +1,6 @@
 package com.ssafy.pollar.model.repository;
 
+import com.ssafy.pollar.domain.entity.Category;
 import com.ssafy.pollar.domain.entity.User;
 import com.ssafy.pollar.domain.entity.Vote;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,9 @@ public interface VoteRepository extends JpaRepository<Vote,Long> {
     List<Vote> getUserParticipateVoteList(String userId);
     @Query(value = "select v from User u join u.userVoteLikes ul join ul.voteLike v where u.userId=?1")
     List<Vote> getUserLikeVoteList(String userId);
+
+    @Query(value = "select v from Vote v join v.voteCategories vc where vc.category =?1")
+    List<Vote> getUserInterestVoteList(Category cate);
+
 
 }
