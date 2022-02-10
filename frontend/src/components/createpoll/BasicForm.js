@@ -14,10 +14,11 @@ import {
   FormGroup,
   Checkbox,
   Modal,
+  Grid,
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import CategoryModal from './CategoryModal';
-import reactDom from 'react-dom';
 import React from 'react';
 
 function BasicForm(props) {
@@ -43,50 +44,48 @@ function BasicForm(props) {
   return (
     <>
       <Box>
-        <Typography variant="h4">투표 제목</Typography>
-        <TextField
-          id="voteName"
-          // label="제목을 입력하세요"
-          variant="standard"
-          required
-          fullWidth
-          placeholder="투표 제목을 입력하세요."
-          value={vote.voteName}
-          onChange={(e) =>
-            setVote({
-              ...vote,
-              voteName: e.target.value,
-            })
-          }
-        />
-        <br /> <br />
-        <Typography variant="h4">투표 내용</Typography>
-        <TextField
-          id="voteContent"
-          label="투표 내용"
-          multiline
-          fullWidth
-          rows={4}
-          variant="standard"
-          required
-          value={vote.voteContent}
-          onChange={(e) =>
-            setVote({
-              ...vote,
-              voteContent: e.target.value,
-            })
-          }
-          // placeholder='투표 내용을 입력하세요.'
-        />
-        <br />
-        <br />
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <Button 
-            onClick={handleOpen}
-            
-          >
-            카테고리 선택
-            </Button>
+        <Stack spacing={1}>
+          <Typography variant="h4" paddingTop={1}>
+            투표 제목
+          </Typography>
+          <TextField
+            id="voteName"
+            variant="standard"
+            required
+            fullWidth
+            placeholder="투표 제목을 입력하세요."
+            value={vote.voteName}
+            onChange={(e) =>
+              setVote({
+                ...vote,
+                voteName: e.target.value,
+              })
+            }
+          />{' '}
+        </Stack>
+        <Stack spacing={1} paddingTop={2}>
+          <Typography variant="h4" paddingTop={1}>
+            투표 내용
+          </Typography>
+          <TextField
+            id="voteContent"
+            placeholder="투표 내용을 입력하세요 "
+            multiline
+            fullWidth
+            rows={4}
+            variant="standard"
+            required
+            value={vote.voteContent}
+            onChange={(e) =>
+              setVote({
+                ...vote,
+                voteContent: e.target.value,
+              })
+            }
+          />
+        </Stack>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={6} paddingTop={2} paddingBottom={2}>
+          <Button onClick={handleOpen}>카테고리 선택</Button>
           <Modal
             open={open}
             onClose={handleClose}
@@ -100,44 +99,48 @@ function BasicForm(props) {
 
           <DatePicker vote={vote} setVote={setVote} />
         </Stack>
-        <br />
         <hr></hr>
-        <br />
-        <Typography variant="h4">투표 익명 옵션 선택</Typography>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <FormControlLabel
-            label="익명으로 투표 생성하기 (투표 생성자와 투표자 모두 익명)"
-            control={
-              <Checkbox
-                checked={vote.userAnonymousType}
-                onChange={(e) => {
-                  setVote({
-                    ...vote,
-                    userAnonymousType: e.target.checked,
-                  });
-                }}
-              />
-            }
-          />
-          <br />
-          <FormControlLabel
-            label="투표자만 익명으로 (투표자만 익명)"
-            control={
-              <Checkbox
-                checked={vote.voteAnonymousType}
-                onChange={(e) => {
-                  setVote({
-                    ...vote,
-                    voteAnonymousType: e.target.checked,
-                  });
-                }}
-              />
-            }
-          />
+        <Stack paddingTop={2}>
+          <Typography variant="h4" paddingBottom={1}>
+            투표 익명 옵션 선택
+          </Typography>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <FormControlLabel
+              label="익명으로 투표 생성하기 (투표 생성자와 투표자 모두 익명)"
+              control={
+                <Checkbox
+                  checked={vote.userAnonymousType}
+                  onChange={(e) => {
+                    setVote({
+                      ...vote,
+                      userAnonymousType: e.target.checked,
+                    });
+                  }}
+                />
+              }
+            />
+            <br />
+            <FormControlLabel
+              label="투표자만 익명으로 (투표자만 익명)"
+              control={
+                <Checkbox
+                  checked={vote.voteAnonymousType}
+                  onChange={(e) => {
+                    setVote({
+                      ...vote,
+                      voteAnonymousType: e.target.checked,
+                    });
+                  }}
+                />
+              }
+            />
+          </Stack>
         </Stack>
         <br />
         <hr></hr>
-        <Typography variant="h4">투표 타입 선택</Typography>
+        <Typography variant="h4" paddingTop={1} paddingBottom={1}>
+          투표 타입 선택
+        </Typography>
         <RadioGroup
           row
           aria-labelledby="demo-controlled-radio-buttons-group"
@@ -150,16 +153,8 @@ function BasicForm(props) {
             })
           }
         >
-          <FormControlLabel
-            value={true}
-            control={<Radio />}
-            label="텍스트 투표"
-          />
-          <FormControlLabel
-            value={false}
-            control={<Radio />}
-            label="이미지 투표"
-          />
+          <FormControlLabel value={true} control={<Radio />} label="텍스트 투표" />
+          <FormControlLabel value={false} control={<Radio />} label="이미지 투표" />
         </RadioGroup>
       </Box>
     </>

@@ -21,25 +21,21 @@ export const checkNickname = async (userNickname) => {
       userNickname: userNickname,
     },
   });
-  // console.log(response);
   return response.data;
 };
 
 /* 이메일 중복검사 */
-// 여기는 왜 post일까
 export const checkEmail = async (userEmail) => {
   const response = await instance.get(USER + 'emailcheck', {
     params: { 
       userEmail: userEmail 
     },
   });
-  // console.log(response);
   return response.data;
 };
 
 /* 이메일 인증 메일 발송 */
 export const emailConfirm = async (userEmail) => {
-  // console.log(userEmail);
   const response = await instance.get(USER + 'confirmemail', {
     params: { 
       userEmail: userEmail 
@@ -52,13 +48,11 @@ export const emailConfirm = async (userEmail) => {
 /* 이메일 인증 토큰 확인 */
 export const emailToken = async (token) => {
   const response = await instance.get(USER + 'emailtoken', {
-    // user 가 입력한 인증번호
     params:{
         userEmail: token.userEmail,
         token: token.token,
       }
   });
-  // console.log(response);
   return response.data;
 };
 

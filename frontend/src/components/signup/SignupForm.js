@@ -19,7 +19,6 @@ import {
 } from '../../services/api/UserApi';
 
 function SignupForm(props) {
-  // props로 상위에 있는 setNext를 받아옴 -> 중괄호 중요
   const { setNext, setUser, user } = props;
   const [showPassword, setShowPassword] = useState(false);
 
@@ -71,15 +70,13 @@ function SignupForm(props) {
 
   // userId Validation
   const checkIdValid = (id) => {
-    var checkId = /^[a-z|A-Z|0-9+|]{5,15}$/g.test(user.userId);
-    // console.log('id : ', id);
+    var checkId = /^[a-z|A-Z|0-9+|]{6,15}$/g.test(user.userId);
     if (!checkId) {
       setErrorState({
         ...errorState,
         UserIdRegex: true,
       });
     } else {
-      // console.log('성공');
       setErrorState({
         ...errorState,
         UserIdRegex: false,
@@ -106,13 +103,11 @@ function SignupForm(props) {
   // userNickname duplicate check
   const checkNickUnique = async (nick) => {
     const result = await checkNickname(nick);
-    // console.log(result)
     if (result) {
       setErrorState({
         ...errorState,
         nickNameUnique: false,
       });
-      // alert('사용 가능한 닉네임입니다!');
     } else {
       setErrorState({
         ...errorState,
@@ -143,7 +138,6 @@ function SignupForm(props) {
           ...errorState,
           emailUnique: true,
         });
-        // checkEmailUnique(email);
       }
     } else {
       setErrorState({
@@ -173,7 +167,6 @@ function SignupForm(props) {
     var checkpw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{4,12}$/.test(
       user.password
     );
-    // console.log(checkpw)
     if (!checkpw) {
       setErrorState({
         ...errorState,
@@ -195,10 +188,13 @@ function SignupForm(props) {
     e.preventDefault();
     try {
       const result = await emailConfirm(user.userEmail);
-      // console.log(result);
       if (result) {
         setMessage('인증번호가 발송되었습니다. 5분안에 인증번호를 입력하세요.');
         setEmailSend(true);
+        setTokenNumber({
+          ...tokenNumber,
+          userEmail: user.userEmail,
+        });
       } else {
         setMessage('인증번호 전송 실패.');
         setEmailSend(false);
@@ -206,12 +202,16 @@ function SignupForm(props) {
     } catch (error) {
       setMessage('인증번호가 발송되었습니다.');
       setEmailSend(true);
+      setTokenNumber({
+        ...tokenNumber,
+        userEmail: user.userEmail,
+      });
     }
   };
 
   // 이메일 인증번호 확인
   const [tokenNumber, setTokenNumber] = useState({
-    userEmail: user.userEmail,
+    userEmail: '',
     token: '',
   });
   const [tokenMessage, setTokenMessage] = useState('');
@@ -224,14 +224,12 @@ function SignupForm(props) {
     e.preventDefault();
     try {
       console.log(tokenNumber);
-      // response.data받기
       const response = await emailToken(tokenNumber);
       if (response.message === 'success') {
         // 토큰이 T/F인지 확인
         const tokenResult = response.isValid;
         // 인증번호 확인한 Email이 작성된 Email과 같은지 확인
         const tokenEmail = response.userEmail;
-
         if (tokenResult) {
           setTokenMessage('이메일 인증 성공');
           setTokenState({
@@ -281,7 +279,6 @@ function SignupForm(props) {
               }
               onKeyUp={(e) => checkIdValid(e.target.value)}
               onBlur={(e) => checkIdUnique(e.target.value)}
-              // UserIdRegex가 true. -> 유효하지 않다
               error={errorState.UserIdRegex ? errorState.UserIdRegex : errorState.UserIdUnique}
               helperText={
                 errorState.UserIdRegex
@@ -370,7 +367,6 @@ function SignupForm(props) {
               }
               onKeyUp={(e) => checkNickValid(e.target.value)}
               onBlur={(e) => checkNickUnique(e.target.value)}
-              // UserIdRegex가 true. -> 유효하지 않다
               error={
                 errorState.nickNameRegex ? errorState.nickNameRegex : errorState.nickNameUnique
               }
@@ -407,7 +403,6 @@ function SignupForm(props) {
             error={errorState.passwordRegex}
             helperText={errorState.passwordRegex && errorMsg.passwordRegex}
           />
-          {/* 생일 / 성별 */}
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <TextField
               required
@@ -430,11 +425,11 @@ function SignupForm(props) {
               row
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
-              value={user.userSex}
+              value={user.userGender}
               onChange={(e) =>
                 setUser({
                   ...user,
-                  userSex: e.target.value,
+                  userGender: e.target.value,
                 })
               }
             >
@@ -446,10 +441,9 @@ function SignupForm(props) {
           !user.password ||
           !user.userNickname ||
           !user.userEmail ||
-          !user.userBirthday ||
-          !user.userSex ? (
+          !user.userBirthday ? (
             <Button>필수 항목을 모두 작성해주세요</Button>
-          ) : !tokenState.changeEmail && tokenNumber.token ? (
+          ) : tokenNumber.userEmail == user.userEmail && !tokenState.tokenValid ? (
             <Button fullWidth size="large" variant="contained" onClick={() => setNext(true)}>
               다음
             </Button>

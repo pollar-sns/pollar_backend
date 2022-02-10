@@ -35,6 +35,7 @@ export default function Router() {
         { path: '', element: <PollsPage /> },
         { path: ':type', element: <PollsPage /> },
         { path: 'create', element: <PollCreatePage /> },
+        { path: 'detail', element: <PollDetailPage /> },
       ],
     },
     {

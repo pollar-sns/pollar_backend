@@ -1,21 +1,35 @@
-import { instance, instanceWithAuth } from '../../services/axios';
+import { fileInstance, instance, instanceWithAuth } from '../../services/axios';
 const COMMON = '/vote';
 
 
 // create vote
-export const voteCreate = async (vote) => {
+// Text vote
+export const voteCreate = async (form) => {
   const response = await instance
-    .post(COMMON + '/create', {
-      // author: vote.author,
-      author: 'user1',
-      voteName: vote.voteName,
-      voteContent: vote.voteContent,
-      voteType: vote.voteType,
-      voteExpirationTime: vote.voteExpirationTime,
-      userAnonymousType: vote.userAnonymousType,
-      voteAnonymousType: vote.voteAnonymousType,
-      voteCategories: vote.voteCategories,
-      voteSelects: vote.voteSelects
-    });
-  // console.log(response.config.data);
+    .post(COMMON + '/create', form)
+
+    .then((response) => {
+      return response.data
+    })
+    .catch((error)=> {
+      // alert('작성 실패 ')
+    })
 };
+
+
+export const voteImageCreate = async (form) => {
+  console.log(form)
+  const response = await instance
+    .post(COMMON + '/create', form,{
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      } 
+    })
+    .then((response) => {
+      return response.data
+    })
+    .catch((error)=> {
+      alert('작성 실패 ')
+    })
+};
+
