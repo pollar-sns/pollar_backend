@@ -1,6 +1,7 @@
 package com.ssafy.pollar.model.service;
 
 import com.ssafy.pollar.domain.entity.*;
+import com.ssafy.pollar.model.dto.FollowingDto;
 import com.ssafy.pollar.model.dto.ParticipateDto;
 import com.ssafy.pollar.model.dto.SelectionDto;
 import com.ssafy.pollar.model.dto.VoteDto;
@@ -31,7 +32,11 @@ public class VoteServiceImpl implements VoteService {
     private final VoteLikeRepository voteLikeRepository;
     private final VoteParticipateRepository voteParticipateRepository;
 
+
 //    @Value("${file.path}")
+
+    private final FollowingService followingService;
+
     private String uploadFolder;
 
     @Override
@@ -110,7 +115,7 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public List<VoteDto> getVoteList() throws Exception {
-        List<Vote> list = voteRepository.findAll();
+        List<Vote> list = voteRepository.findByOrderByVoteCreateTimeDesc();
         List<VoteDto> dtoList = new ArrayList<>();
         for (Vote vote: list) {
             VoteDto dto = new VoteDto(vote);
@@ -174,9 +179,7 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public List<ParticipateDto> getVoteUserList(Long voteId) throws Exception {
-        //해당 selection id들 찾고
-        //거기에 해당하는 user들
-        //list로 반환
+
         List<ParticipateDto> dtoList = new ArrayList<>();
 
         List<VoteSelect> selectList = voteSelectRepository.getAllByVoteSelect(voteRepository.findById(voteId).get());
@@ -244,5 +247,41 @@ public class VoteServiceImpl implements VoteService {
         return dtoList;
     }
 
+    @Override
+    public List<VoteDto> getUserInterestVoteList(String userId)throws Exception{
+        //userid로 cate찾고
+        //그거랑 맞는 cate를 가진 vote
+        List<Category> categoryList = categoryRepository.getUserCategories(userId);
+
+        List<Vote> entityList = new ArrayList<>();
+        for (Category cate : categoryList) {
+            List<Vote> temp = voteRepository.getUserInterestVoteList(cate);
+            entityList.addAll(temp);
+        }
+        List<VoteDto> dtoList = new ArrayList<>();
+        for (Vote entity: entityList) {
+            VoteDto dto = new VoteDto(entity);
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
+
+    @Override
+    public List<VoteDto> getUserFollowVoteList(String userId) throws Exception {
+
+        List<FollowingDto> followingDtoList = followingService.followingList(userId,userId);
+        List<Vote> entityList = new ArrayList<>();
+        for(FollowingDto followingDto : followingDtoList){
+            List<Vote> temp = voteRepository.findAllByAuthor(userRepository.findByUserId(followingDto.getFollowerId()).get());
+            entityList.addAll(temp);
+        }
+
+        List<VoteDto> dtoList = new ArrayList<>();
+        for (Vote entity: entityList) {
+            VoteDto dto = new VoteDto(entity);
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
 
 }

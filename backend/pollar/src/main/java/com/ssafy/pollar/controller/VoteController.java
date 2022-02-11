@@ -1,5 +1,6 @@
 package com.ssafy.pollar.controller;
 
+import com.ssafy.pollar.domain.entity.Vote;
 import com.ssafy.pollar.model.dto.ParticipateDto;
 import com.ssafy.pollar.model.dto.SelectionDto;
 
@@ -153,4 +154,17 @@ public class VoteController {
         return new ResponseEntity<>(voteService.getUserLikeVoteList(userId),HttpStatus.OK);
     }
 
+    @ApiOperation(value = "유저 관심분야 투표 리스트")
+    @GetMapping("{userId}/interlist")
+    public ResponseEntity<List<VoteDto>> getUserInterVoteList(@PathVariable @ApiParam(value = "유저 아이디") String userId)throws Exception{
+
+        return new ResponseEntity<>(voteService.getUserInterestVoteList(userId),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "유저 팔로잉 투표 리스트")
+    @GetMapping("{userId}/fvotelist")
+    public ResponseEntity<List<VoteDto>> getUserFollowVoteList(@PathVariable @ApiParam(value = "유저 아이디") String userId)throws Exception{
+
+        return new ResponseEntity<>(voteService.getUserFollowVoteList(userId),HttpStatus.OK);
+    }
 }
