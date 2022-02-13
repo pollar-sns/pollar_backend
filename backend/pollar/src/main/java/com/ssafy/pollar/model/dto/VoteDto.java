@@ -1,6 +1,7 @@
 package com.ssafy.pollar.model.dto;
 
 import com.ssafy.pollar.domain.entity.*;
+import com.ssafy.pollar.model.repository.VoteRepository;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,8 @@ import java.util.List;
 @ApiModel(value = "VoteDto : 피드정보", description = "피드의 상세 정보를 나타낸다.")
 public class VoteDto {
 
-    public VoteDto(Vote vote) {     // vote entity 받아와서 vote dto로 변환. list로 딸려있는 애들은 따로 요청해서 보내야 될거 같음
+
+    public VoteDto(Vote vote,long likeCount ,long parCount) {     // vote entity 받아와서 vote dto로 변환. list로 딸려있는 애들은 따로 요청해서 보내야 될거 같음
         this.voteId = vote.getVoteId();
         this.voteName = vote.getVoteName();
         this.voteContent = vote.getVoteContent();
@@ -29,6 +31,8 @@ public class VoteDto {
         this.voteAnonymousType = vote.getVoteAnonymouseType();
         this.voteCreateTime = vote.getVoteCreateTime();
         this.author=vote.getAuthor().getUserId();
+        this.voteLikeCount=likeCount;
+        this.voteParticipateCount=parCount;
     }
 
     public VoteDto(long voteId, String voteName){// 피드 검색용
@@ -77,5 +81,7 @@ public class VoteDto {
     private long voteLikeCount;
     @ApiModelProperty(position = 16, value = "피드를 댓글 수")
     private long voteReplyCount;
+    @ApiModelProperty(position = 17, value = "피드 참여자 수")
+    private long voteParticipateCount;
 
 }

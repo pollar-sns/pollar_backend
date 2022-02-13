@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,9 +32,12 @@ public class VoteController {
     private static final String SUCCESS = "success";
     @ApiOperation(value = "피드생성", notes = "피드 정보를 입력한다.")
     @PostMapping("/create")
-    public ResponseEntity<String> createVote(@RequestPart(value = "voteDto") VoteDto voteDto, @RequestPart(value = "votePhotos", required = false) List<MultipartFile> votePhotos) throws Exception {
-        voteService.create(voteDto, votePhotos);
-        return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);  // status 200과 success라는 문자열을 반환
+    public ResponseEntity<Map<String,Object>> createVote(@RequestPart(value = "voteDto") VoteDto voteDto, @RequestPart(value = "votePhotos", required = false) List<MultipartFile> votePhotos) throws Exception {
+        Long voteId = voteService.create(voteDto, votePhotos);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("message",SUCCESS);
+        resultMap.put("voteId",voteId);
+        return new ResponseEntity<>(resultMap, HttpStatus.OK);  // status 200과 success라는 문자열을 반환
     }
 
     @ApiOperation(value = "피드 삭제", notes = "해당 피드를 삭제한다.")
