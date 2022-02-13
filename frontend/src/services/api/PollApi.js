@@ -40,10 +40,6 @@ export const getTotalVotesCount = async (userId) => {
 
 // create vote
 // Text vote
-export const voteCreate = async (form) => {
-  const response = await instance
-    .post(COMMON + '/create', form)
-
 // 텍스트 투표 생성 
 export const voteCreate = async (form) => {
   const response = await instance.post(COMMON + '/create', form)
