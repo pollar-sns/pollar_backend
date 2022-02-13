@@ -3,8 +3,6 @@ import {
   Box,
   Stack,
   TextField,
-  IconButton,
-  InputAdornment,
   Typography,
   Button,
   Radio,
@@ -15,6 +13,7 @@ import {
   Checkbox,
   Modal,
   Grid,
+  FormHelperText 
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
@@ -41,6 +40,12 @@ function BasicForm(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  console.log('user', vote.userAnonymousType)
+
+  const anonymousMsg = ({
+    voteAnonymous: '투표자가 익명으로 투표하게 됩니다.',
+    userAnonymous: '투표가 익명으로 생성되며 투표자도 익명으로 투표됩니다.',
+  })
   return (
     <>
       <Box>
@@ -106,7 +111,7 @@ function BasicForm(props) {
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <FormControlLabel
-              label="익명으로 투표 생성하기 (투표 생성자와 투표자 모두 익명)"
+              label="익명으로 투표 생성하기"
               control={
                 <Checkbox
                   checked={vote.userAnonymousType}
@@ -121,7 +126,7 @@ function BasicForm(props) {
             />
             <br />
             <FormControlLabel
-              label="투표자만 익명으로 (투표자만 익명)"
+              label="투표자만 익명으로 설정하기"
               control={
                 <Checkbox
                   checked={vote.voteAnonymousType}
@@ -135,11 +140,19 @@ function BasicForm(props) {
               }
             />
           </Stack>
+          {vote.userAnonymoustype ? (
+            <FormHelperText>{anonymousMsg.userAnonymous}</FormHelperText>
+          ): vote.voteAnonymousType && (
+            <FormHelperText>{anonymousMsg.voteAnonymous}</FormHelperText>
+          )} 
         </Stack>
         <br />
         <hr></hr>
         <Typography variant="h4" paddingTop={1} paddingBottom={1}>
           투표 타입 선택
+        </Typography>
+        <Typography variant="caption" paddingTop={1}>
+        &nbsp;투표는 2개 이상의 선택지를 반드시 생성하여야 합니다. <br />
         </Typography>
         <RadioGroup
           row
