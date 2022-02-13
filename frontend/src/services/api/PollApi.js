@@ -44,14 +44,13 @@ export const voteCreate = async (form) => {
   const response = await instance
     .post(COMMON + '/create', form)
 
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      // alert('작성 실패 ')
-    });
+// 텍스트 투표 생성 
+export const voteCreate = async (form) => {
+  const response = await instance.post(COMMON + '/create', form)
+  return response.data;
 };
 
+// 이미지 투표 생성 
 export const voteImageCreate = async (form) => {
   console.log(form);
   const response = await instance
@@ -60,12 +59,7 @@ export const voteImageCreate = async (form) => {
         'Content-Type': 'multipart/form-data',
       },
     })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      alert('작성 실패 ');
-    });
+    return response.data;
 };
 
 /* 투표 '좋아요' 등록 */

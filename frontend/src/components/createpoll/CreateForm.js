@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
-
-import Container from '@mui/material/Container';
-import { Box, Card, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Box, Button, Typography } from '@mui/material';
 
 import { voteCreate, voteImageCreate } from '../../services/api/PollApi';
 import BasicForm from './BasicForm';
 import PollImageOptions from './PollImageOptions';
 import PollTextOptions from './PollTextOptions';
-import { loggedUserState } from '../../atoms/atoms';
-import { constSelector, useRecoilState } from 'recoil';
+import { getLoggedUserId } from '../../utils/loggedUser';
 
 function CreateForm() {
-  const [loggedUser, setloggedUser] = useRecoilState(loggedUserState);
+  const loggedUserId = getLoggedUserId();
+  const navigate = useNavigate();
+  const [imageList, setImageList] = useState([0]);
 
   const [vote, setVote] = useState({
-    author: '',
     voteName: '',
     voteContent: '',
     voteType: 'true',
@@ -24,101 +23,120 @@ function CreateForm() {
     voteCategories: [],
     voteSelects: [],
   });
-  // voteType change
-  const [options, setOptions] = useState(vote.voteType);
-
-  useEffect(() => {
-    setOptions(vote.voteType === 'true');
-  }, [vote]);
-
-  // create를 두번 눌러야됨.. 왜이런지 모르겠다.
-  const addVoteTitle = () => {
-    console.log('1');
-    const item = vote.voteSelects;
-    const tmpList = [];
-    for (const [key, value] of item.entries()) {
-      const vtitle = {
-        selectionTitle: `${key + 1}번 선택지`,
-        content: value,
-      };
-      tmpList.push(vtitle);
-    }
-    // tmpList 까진 실행이 됨
-    // setVote가 안되는듯
-    setVote({
-      ...vote,
-      voteSelects: tmpList,
-    });
-    // console.log(vote.voteSelects)
-  };
 
   // submit
   const handleCreate = async () => {
-    // data 형식 변경
-    console.log(loggedUser);
-    const item = vote.voteSelects;
-    const tmpList = [];
-    for (const [key, value] of item.entries()) {
-      const vtitle = {
-        selectionTitle: `${key + 1}번 선택지`,
-        content: value,
-      };
-      tmpList.push(vtitle);
-    }
+    try {
+      if (vote.voteType === 'true') {
+        // 텍스트 formData 생성
+        const item = vote.voteSelects;
+        const tmpList = [];
+        for (const [key, value] of item.entries()) {
+          const vtitle = {
+            selectionTitle: `${key + 1}번 선택지`,
+            content: value,
+          };
+          tmpList.push(vtitle);
+        }
+        const voteDto = {
+          author: loggedUserId,
+          voteName: vote.voteName,
+          voteContent: vote.voteContent,
+          voteType: vote.voteType,
+          voteExpirationTime: vote.voteExpirationTime,
+          userAnonymousType: vote.userAnonymousType,
+          voteAnonymousType: vote.voteAnonymousType,
+          voteCategories: vote.voteCategories,
+          voteSelects: tmpList,
+        };
+        const form = new FormData();
 
-    const voteDto = {
-      'author': 'user123',
-      'voteName': vote.voteName,
-      'voteContent': vote.voteContent,
-      'voteType': vote.voteType,
-      'voteExpirationTime': vote.voteExpirationTime,
-      'userAnonymousType': vote.userAnonymousType,
-      'voteAnonymousType': vote.voteAnonymousType,
-      'voteCategories': vote.voteCategories,
-      'voteSelects': tmpList,
-    };
+        form.append('voteDto', new Blob([JSON.stringify(voteDto)], { type: 'application/json' }));
+        const result = await voteCreate(form);
+        console.log(result);
+        if (result == 'success') {
+          // result.message에 success 말고, detail로 이동할 수 있는 poll id 붙이기
+          navigate('/polls');
+        } else {
+          alert('투표 생성에 실패하였습니다');
+        }
+      } else {
+        // 이미지 formData 생성
+        const voteDto = {
+          author: loggedUserId,
+          voteName: vote.voteName,
+          voteContent: vote.voteContent,
+          voteType: vote.voteType,
+          voteExpirationTime: vote.voteExpirationTime,
+          userAnonymousType: vote.userAnonymousType,
+          voteAnonymousType: vote.voteAnonymousType,
+          voteCategories: vote.voteCategories,
+          voteSelects: [],
+        };
+        const form = new FormData();
 
-    const form = new FormData()
+        form.append('voteDto', new Blob([JSON.stringify(voteDto)], { type: 'application/json' }));
 
-    form.append(
-      'voteDto',
-      new Blob([JSON.stringify(voteDto)], { type: 'application/json' })
-    );
-
-    if (vote.voteType === 'true') {
-      const result = await voteCreate(form);
-    } else {
-      const result = await voteImageCreate(form);
-    }
-
-    // console.log(result.message);
-    // for (let key of form.keys()) {
-    //   console.log(key, ':', form.get(key));
-    // }
-
-    for (let key of form.keys()) {
-      console.log(key, ':', form.get(key));
+        // vote.voteSelects.map((file) => {
+        //   form.append('votePhotos', file);
+        // });
+        for (var i = 0; i <= imageList.length; i++) {
+          form.append('votePhotos', vote.voteSelects[i]);
+        }
+        const result = await voteImageCreate(form);
+        console.log(result);
+        if (result == 'success') {
+          // result.message에 success 말고, detail로 이동할 수 있는 poll id 붙이기
+          navigate('/polls');
+        } else {
+          alert('투표 생성에 실패하였습니다. ');
+        }
+      }
+    } catch (error) {
+      alert('투표 생성에 실패하였습니다.');
     }
   };
-
   return (
     <>
       <Box>
-        <BasicForm vote={vote} setVote={setVote} setOptions={setOptions} />
-        {options ? (
+        <BasicForm vote={vote} setVote={setVote} />
+        {vote.voteType === 'true' ? (
           <PollTextOptions vote={vote} setVote={setVote} />
         ) : (
-          <PollImageOptions vote={vote} setVote={setVote} />
+          <>
+            <PollImageOptions
+              vote={vote}
+              setVote={setVote}
+              imageList={imageList}
+              setImageList={setImageList}
+            />
+          </>
         )}
-
-        <Button
-          fullWidth
-          variant="contained"
-          // onMouseOver={addVoteTitle}
-          onClick={handleCreate}
-        >
-          create
-        </Button>
+        {!vote.voteName ||
+        !vote.voteContent 
+         ? (
+          <>
+            <Button variant="contained" disabled>
+              Create
+            </Button> <br />
+            <Typography variant="caption" sx={{ color: 'red' }}>
+              투표 생성에 필요한 모든 정보를 입력하세요.
+            </Typography>
+          </>
+        ) : (imageList.length >= 2 || vote.voteSelects.length >=2 ) ? (
+          <Button variant="contained" onClick={handleCreate}>
+            create
+          </Button>
+        ) : (
+          <>
+            <Button variant="contained" disabled>
+              Create
+            </Button> <br />
+            <Typography variant="caption" sx={{ color: 'red' }}>
+              투표 선택지를 2개 이상 생성하세요.
+            </Typography>
+          </>
+        )}
       </Box>
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 
 function PollTextOptions(props) {
   const { vote, setVote } = props;
@@ -24,29 +24,14 @@ function PollTextOptions(props) {
 
   return (
     <>
-      {textList &&
-        textList.map((item, i) => (
-          <>
-            <TextField
-              paddingBottom={1}
-              key={i}
-              id="vote-list"
-              label={`${i + 1}번 선택지`}
-              required
-              fullWidth
-              placeholder="투표 선택지 입력"
-              onChange={(e) => {
-                setVote({
-                  ...vote,
-                  textList: (textList[i] = e.target.value),
-                });
-                changeList();
-              }}
-            />
-          </>
-        ))}
-      <br />
-      <br />
+      <Typography variant="caption" paddingTop={1}>
+        &nbsp;&nbsp;투표 선택지는 1~20자 까지 작성이 가능합니다.
+      </Typography> <br />
+      {textList.length < 4 && (
+        <Button variant="contained" className="option-button" onClick={createTextList} sx={{ margin:1 }}>
+          + 선택지 추가하기 
+        </Button>
+      )}
       {textList.length > 2 && (
         <Button
           onClick={(e) => {
@@ -56,14 +41,32 @@ function PollTextOptions(props) {
             });
           }}
         >
-          Delete Options
+          - 선택지 삭제 
         </Button>
       )}
-      {textList.length < 4 && (
-        <Button variant="contained" className="option-button" onClick={createTextList}>
-          + Add more options
-        </Button>
-      )}
+      <br />
+      {textList &&
+        textList.map((item, i) => (
+            <TextField
+              key={i}
+              id="vote-list"
+              label={`${i + 1}번 선택지`}
+              required
+              fullWidth
+              margin="dense"
+              placeholder="투표 선택지 입력"
+              onChange={(e) => {
+                setVote({
+                  ...vote,
+                  textList: (textList[i] = e.target.value),
+                });
+                changeList();
+              }}
+            />
+
+        ))}
+      <br />
+      <br />
     </>
   );
 }
