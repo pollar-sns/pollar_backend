@@ -12,8 +12,8 @@ import {
   FormGroup,
   Checkbox,
   Modal,
-  Grid,
-  FormHelperText 
+  Chip,
+  FormHelperText,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
@@ -39,13 +39,19 @@ function BasicForm(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  console.log('user', vote.userAnonymousType)
-
-  const anonymousMsg = ({
+  // 카테고리 리스트 확인
+  const [voteInterest, setVoteInterest] = useState([]);
+  const anonymousMsg = {
     voteAnonymous: '투표자가 익명으로 투표하게 됩니다.',
     userAnonymous: '투표가 익명으로 생성되며 투표자도 익명으로 투표됩니다.',
-  })
+  };
+
+  useEffect(() => {
+    voteInterest.map((item) => {
+      console.log(item);
+    });
+  }, [voteInterest]);
+  console.log(voteInterest);
   return (
     <>
       <Box>
@@ -59,6 +65,7 @@ function BasicForm(props) {
             required
             fullWidth
             placeholder="투표 제목을 입력하세요."
+            inputProps={{ maxLength: 20 }}
             value={vote.voteName}
             onChange={(e) =>
               setVote({
@@ -75,6 +82,7 @@ function BasicForm(props) {
           <TextField
             id="voteContent"
             placeholder="투표 내용을 입력하세요 "
+            inputProps={{ maxLength: 1000 }}
             multiline
             fullWidth
             rows={4}
@@ -90,19 +98,41 @@ function BasicForm(props) {
           />
         </Stack>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={6} paddingTop={2} paddingBottom={2}>
-          <Button onClick={handleOpen}>카테고리 선택</Button>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+        <Typography variant="h4" paddingTop={1}>
+            투표 카테고리
+          </Typography>
+          <Stack 
+          justifyContent="center"
+          alignItems="center"
           >
-            <Box sx={style}>
-              <CategoryModal />
-            </Box>
-          </Modal>
-
-          <DatePicker vote={vote} setVote={setVote} />
+            <Button onClick={handleOpen} variant="contained"  >카테고리 선택</Button>
+            <Stack direction={{ xs: 'column', sm: 'row' }} paddingTop={2}>
+              {voteInterest.map((item, index) => (
+                <Chip key={index} label={item} variant="filled" />
+              ))}
+            </Stack>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <CategoryModal
+                  vote={vote}
+                  setVote={setVote}
+                  setVoteInterest={setVoteInterest}
+                  close={handleClose}
+                />
+              </Box>
+            </Modal>
+          </Stack>
+        <Typography variant="h4" paddingTop={1}>
+            투표 마감시간
+          </Typography>
+          <Stack>
+            <DatePicker vote={vote} setVote={setVote} />
+          </Stack>
         </Stack>
         <hr></hr>
         <Stack paddingTop={2}>
@@ -142,9 +172,9 @@ function BasicForm(props) {
           </Stack>
           {vote.userAnonymoustype ? (
             <FormHelperText>{anonymousMsg.userAnonymous}</FormHelperText>
-          ): vote.voteAnonymousType && (
-            <FormHelperText>{anonymousMsg.voteAnonymous}</FormHelperText>
-          )} 
+          ) : (
+            vote.voteAnonymousType && <FormHelperText>{anonymousMsg.voteAnonymous}</FormHelperText>
+          )}
         </Stack>
         <br />
         <hr></hr>
@@ -152,7 +182,8 @@ function BasicForm(props) {
           투표 타입 선택
         </Typography>
         <Typography variant="caption" paddingTop={1}>
-        &nbsp;투표는 2개 이상의 선택지를 반드시 생성하여야 합니다. <br />
+          &nbsp;투표는 2개 이상의 선택지를 반드시 생성하여야 합니다. <br />
+
         </Typography>
         <RadioGroup
           row
