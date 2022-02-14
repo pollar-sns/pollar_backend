@@ -104,6 +104,28 @@ export const requestPollUnlike = async (voteId) => {
   return response.data;
 };
 
+/* 유저가 투표 선택지에 투표 */
+export const requestPollVote = async (selectionId) => {
+  const response = await createIntstanceWithAuth().post(
+    COMMON + `/${getLoggedUserId()}/${selectionId}`
+  );
+  return response.data;
+};
+
+/* 유저가 투표 선택지에 투표 취소 */
+export const cancelPollVote = async (selectionId) => {
+  const response = await createIntstanceWithAuth().delete(
+    COMMON + `/${getLoggedUserId()}/${selectionId}`
+  );
+  return response.data;
+};
+
+/* (투표시 결과 디스플레이) 투표 총 참여자 수, 선택지 별 참여자 수 */
+export const getPollSelectionStatus = async (voteId) => {
+  const response = await createIntstanceWithAuth().get(COMMON + `/${voteId}/vparcount`);
+  return response.data;
+};
+
 export const getVoteInfo = async (voteId) => {
   // voteId를 pathvariable로 보내서 vote dto를 받아옴
   const response = await createIntstanceWithAuth().get(COMMON + `/${voteId}`, {
