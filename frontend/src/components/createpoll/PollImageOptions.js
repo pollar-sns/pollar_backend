@@ -55,10 +55,9 @@ function PollImageOptions(props) {
     // fileInput= fileInput.current.value(-1)
   };
 
-  useEffect(() => {
-    console.log(fileInput);
-    console.log(typeof fileInput)
-  },[fileInput]);
+  // useEffect(() => {
+
+  // },[fileInput]);
 
   const uploadImage = (e) => {
     // const fileArr = e.target.files[0]; // 여기서 하나씩만 추가하지 않나
@@ -77,10 +76,10 @@ function PollImageOptions(props) {
     reader.readAsDataURL(file);
   };
 
-  useEffect(() => {
-    console.log(fileInput);
-    // fileInput.current = fileInput.current.click()
-  }, [fileInput]);
+  // useEffect(() => {
+  //   console.log(fileInput);
+  //   // fileInput.current = fileInput.current.click()
+  // }, [fileInput]);
 
   return (
     <>

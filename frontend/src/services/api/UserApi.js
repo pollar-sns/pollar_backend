@@ -58,7 +58,7 @@ export const emailToken = async (token) => {
 
 /* 회원정보 수정 */
 export const modifyUserInfo = async(user) => {
-  const response = await instance.put(USER, {
+  const response = await instance.put(COMMON, {
     userId: getLoggedUserId(),
     userNickname: user.userNickname,
   })
@@ -70,7 +70,7 @@ export const modifyUserInfo = async(user) => {
 }
 
 export const modifyUserPw = async(user) => {
-  const response = await instance.put(USER + 'modifypass', {
+  const response = await instance.put(COMMON + 'modifypass', {
     userId: getLoggedUserId(),
     password: user.password,
   })
@@ -82,7 +82,7 @@ export const modifyUserPw = async(user) => {
 
 // 회원 정보 얻어오기
 export const getUserInfo = async(userId) => {
-  const response = await instance.get(USER + 'info' + `/${userId}`, {
+  const response = await instance.get(COMMON + 'info' + `/${userId}`, {
     profileUserId: userId,
     loginUserId: getLoggedUserId(),
   });
