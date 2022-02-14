@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import Container from '@mui/material/Container';
-import { Box, Card, Button } from '@mui/material';
+import Container from "@mui/material/Container";
+import { Box, Card, Button } from "@mui/material";
 
-import { voteCreate, voteImageCreate } from '../../services/api/PollApi';
-import BasicForm from './BasicForm';
-import PollImageOptions from './PollImageOptions';
-import PollTextOptions from './PollTextOptions';
-import { loggedUserState } from '../../atoms/atoms';
-import { constSelector, useRecoilState } from 'recoil';
+import { voteCreate, voteImageCreate } from "../../services/api/PollApi";
+import BasicForm from "./BasicForm";
+import PollImageOptions from "./PollImageOptions";
+import PollTextOptions from "./PollTextOptions";
+import { loggedUserState } from "../../atoms/atoms";
+import { constSelector, useRecoilState } from "recoil";
 
 function CreateForm() {
   const [loggedUser, setloggedUser] = useRecoilState(loggedUserState);
 
   const [vote, setVote] = useState({
-    author: '',
-    voteName: '',
-    voteContent: '',
-    voteType: 'true',
-    voteExpirationTime: '',
+    author: "",
+    voteName: "",
+    voteContent: "",
+    voteType: "true",
+    voteExpirationTime: "",
     userAnonymousType: false,
     voteAnonymousType: false,
     voteCategories: [],
@@ -28,12 +28,12 @@ function CreateForm() {
   const [options, setOptions] = useState(vote.voteType);
 
   useEffect(() => {
-    setOptions(vote.voteType === 'true');
+    setOptions(vote.voteType === "true");
   }, [vote]);
 
   // create를 두번 눌러야됨.. 왜이런지 모르겠다.
   const addVoteTitle = () => {
-    console.log('1');
+    console.log("1");
     const item = vote.voteSelects;
     const tmpList = [];
     for (const [key, value] of item.entries()) {
@@ -67,25 +67,25 @@ function CreateForm() {
     }
 
     const voteDto = {
-      'author': 'user123',
-      'voteName': vote.voteName,
-      'voteContent': vote.voteContent,
-      'voteType': vote.voteType,
-      'voteExpirationTime': vote.voteExpirationTime,
-      'userAnonymousType': vote.userAnonymousType,
-      'voteAnonymousType': vote.voteAnonymousType,
-      'voteCategories': vote.voteCategories,
-      'voteSelects': tmpList,
+      author: "user123",
+      voteName: vote.voteName,
+      voteContent: vote.voteContent,
+      voteType: vote.voteType,
+      voteExpirationTime: vote.voteExpirationTime,
+      userAnonymousType: vote.userAnonymousType,
+      voteAnonymousType: vote.voteAnonymousType,
+      voteCategories: vote.voteCategories,
+      voteSelects: tmpList,
     };
 
-    const form = new FormData()
+    const form = new FormData();
 
     form.append(
-      'voteDto',
-      new Blob([JSON.stringify(voteDto)], { type: 'application/json' })
+      "voteDto",
+      new Blob([JSON.stringify(voteDto)], { type: "application/json" })
     );
 
-    if (vote.voteType === 'true') {
+    if (vote.voteType === "true") {
       const result = await voteCreate(form);
     } else {
       const result = await voteImageCreate(form);
@@ -97,7 +97,7 @@ function CreateForm() {
     // }
 
     for (let key of form.keys()) {
-      console.log(key, ':', form.get(key));
+      console.log(key, ":", form.get(key));
     }
   };
 
