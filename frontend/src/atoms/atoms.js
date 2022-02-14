@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 /* Sample code */
 // export const sampleState = atom({
@@ -10,7 +10,7 @@ import { atom } from 'recoil';
 // - userId
 // - userNickname: 프로필 페이지 요청 시 필요
 export const loggedUserState = atom({
-  key: 'loggedUserState',
+  key: "loggedUserState",
   default: [],
 });
 
@@ -19,6 +19,6 @@ export const loggedUserState = atom({
 // - userId
 // - userNickname: 프로필 페이지 요청 시 필요
 export const notificationListState = atom({
-  key: 'notificationListState',
+  key: "notificationListState",
   default: [],
 });
