@@ -1,4 +1,4 @@
-import { instance, createMultipartInstance, fileInstance } from '../../services/axios';
+import { instance, instanceWithAuth, fileInstance, createIntstanceWithAuth } from '../../services/axios';
 import { getLoggedUserId } from '../../utils/loggedUser';
 
 // 공통되는 경로는 다음과 같이 별도로 정의해둠
@@ -57,17 +57,40 @@ export const emailToken = async (token) => {
 };
 
 /* 회원정보 수정 */
-
-/* 회원 정보 불러오기 */
-export const getUserInfo = async () => {
-  const response = await createMultipartInstance().get(COMMON + `/info/${getLoggedUserId()}`);
-  // , {
-  //   params: {
-  //     userId: getLoggedUserId(),
-  //   },
-  // });
+export const modifyUserInfo = async(user) => {
+  const response = await instance.put(USER, {
+    userId: getLoggedUserId(),
+    userNickname: user.userNickname,
+  })
+  console.log("========================================")
+  console.log("========================================")
+  console.log(response.data)
+  console.log("========================================")
   return response.data;
-};
+}
+
+export const modifyUserPw = async(user) => {
+  const response = await instance.put(USER + 'modifypass', {
+    userId: getLoggedUserId(),
+    password: user.password,
+  })
+  console.log("========================================")
+  console.log("========================================")
+  console.log(response.data)
+  console.log("========================================")
+}
+
+// 회원 정보 얻어오기
+export const getUserInfo = async(userId) => {
+  const response = await instance.get(USER + 'info' + `/${userId}`, {
+    profileUserId: userId,
+    loginUserId: getLoggedUserId(),
+  });
+  console.log("========================================")
+  console.log("========================================")
+  console.log(response.data)
+  console.log("========================================")
+}
 
 // 프로필 이미지 수정
 // ProfileApi 에서 기본 유저 정보 호출해서 사용하기
