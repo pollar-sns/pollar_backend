@@ -53,7 +53,7 @@ export default function ReplyDetail({ reply }) {
         <Grid item xs={8}>
           <Stack>
             <Typography variant="h4" paddingTop={1} marginBottom={2} marginLeft={4}>
-              닉네임
+              {reply.replyUserNickname}
             </Typography>
             {!vis ? (
               <>
