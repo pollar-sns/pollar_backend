@@ -3,10 +3,10 @@ import {
   createMultipartInstance,
   fileInstance,
   createIntstanceWithAuth,
-} from "../../services/axios";
-import { getLoggedUserId } from "../../utils/loggedUser";
+} from '../../services/axios';
+import { getLoggedUserId } from '../../utils/loggedUser';
 
-const COMMON = "/vote";
+const COMMON = '/vote';
 
 /* 유저가 총 업로드한 투표 개수 */
 export const getTotalUploadsCount = async (userId) => {
@@ -46,16 +46,16 @@ export const getTotalVotesCount = async (userId) => {
 // Text vote
 // 텍스트 투표 생성
 export const voteCreate = async (form) => {
-  const response = await instance.post(COMMON + "/create", form);
+  const response = await instance.post(COMMON + '/create', form);
   return response.data;
 };
 
 // 이미지 투표 생성
 export const voteImageCreate = async (form) => {
   console.log(form);
-  const response = await instance.post(COMMON + "/create", form, {
+  const response = await instance.post(COMMON + '/create', form, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      'Content-Type': 'multipart/form-data',
     },
   });
   return response.data;
@@ -63,7 +63,7 @@ export const voteImageCreate = async (form) => {
 
 /* 투표 '좋아요' 등록 */
 export const requestPollLike = async (voteId) => {
-  const response = await createIntstanceWithAuth().post(COMMON + "/like", {
+  const response = await createIntstanceWithAuth().post(COMMON + '/like', {
     userId: getLoggedUserId(),
     voteId,
   });
@@ -72,7 +72,7 @@ export const requestPollLike = async (voteId) => {
 
 /* 투표 '좋아요' 해제 */
 export const requestPollUnlike = async (voteId) => {
-  const response = await createIntstanceWithAuth().delete(COMMON + "/like", {
+  const response = await createIntstanceWithAuth().delete(COMMON + '/like', {
     //? axios에서의 DELETE는 다음과 같이 'data' key에 body를 담아서 보내야 함
     data: { userId: getLoggedUserId(), voteId },
   });
