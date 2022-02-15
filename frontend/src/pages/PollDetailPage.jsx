@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { getPollCategory } from '../services/api/CategoryApi';
 import { getRelies } from '../services/api/ReplyApi';
 import ReplyForm from '../components/detailpoll/ReplyForm';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 export default function PollDetailPage() {
   let { id } = useParams();     // url에 있는 path variable을 가져옴
