@@ -23,6 +23,8 @@ import NavSection from './NavSection';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getLoggedUserInfo } from '../../utils/loggedUser';
+import SearchDrawer from './SearchDrawer';
+
 
 // ----------------------------------------------------------------------
 
@@ -93,8 +95,8 @@ export default function Navbar({ onOpenSidebar, isFullLayout }) {
                   </Typography>
                 </NavLogo>
                 <NavSection navConfig={sidebarConfig} mr={10} />
-
-                <Searchbar />
+                <SearchDrawer user={loggedUserInfo} />
+                {/* <Searchbar /> */}
                 <Box sx={{ flexGrow: 1 }} />
                 {/* loggedUserId 가 undefined인지 여부에 따라서 Navbar 구성 변경 */}
                 {loggedUserInfo ? (

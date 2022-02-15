@@ -3,6 +3,8 @@ import PollListTabs from '../components/polls/PollListTabs';
 import Page from '../components/Page';
 import { Card, Grid, Stack, Typography } from '@mui/material';
 import GradAnimatedButton from '../components/common/GradAnimatedButton';
+import UserProfileCard from '../components/user/UserProfileCard';
+
 
 const RootStyle = styled(Page)(({ theme }) => ({
   // paddingLeft: 100,
@@ -26,7 +28,8 @@ export default function PollsPage() {
           <GradAnimatedButton href="/polls/create" sx={{ width: 'max-content', mt: 2 }}>
             <Typography variant="subtitle2">&nbsp;+&nbsp;Create A Poll&nbsp;&nbsp;</Typography>
           </GradAnimatedButton>
-          <Card sx={{ padding: 5 }}>(사용자 프로필 정보)</Card>
+          <UserProfileCard />
+          {/* <Card sx={{ padding: 5 }}>(사용자 프로필 정보)</Card> */}
         </Stack>
         {/* </Grid> */}
         <Grid
