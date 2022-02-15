@@ -13,7 +13,7 @@ export const getNotificationList = async () => {
 
 /* 알림 읽기 */
 export const readNotifications = async (notificationIdList) => {
-  const response = await createIntstanceWithAuth().post(COMMON + '/list', {
+  const response = await createIntstanceWithAuth().put(COMMON + '/read', {
     notificationIdList,
   });
   return response.data;

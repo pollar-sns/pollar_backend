@@ -6,7 +6,7 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material';
-import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
@@ -17,12 +17,14 @@ import { readNotifications } from '../../services/api/NotificationApi';
 
 function renderContent(notificationType, notificationContents) {
   const title = (
-    <Typography variant="subtitle2">
-      {notificationType === 2 ? '좋아요 알림' : '팔로우 알림'}
-      <Typography component="span" variant="body2" sx={{ color: 'text.secondary' }}>
-        &nbsp; {notificationContents}
+    <>
+      <Typography variant="subtitle2">
+        {notificationType === 2 ? '좋아요 알림' : '팔로우 알림'}&nbsp;
+        <Typography component="span" variant="body2" sx={{ color: 'text.secondary' }}>
+          {notificationContents}
+        </Typography>
       </Typography>
-    </Typography>
+    </>
   );
 
   if (notificationType === 2) {
@@ -66,25 +68,27 @@ export default function NotificationItem({ notification }) {
 
   /* 알림 클릭 시 읽음처리 + 관련 action 처리 */
   const handleNotificationClick = async () => {
-    const result = await readNotifications([notificationId]);
-    if (result.data === 'success') {
+    if (!notificationRead) {
+      const result = await readNotifications([notificationId]);
       // 알림과 관련된 action 처리
-      /* 피드(투표) 관련 */
-      if (notificationType === 2) {
-        navigate(`/poll/${voteId}`);
-      } /* 팔로잉 관련 */ else if (notificationType === 4) {
-        navigate(`/users/profile/${sendId}`);
-      } else {
-        console.log('undefined....');
+      if (result.data === 'success') {
+        console.log('읽음처리');
       }
+    }
+    /* 피드(투표) 관련 */
+    if (notificationType === 2) {
+      navigate(`/poll/${voteId}`);
+    } /* 팔로잉 관련 */ else if (notificationType === 4) {
+      navigate(`/users/profile/${sendId}`);
+    } else {
+      // todo
+      // console.log('일반 알림');
     }
   };
 
   return (
     <ListItemButton
-      to="#"
       disableGutters
-      component={RouterLink}
       onClick={handleNotificationClick}
       sx={{
         py: 1.5,

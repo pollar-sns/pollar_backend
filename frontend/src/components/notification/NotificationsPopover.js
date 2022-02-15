@@ -73,7 +73,7 @@ export default function NotificationsPopover() {
     getList();
   }, []);
 
-  console.log(notifications);
+  // console.log(notifications);
 
   return (
     <>
