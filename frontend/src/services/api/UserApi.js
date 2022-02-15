@@ -3,15 +3,15 @@ import {
   instanceWithAuth,
   fileInstance,
   createIntstanceWithAuth,
-} from "../../services/axios";
-import { getLoggedUserId } from "../../utils/loggedUser";
+} from '../../services/axios';
+import { getLoggedUserId } from '../../utils/loggedUser';
 
 // 공통되는 경로는 다음과 같이 별도로 정의해둠
-const COMMON = "/user";
+const COMMON = '/user';
 
 /* 아이디 중복검사 */
 export const checkId = async (userId) => {
-  const response = await instance.get(COMMON + "/idcheck", {
+  const response = await instance.get(COMMON + '/idcheck', {
     params: {
       userId: userId,
     },
@@ -21,7 +21,7 @@ export const checkId = async (userId) => {
 
 /* 닉네임 중복검사 */
 export const checkNickname = async (userNickname) => {
-  const response = await instance.get(COMMON + "/nickcheck", {
+  const response = await instance.get(COMMON + '/nickcheck', {
     params: {
       userNickname: userNickname,
     },
@@ -31,7 +31,7 @@ export const checkNickname = async (userNickname) => {
 
 /* 이메일 중복검사 */
 export const checkEmail = async (userEmail) => {
-  const response = await instance.get(COMMON + "/emailcheck", {
+  const response = await instance.get(COMMON + '/emailcheck', {
     params: {
       userEmail: userEmail,
     },
@@ -41,7 +41,7 @@ export const checkEmail = async (userEmail) => {
 
 /* 이메일 인증 메일 발송 */
 export const emailConfirm = async (userEmail) => {
-  const response = await instance.get(COMMON + "/confirmemail", {
+  const response = await instance.get(COMMON + '/confirmemail', {
     params: {
       userEmail: userEmail,
     },
@@ -52,7 +52,7 @@ export const emailConfirm = async (userEmail) => {
 
 /* 이메일 인증 토큰 확인 */
 export const emailToken = async (token) => {
-  const response = await instance.get(COMMON + "/emailtoken", {
+  const response = await instance.get(COMMON + '/emailtoken', {
     params: {
       userEmail: token.userEmail,
       token: token.token,
@@ -67,39 +67,39 @@ export const modifyUserInfo = async (user) => {
     userId: getLoggedUserId(),
     userNickname: user.userNickname,
   });
-  console.log("========================================");
-  console.log("========================================");
+  console.log('========================================');
+  console.log('========================================');
   console.log(response.data);
-  console.log("========================================");
+  console.log('========================================');
   return response.data;
 };
 
 export const modifyUserPw = async (user) => {
-  const response = await instance.put(COMMON + "modifypass", {
+  const response = await instance.put(COMMON + 'modifypass', {
     userId: getLoggedUserId(),
     password: user.password,
   });
-  console.log("========================================");
-  console.log("========================================");
+  console.log('========================================');
+  console.log('========================================');
   console.log(response.data);
-  console.log("========================================");
+  console.log('========================================');
 };
 
 // 회원 정보 얻어오기
 export const getUserInfo = async (userId) => {
-  const response = await instance.get(COMMON + "info" + `/${userId}`, {
+  const response = await instance.get(COMMON + 'info' + `/${userId}`, {
     profileUserId: userId,
     loginUserId: getLoggedUserId(),
   });
-  console.log("========================================");
-  console.log("========================================");
+  console.log('========================================');
+  console.log('========================================');
   console.log(response.data);
-  console.log("========================================");
+  console.log('========================================');
 };
 
 // 프로필 이미지 수정
 // ProfileApi 에서 기본 유저 정보 호출해서 사용하기
 export const modifyProfilePhoto = async (formData) => {
-  const response = await fileInstance.put(COMMON + "/photo", formData);
+  const response = await fileInstance.put(COMMON + '/photo', formData);
   console.log(response);
 };

@@ -17,8 +17,6 @@ export default function PollDetailPage() {
   const getVote = async () => {   // voteInfo랑 categories 가져오기
     const data = await getVoteInfo(id);
     setVoteInfo(data);
-    const categoryData = await getPollCategory(id);
-    setCategories(categoryData)
   };
   const loadReply = async () => {
     const replyList = await getRelies(id);

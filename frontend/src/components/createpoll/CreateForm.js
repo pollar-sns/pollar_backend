@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, Card } from '@mui/material';
+import Container from '@mui/material/Container';
 
 import { voteCreate, voteImageCreate } from '../../services/api/PollApi';
 import BasicForm from './BasicForm';
 import PollImageOptions from './PollImageOptions';
 import PollTextOptions from './PollTextOptions';
 import { getLoggedUserId } from '../../utils/loggedUser';
+import { loggedUserState } from '../../atoms/atoms';
+import { constSelector, useRecoilState } from 'recoil';
 
 function CreateForm() {
   const loggedUserId = getLoggedUserId();
@@ -14,6 +17,7 @@ function CreateForm() {
   const [imageList, setImageList] = useState([0]);
 
   const [vote, setVote] = useState({
+    author: '',
     voteName: '',
     voteContent: '',
     voteType: 'true',
@@ -97,7 +101,7 @@ function CreateForm() {
         }
       }
     } catch (error) {
-      alert("투표 생성에 실패하였습니다.");
+      alert('투표 생성에 실패하였습니다.');
     }
   };
   return (
