@@ -15,7 +15,6 @@ import clockFill from '@iconify/icons-eva/clock-fill';
 import { readNotifications } from '../../services/api/NotificationApi';
 import stringToColor from '../../utils/stringToColor';
 
-f;
 function renderContent(notification) {
   const { notificationType, notificationContents, sendId, userProfilePhoto, voteName } =
     notification;

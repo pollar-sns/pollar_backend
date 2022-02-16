@@ -4,6 +4,8 @@ import { getLoggedUserId } from '../utils/loggedUser';
 import { getAllUsers } from '../services/api/SearchApi';
 import UserDetailCard from '../components/user/UserDetailCard';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { isLoggedState } from '../atoms/atoms';
 
 function UserPage() {
   // 로그인되어있는 사용자의 Id
