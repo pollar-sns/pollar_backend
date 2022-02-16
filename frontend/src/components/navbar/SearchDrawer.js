@@ -235,14 +235,17 @@ export default function SearchDrawer(user) {
                   &nbsp;&nbsp;{vote.author}
                 </Typography>
               </Stack>
-              {vote.voteType === 1 ? (
-                <TextSnippetIcon />
+              {vote.voteType ? (
+                <TextSnippetIcon sx={{ fontSize: '1.5rem', ml: 1 }}/>
               ) : (
-                <ImageIcon sx={{ fontSize: '1.5rem', marginLeft: 2 }} />
+                <ImageIcon sx={{ fontSize: '1.5rem', ml: 2 }} />
               )}
-              <Typography component="span" variant="BUTTON">
-                &nbsp;&nbsp;{vote.voteName}
+              <Typography component="span" variant="subtitle1">
+                &nbsp;&nbsp;{vote.voteName}&nbsp;&nbsp;
               </Typography>
+              {vote.voteCategoriesName.map((item, index)=> (
+                <Chip label={item} />
+              ))}
             </Button>
           ))}
         </>
