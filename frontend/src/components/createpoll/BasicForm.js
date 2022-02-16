@@ -10,6 +10,7 @@ import {
   FormControlLabel,
   FormLabel,
   FormGroup,
+  Grid,
   Checkbox,
   Modal,
   Chip,
@@ -26,10 +27,9 @@ function BasicForm(props) {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 500,
+    width: 1000,
     height: 500,
     bgcolor: 'background.paper',
-    // border: '2px solid #333',
     boxShadow: 24,
     borderRadius: 2,
     p: 4,
@@ -56,7 +56,10 @@ function BasicForm(props) {
     <>
       <Box>
         <Stack spacing={1}>
-          <Typography variant="h4" paddingTop={1}>
+          <Typography
+            sx={{ fontSize: 22, fontWeight: 'bold', color: 'text.secondary' }}
+            paddingTop={1}
+          >
             투표 제목
           </Typography>
           <TextField
@@ -76,7 +79,10 @@ function BasicForm(props) {
           />{' '}
         </Stack>
         <Stack spacing={1} paddingTop={2}>
-          <Typography variant="h4" paddingTop={1}>
+          <Typography
+            sx={{ fontSize: 22, fontWeight: 'bold', color: 'text.secondary' }}
+            paddingTop={1}
+          >
             투표 내용
           </Typography>
           <TextField
@@ -97,20 +103,22 @@ function BasicForm(props) {
             }
           />
         </Stack>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={6} paddingTop={2} paddingBottom={2}>
-        <Typography variant="h4" paddingTop={1}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} paddingTop={2} paddingBottom={2}>
+          <Typography
+            paddingTop={1}
+            sx={{ fontSize: 22, fontWeight: 'bold', color: 'text.secondary' }}
+          >
             투표 카테고리
           </Typography>
-          <Stack 
-          justifyContent="center"
-          alignItems="center"
-          >
-            <Button onClick={handleOpen} variant="contained"  >카테고리 선택</Button>
-            <Stack direction={{ xs: 'column', sm: 'row' }} paddingTop={2}>
+          <Stack justifyContent="center" alignItems="center" direction={{ xs: 'column', sm: 'row' }}>
+            <Stack direction={{ xs: 'column', sm: 'row', }}>
               {voteInterest.map((item, index) => (
-                <Chip key={index} label={item} variant="filled" />
+                <Chip key={index} label={item} variant="filled" sx={{ mx:0.3}} />
               ))}
             </Stack>
+            <Button onClick={handleOpen} variant="contained" sx={{ mx:3,}}>
+              카테고리 선택
+            </Button>
             <Modal
               open={open}
               onClose={handleClose}
@@ -127,63 +135,77 @@ function BasicForm(props) {
               </Box>
             </Modal>
           </Stack>
-        <Typography variant="h4" paddingTop={1}>
-            투표 마감시간
-          </Typography>
-          <Stack>
-            <DatePicker vote={vote} setVote={setVote} />
-          </Stack>
         </Stack>
+
         <hr></hr>
-        <Stack paddingTop={2}>
-          <Typography variant="h4" paddingBottom={1}>
-            투표 익명 옵션 선택
-          </Typography>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-            <FormControlLabel
-              label="익명으로 투표 생성하기"
-              control={
-                <Checkbox
-                  checked={vote.userAnonymousType}
-                  onChange={(e) => {
-                    setVote({
-                      ...vote,
-                      userAnonymousType: e.target.checked,
-                    });
-                  }}
-                />
-              }
-            />
-            <br />
-            <FormControlLabel
-              label="투표자만 익명으로 설정하기"
-              control={
-                <Checkbox
-                  checked={vote.voteAnonymousType}
-                  onChange={(e) => {
-                    setVote({
-                      ...vote,
-                      voteAnonymousType: e.target.checked,
-                    });
-                  }}
-                />
-              }
-            />
+        <Stack>
+          <Stack paddingTop={2} direction={{ xs: 'column', sm: 'row' }}>
+            <Stack>
+            <Typography
+              sx={{ fontSize: 22, fontWeight: 'bold', color: 'text.secondary' }}
+              paddingBottom={1}
+            >
+              투표 익명 옵션 선택
+            </Typography>
+              <FormControlLabel
+                label="익명으로 투표 생성하기"
+                control={
+                  <Checkbox
+                    checked={vote.userAnonymousType}
+                    onClick={(e) => {
+                      setVote({
+                        ...vote,
+                        userAnonymousType: e.target.checked,
+                      });
+                    }}
+                  />
+                }
+              />
+              <FormControlLabel
+                label="투표자만 익명으로 설정하기"
+                control={
+                  <Checkbox
+                    checked={vote.voteAnonymousType}
+                    onClick={(e) => {
+                      setVote({
+                        ...vote,
+                        voteAnonymousType: e.target.checked,
+                      });
+                    }}
+                  />
+                }
+              />
+            </Stack>
+            <Stack spacing={2} sx={{ml:20}}>
+              <Typography
+                sx={{ fontSize: 22, fontWeight: 'bold', color: 'text.secondary' }}
+                paddingTop={1}
+              >
+                투표 마감시간
+              </Typography>
+              <Stack>
+                <DatePicker vote={vote} setVote={setVote} />
+              </Stack>
+            </Stack>
           </Stack>
-          {vote.userAnonymoustype ? (
+          {vote.userAnonymousType ? (
             <FormHelperText>{anonymousMsg.userAnonymous}</FormHelperText>
           ) : (
             vote.voteAnonymousType && <FormHelperText>{anonymousMsg.voteAnonymous}</FormHelperText>
           )}
+
         </Stack>
         <br />
         <hr></hr>
-        <Typography variant="h4" paddingTop={1} paddingBottom={1}>
+        <Typography
+          sx={{ fontSize: 22, fontWeight: 'bold', color: 'text.secondary' }}
+          paddingTop={1}
+          paddingBottom={1}
+        >
           투표 타입 선택
         </Typography>
-        <Typography variant="caption" paddingTop={1}>
+        <Typography variant="caption" paddingTop={1} sx={{ color: 'text.secondary' }}>
           &nbsp;투표는 2개 이상의 선택지를 반드시 생성하여야 합니다. <br />
-
         </Typography>
         <RadioGroup
           row

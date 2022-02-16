@@ -44,10 +44,10 @@ export default function CategoryModal(props) {
   function CategoryGroup({ bigCategoryGroup }) {
     return (
       <Box>
-        <Typography variant="body2" align="left" sx={{ color: 'text.secondary', mt: 1 }}>
+        <Typography variant="subtitle1" align="left" sx={{ color: '#6667AB', mt: 1 , mb:1,}}>
           {bigCategoryGroup[0]}
         </Typography>
-        <Stack direction="row" spacing={1}>
+        <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap' }}>
           {bigCategoryGroup[1].map((item) => (
             <Chip
               key={item.categoryId}
@@ -96,7 +96,7 @@ export default function CategoryModal(props) {
 
   return (
     <>
-      <Stack sx={{ width: '100%' }}>
+      <Stack sx={{ width: 960, overflow:'scroll', height:460,}} >
         <Collapse in={openLimitedAlert}>
           <Alert
             severity="error"
@@ -139,7 +139,7 @@ export default function CategoryModal(props) {
             이미 선택한 관심분야입니다.
           </Alert>
         </Collapse>
-        <Typography variant="body1" align="left" sx={{ color: 'text.secondary', mt: 3, mb: 1 }}>
+        <Typography variant="body1" align="left" sx={{ color: 'text.secondary', mb: 1 }}>
           선택한 관심분야
         </Typography>
         <Stack direction="row" spacing={1}>
@@ -148,7 +148,7 @@ export default function CategoryModal(props) {
               key={index}
               label={item.categoryNameSmall}
               onDelete={() => handleDelete(item)}
-              color="secondary"
+              color="primary"
             />
           ))}
         </Stack>
@@ -162,7 +162,7 @@ export default function CategoryModal(props) {
           ))}
         </Stack>
         <br />
-        <Button onClick={handleCommit} variant="contained">저장</Button>
+        <Button onClick={handleCommit} variant="contained" sx={{ mb:3, }}>저장</Button>
       </Stack>
     </>
   );

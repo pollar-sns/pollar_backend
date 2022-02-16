@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react';
 import { getLoggedUserInfo } from '../../utils/loggedUser';
 import NotificationsPopover from '../notification/NotificationsPopover';
 import SearchDrawer from './SearchDrawer';
+import GradAnimatedButton from '../common/GradAnimatedButton';
 
 // ----------------------------------------------------------------------
 
@@ -95,8 +96,8 @@ export default function Navbar({ onOpenSidebar, isFullLayout }) {
                 </NavLogo>
                 <NavSection navConfig={sidebarConfig} mr={10} />
                 <SearchDrawer user={loggedUserInfo} />
-                {/* <Searchbar /> */}
                 <Box sx={{ flexGrow: 1 }} />
+
                 {/* loggedUserId 가 undefined인지 여부에 따라서 Navbar 구성 변경 */}
                 {loggedUserInfo ? (
                   <>

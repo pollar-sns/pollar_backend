@@ -4,11 +4,13 @@ import { Box, Grid, Container, Typography, Stack, Button } from '@mui/material';
 import Page from '../components/Page';
 import homeImg from '../assets/images/grad_img.png';
 import GradAnimatedButton from '../components/common/GradAnimatedButton';
-import ImageUploadButton from '../components/common/ImageUploadButton';
-
+import { useRecoilState } from 'recoil';
+import { loggedUserState } from '../atoms/atoms';
 // ----------------------------------------------------------------------
 
 export default function HomePage() {
+  const [loggedUser, setLoggedUser] = useRecoilState(loggedUserState);
+
   return (
     <Page title="Home">
       <Container maxWidth="md" sx={{ height: '60vh' }}>
@@ -20,18 +22,26 @@ export default function HomePage() {
                 <br />
                 Anywhere
               </Typography>
-              <Typography variant="inherit" color="primary.light">
-                프로젝트 CICD 테스트
-                <ImageUploadButton />
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi, nunc a in vel
-                feugiat.
+              <Typography variant="h6" color="primary.light">
+                선택이 두려우시면 투표로 결정하세요를레히
+                <br />
+                투표를 만들어 고민을 나누고,
+                <br />
+                투표를 하면서 의견을 나눠주세요.
               </Typography>
             </Stack>
-            <GradAnimatedButton href="/users/signup">
-              <Typography variant="body1" color="inline">
-                Get Started
-              </Typography>
-            </GradAnimatedButton>
+
+            {!loggedUser ? (
+              <GradAnimatedButton href="/users/signup">
+                <Typography variant="body1" color="inline">
+                  Get Started
+                </Typography>
+              </GradAnimatedButton>
+            ) : (
+              <GradAnimatedButton href="/polls/create" sx={{ width: 'max-content',}}>
+                <Typography variant="subtitle2">&nbsp;+&nbsp;Create A Poll&nbsp;&nbsp;</Typography>
+              </GradAnimatedButton>
+            )}
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
             <img src={homeImg} alt="" />
