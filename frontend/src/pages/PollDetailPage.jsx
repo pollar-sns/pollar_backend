@@ -11,6 +11,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { isLoggedState } from '../atoms/atoms';
 import { getLoggedUserId } from '../utils/loggedUser';
+import PollDetailCard from '../components/detailpoll/PollDetailForm';
 
 export default function PollDetailPage() {
   // 로그인된 사용자만 사용가능 (recoil state watch하자)
@@ -34,6 +35,7 @@ export default function PollDetailPage() {
     // voteInfo랑 categories 가져오기
     const data = await getVoteInfo(id);
     setVoteInfo(data);
+    console.log(data);
   };
   const loadReply = async () => {
     const replyList = await getRelies(id);
@@ -58,6 +60,7 @@ export default function PollDetailPage() {
               overflowY: 'scroll', // added scroll
             }}
           >
+            <PollDetailCard poll={voteInfo} voteId={id} />
             <ReplyForm replies={replies} />
           </Box>
         </Card>
