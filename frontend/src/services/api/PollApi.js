@@ -15,24 +15,6 @@ export const getTotalVotesCount = async (userId) => {
   return response.data;
 };
 
-// /* 유저가 업로드한 투표 리스트 */
-// export const getUserUploadsList = async (userId) => {
-//   const response = await instance.get(COMMON + `/${userId}/uvotelist`);
-//   return response.data;
-// };
-
-// /* 유저가 참여한 투표 리스트 */
-// export const getUserVotesList = async (userId) => {
-//   const response = await instance.get(COMMON + `/${userId}/uparlist`);
-//   return response.data;
-// };
-
-// /* 유저가 '좋아요' 누른 투표 리스트 */
-// export const getUserLikesList = async (userId) => {
-//   const response = await instance.get(COMMON + `/${userId}/ulikelist`);
-//   return response.data;
-// };
-
 /* Trending(인기) 투표 리스트 */
 export const getTrendingPollList = async () => {
   const userId = getLoggedUserId();

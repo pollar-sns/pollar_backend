@@ -51,90 +51,83 @@ function CreateForm() {
 
   // submit
   const handleCreate = async () => {
-    if (!vote.voteCategories.length){
-      openAlert()
-    } else{
-    try {
-      if (vote.voteType === 'true') {
-        // 텍스트 formData 생성
-        const item = vote.voteSelects;
-        const tmpList = [];
-        for (const [key, value] of item.entries()) {
-          const vtitle = {
-            selectionTitle: `${key + 1}번 선택지`,
-            content: value,
-          };
-          tmpList.push(vtitle);
-        }
-        const voteDto = {
-          author: loggedUserId,
-          voteName: vote.voteName,
-          voteContent: vote.voteContent,
-          voteType: vote.voteType,
-          voteExpirationTime: vote.voteExpirationTime,
-          userAnonymousType: vote.userAnonymousType,
-          voteAnonymousType: vote.voteAnonymousType,
-          voteCategories: vote.voteCategories,
-          voteSelects: tmpList,
-        };
-        const form = new FormData();
-
-        form.append('voteDto', new Blob([JSON.stringify(voteDto)], { type: 'application/json' }));
-        const result = await voteCreate(form);
-        if (result.message == 'success') {
-          navigate(`/polls/${result.voteId}`);
-        } else {
-          openAlert();
-          navigate(`/polls`);
-        }
-      } else {
-        // 이미지 formData 생성
-        const item = vote.voteSelects;
-        const tmpList = [];
-        console.log('imageList', imageList);
-        console.log('imageList', imageList.length);
-        console.log('voteSelects', item);
-
-        for (var i = 0; i < imageList.length; i++) {
-          const vtitle = {
-            selectionTitle: `${i + 1}번 선택지`,
-          };
-          tmpList.push(vtitle);
-        }
-        const voteDto = {
-          author: loggedUserId,
-          voteName: vote.voteName,
-          voteContent: vote.voteContent,
-          voteType: vote.voteType,
-          voteExpirationTime: vote.voteExpirationTime,
-          userAnonymousType: vote.userAnonymousType,
-          voteAnonymousType: vote.voteAnonymousType,
-          voteCategories: vote.voteCategories,
-          voteSelects: tmpList,
-        };
-        const form = new FormData();
-
-        form.append('voteDto', new Blob([JSON.stringify(voteDto)], { type: 'application/json' }));
-
-        for (var i = 0; i < imageList.length; i++) {
-          form.append('votePhotos', vote.voteSelects[i]);
-        }
-        const result = await voteImageCreate(form);
-
-        if (result.message == 'success') {
-          navigate(`/polls/${result.voteId}`);
-        }
-      }
-    } catch (error) {
+    if (!vote.voteCategories.length) {
       openAlert();
-      navigate(`/polls`);
-    }}
+    } else {
+      try {
+        if (vote.voteType === 'true') {
+          // 텍스트 formData 생성
+          const item = vote.voteSelects;
+          const tmpList = [];
+          for (const [key, value] of item.entries()) {
+            const vtitle = {
+              selectionTitle: `${key + 1}번 선택지`,
+              content: value,
+            };
+            tmpList.push(vtitle);
+          }
+          const voteDto = {
+            author: loggedUserId,
+            voteName: vote.voteName,
+            voteContent: vote.voteContent,
+            voteType: vote.voteType,
+            voteExpirationTime: vote.voteExpirationTime,
+            userAnonymousType: vote.userAnonymousType,
+            voteAnonymousType: vote.voteAnonymousType,
+            voteCategories: vote.voteCategories,
+            voteSelects: tmpList,
+          };
+          const form = new FormData();
 
+          form.append('voteDto', new Blob([JSON.stringify(voteDto)], { type: 'application/json' }));
+          const result = await voteCreate(form);
+          if (result.message == 'success') {
+            navigate(`/polls/${result.voteId}`);
+          } else {
+            openAlert();
+            navigate(`/polls`);
+          }
+        } else {
+          // 이미지 formData 생성
+          const item = vote.voteSelects;
+          const tmpList = [];
+
+          for (var i = 0; i < imageList.length; i++) {
+            const vtitle = {
+              selectionTitle: `${i + 1}번 선택지`,
+            };
+            tmpList.push(vtitle);
+          }
+          const voteDto = {
+            author: loggedUserId,
+            voteName: vote.voteName,
+            voteContent: vote.voteContent,
+            voteType: vote.voteType,
+            voteExpirationTime: vote.voteExpirationTime,
+            userAnonymousType: vote.userAnonymousType,
+            voteAnonymousType: vote.voteAnonymousType,
+            voteCategories: vote.voteCategories,
+            voteSelects: tmpList,
+          };
+          const form = new FormData();
+
+          form.append('voteDto', new Blob([JSON.stringify(voteDto)], { type: 'application/json' }));
+
+          for (var i = 0; i < imageList.length; i++) {
+            form.append('votePhotos', vote.voteSelects[i]);
+          }
+          const result = await voteImageCreate(form);
+
+          if (result.message == 'success') {
+            navigate(`/polls/${result.voteId}`);
+          }
+        }
+      } catch (error) {
+        openAlert();
+        navigate(`/polls`);
+      }
+    }
   };
-  useEffect(()=> {
-    console.log(!vote.voteName && !vote.voteContent )
-    console.log(!vote.voteCategories.length)
-  },[vote.voteCategories])
   return (
     <>
       {alert.open && (
@@ -161,10 +154,10 @@ function CreateForm() {
             />
           </>
         )}
-        {(!vote.voteName && !vote.voteContent ) ? (
+        {!vote.voteName && !vote.voteContent ? (
           <>
             <Button variant="contained" disabled size="large">
-              투표 생성하기 
+              투표 생성하기
             </Button>
             <br />
             <Typography variant="caption" sx={{ color: 'red' }}>
@@ -173,12 +166,12 @@ function CreateForm() {
           </>
         ) : imageList.length >= 2 || vote.voteSelects.length >= 2 ? (
           <Button variant="contained" onClick={handleCreate}>
-            투표 생성하기 
+            투표 생성하기
           </Button>
         ) : (
           <>
             <Button variant="contained" disabled>
-              투표 생성하기 
+              투표 생성하기
             </Button>
             <br />
             <Typography variant="caption" sx={{ color: 'red' }}>

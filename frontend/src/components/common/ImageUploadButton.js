@@ -13,25 +13,16 @@ const Input = styled('input')({
 
 export default function ImageUploadButton({ size, userId, prevImage }) {
   // 로그인되어있는 사용자의 Id, 이미지 확인
-  //// const loggedUserId = getLoggedUserId();
   let loggedUserId = getLoggedUserId();
   if (typeof userId !== 'undefined') loggedUserId = userId;
 
-  // const loggedUserPhoto = getLoggedUserPhoto();
-  // console.log('==========================================');
-  // console.log('현재 로그인한 아이디: ' + loggedUserId);
-  // console.log('유저 프로필 이미지 주소: ' + loggedUserPhoto);
-  // console.log('==========================================');
-
   // 이미지 상태값으로 사용해서 변경해주기
 
-  // const [image, setImage] = useState(loggedUserPhoto);
   const [image, setImage] = useState(prevImage);
   const fileInput = useRef(null);
   // 아래 주소 default로 넣어놔도 좋을듯
   // https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png
 
-  // console.log(image);
   const onChange = (e) => {
     if (e.target.files[0]) {
       const formData = new FormData();
@@ -40,19 +31,13 @@ export default function ImageUploadButton({ size, userId, prevImage }) {
           userId: loggedUserId,
         },
       ];
-      // formData.append(
-      //   "userDto",
-      //   new Blob([JSON.stringify(variable)], { type: "application/json" })
-      // )
+
       formData.append(
         'userDto',
         new Blob([JSON.stringify({ userId: loggedUserId })], { type: 'application/json' })
       );
-      // formData.append("userDto", loggedUserId);
-      formData.append('userProfilePhoto', e.target.files[0]);
 
-      // setImage(e.target.files[0]);
-      // console.log(e.target.files[0]);
+      formData.append('userProfilePhoto', e.target.files[0]);
       modifyProfilePhoto(formData);
     } else {
       //업로드 취소할 시
@@ -63,7 +48,6 @@ export default function ImageUploadButton({ size, userId, prevImage }) {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        console.log(reader);
         setImage(reader.result);
       }
     };
@@ -80,7 +64,6 @@ export default function ImageUploadButton({ size, userId, prevImage }) {
         <Avatar
           alt="user profile photo"
           src={image}
-          // sx={{ width: 56, height: 56, cursor: 'pointer' }}
           sx={{ width: `${size}`, height: `${size}`, cursor: 'pointer' }}
           onClick={() => {
             fileInput.current.click();

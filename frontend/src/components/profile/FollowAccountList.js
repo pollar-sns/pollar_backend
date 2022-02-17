@@ -39,11 +39,11 @@ export default function FollowAccountList({ listType, setOpenModal, listOwnerId 
 
   useEffect(() => {
     getAccountList();
-  }, []); // todo [listType]?아니면 그냥 생성초기에만?
+  }, []);
 
   /* 사용자 프로필을 클릭했을 시 해당 사용자의 프로필로 이동 */
   const handleAccountClick = (userId) => {
-    console.log(userId);
+    // console.log(userId);
     // 아이템(사용자 계정)을 누르면 모달창을 닫는다
     setOpenModal(false);
     navigate(`/users/profile/${userId}`, { replace: true });
@@ -90,7 +90,6 @@ export default function FollowAccountList({ listType, setOpenModal, listOwnerId 
                   src={`/static/images/avatar/${account.followingNickname + 1}.jpg`}
                 />
               </ListItemAvatar>
-              {/* <ListItemText id={labelId} primary={`Line item ${value + 1}`} /> */}
               <ListItemText
                 id={labelId}
                 primary={
@@ -101,7 +100,6 @@ export default function FollowAccountList({ listType, setOpenModal, listOwnerId 
                     color="text.primary"
                   >
                     {isFollowerList ? account.followingNickname : account.followerNickname}
-                    {/* {account.followingNickname} */}
                   </Typography>
                 }
                 secondary={
@@ -113,7 +111,6 @@ export default function FollowAccountList({ listType, setOpenModal, listOwnerId 
                       color="text.disabled"
                     >
                       @{isFollowerList ? account.followingId : account.followerId}
-                      {/* @{account.followingId} */}
                     </Typography>
                   </>
                 }

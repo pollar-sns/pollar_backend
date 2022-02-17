@@ -22,7 +22,6 @@ const GradAnimatedButton = styled(Button)(({ theme }) => ({
   paddingRight: 20,
   color: 'rgba(255,255,255,0.9)',
   borderRadius: '10px',
-  // background: 'linear-gradient(-45deg, #FFA63D, #FF3D77, #338AFF, #3CF0C5)',
   background: 'linear-gradient(-45deg, #FFA63D, #FF3D77, #338AFF)',
   backgroundSize: '600%',
   boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',

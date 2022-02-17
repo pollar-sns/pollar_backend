@@ -9,7 +9,7 @@ export default function LikesTabPanel({ userId }) {
   /* 사용자가 '좋아요' 누른 투표 목록 요청 */
   const getLikesList = async () => {
     const list = await getUserLikesList(userId);
-    console.log(list);
+    // console.log(list);
     setPollList(list);
   };
 

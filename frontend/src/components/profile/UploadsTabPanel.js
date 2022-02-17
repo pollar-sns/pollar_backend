@@ -23,11 +23,9 @@ export default function UploadsTabPanel({ userId }) {
   return (
     <>
       {/* 업로드한 투표 리스트 */}
-      {/* <Grid container spacing={3}> */}
       <ImageList
         variant="masonry"
         cols={2}
-        // gap={20}
         sx={{
           width: '100%',
           paddingX: 3,
@@ -42,7 +40,6 @@ export default function UploadsTabPanel({ userId }) {
           ) : null
         )}
       </ImageList>
-      {/* </Grid> */}
 
       {/* 투표 생성 버튼 */}
       <GradAnimatedButton href="/polls/create" sx={{ position: 'absolute', bottom: 0, right: 50 }}>

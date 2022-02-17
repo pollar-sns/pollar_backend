@@ -11,8 +11,6 @@ import { isLoggedState } from '../atoms/atoms';
 import { checkUserLogged, getLoggedUserId } from '../utils/loggedUser';
 
 const RootStyle = styled(Page)(({ theme }) => ({
-  // paddingLeft: 100,
-  // paddingRight: 100,
   height: '72vh',
   [theme.breakpoints.up('md')]: {
     display: 'flex',
@@ -26,7 +24,7 @@ export default function PollsPage() {
 
   useEffect(() => {
     if (!isLogged && !checkUserLogged()) {
-      // todo
+
       alert('회원에게만 제공되는 서비스입니다. ');
       navigate('/users/login');
     }
@@ -35,8 +33,6 @@ export default function PollsPage() {
   return (
     <>
       <RootStyle title="Polls">
-        {/* <Stack> */}
-        {/* <Grid flexDirection="column" sx={{ mx: 'auto', textAlign: 'center' }}> */}
         <Stack>
           <Typography variant="h3" color="primary">
             Polls
@@ -46,7 +42,6 @@ export default function PollsPage() {
           </GradAnimatedButton>
           <UserProfileCard />
         </Stack>
-        {/* </Grid> */}
         <Grid
           container
           item
@@ -56,7 +51,6 @@ export default function PollsPage() {
         >
           <PollListTabs />
         </Grid>
-        {/* </Stack> */}
       </RootStyle>
     </>
   );

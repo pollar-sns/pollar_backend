@@ -37,7 +37,6 @@ function Profile({ profileInfo, isOwnerAccount, setTriggerRefresh }) {
             >
               <MobileHidden width="smDown">
                 <Avatar
-                  // src={profilePicture}
                   src={profileInfo.userProfilePhoto}
                   alt="Profile Photo"
                   shadow="xl"

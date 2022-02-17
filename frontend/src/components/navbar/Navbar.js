@@ -63,20 +63,13 @@ export default function Navbar({ onOpenSidebar, isFullLayout }) {
   // const [loggedUser, setLoggedUser] = useRecoilState(loggedUserState);
   // 아래로 대체
   const isLogged = useRecoilValue(isLoggedState);
-  // const [isUserInfoUpdated, setIsUserInfoUpdated] = useRecoilState(isUserInfoUpdatedState);
+
   const isUserInfoUpdated = useRecoilValue(isUserInfoUpdatedState);
 
   // (해결)
   //// 문제점: 새로고침 시 recoil state 날라감 (line 90)
   // JWT 검사로 변경 필요
   const [loggedUserInfo, setLoggedUserInfo] = useState();
-
-  // // 사용자 정보 변경 시 바로바로 반영되게끔 하기 위해 api를 매번 요청
-  // const getUserAccountInfo = async () => {
-  //   const data = await getUserInfo(getLoggedUserId());
-  //   console.log(data);
-  //   setLoggedUserInfo(data);
-  // };
 
   useEffect(() => {
     // localStorage에서 정보 가져옴
@@ -92,19 +85,12 @@ export default function Navbar({ onOpenSidebar, isFullLayout }) {
       // 로그아웃된 상태라면, 사용자 정보 초기화
       setLoggedUserInfo();
     }
-    // getUserAccountInfo();
   }, [isLogged, isUserInfoUpdated]); //? 로그아웃 시, 감지를 하기 위해서 recoil을 deps에 추가하는 방식으로 설계함
 
   return (
     <RootStyle sx={isFullLayout ? { backgroundColor: 'transparent' } : null}>
       <Container maxWidth="lg">
         <ToolbarStyle>
-          {/* <MobileHidden width="lgUp">
-            <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }}>
-              <Icon icon={menu2Fill} />
-            </IconButton>
-          </MobileHidden> */}
-
           <Box sx={{ flexGrow: 1 }}>
             <AppBar
               position="static"
@@ -123,11 +109,10 @@ export default function Navbar({ onOpenSidebar, isFullLayout }) {
                 </NavLogo>
                 <NavSection navConfig={sidebarConfig} mr={10} />
 
-                <Searchbar />
                 <Box sx={{ flexGrow: 1 }} />
-                {/* loggedUserId 가 undefined인지 여부에 따라서 Navbar 구성 변경 */}
                 {loggedUserInfo ? (
                   <>
+                    <SearchDrawer />
                     <NotificationsPopover />
                     <AccountPopover account={loggedUserInfo} />
                   </>

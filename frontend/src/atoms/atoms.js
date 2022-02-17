@@ -26,12 +26,3 @@ export const isUserInfoUpdatedState = atom({
   key: 'isUserInfoUpdatedState',
   default: false,
 });
-
-// /* Notification(알림) 목록 */
-// //: 로그인 성공 시 Navbar에 디스플레이 될 알림 목록
-// // - userId
-// // - userNickname: 프로필 페이지 요청 시 필요
-// export const notificationListState = atom({
-//   key: 'notificationListState',
-//   default: [],
-// });

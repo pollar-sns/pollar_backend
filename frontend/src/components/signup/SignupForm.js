@@ -203,7 +203,6 @@ function SignupForm(props) {
     try {
       const result = await emailConfirm(user.userEmail);
       if (result) {
-        // setMessage('인증번호가 발송되었습니다. 5분안에 인증번호를 입력하세요.');
         setTokenNumber({
           ...tokenNumber,
           userEmail: user.userEmail,
@@ -236,7 +235,8 @@ function SignupForm(props) {
   const handleTokenSend = async (e) => {
     e.preventDefault();
     try {
-      console.log(tokenNumber);
+      // 토큰 넘버 확인
+      // console.log(tokenNumber);
       const response = await emailToken(tokenNumber);
       if (response.message === 'success') {
         // 토큰이 T/F인지 확인
@@ -401,22 +401,6 @@ function SignupForm(props) {
                 >
                   {!tokenNumber.token ? '입력대기중' : '인증확인'}
                 </Button>
-
-                {/* {!tokenNumber.token ? (
-                  <Button fullWidth size="large" variant="contained" disabled>
-                    인증번호를 입력하세요
-                  </Button>
-                ) : (
-                  <Button
-                    required
-                    fullWidth
-                    size="large"
-                    variant="contained"
-                    onClick={handleTokenSend}
-                  >
-                    인증확인
-                  </Button>
-                )} */}
               </Grid>
             </Grid>
           </Stack>

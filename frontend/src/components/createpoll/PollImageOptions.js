@@ -23,6 +23,7 @@ function PollImageOptions(props) {
   const fileInput = useRef(null);
   const [Index, setIndex] = useState(0);
 
+  // 이미지 선택지 추가
   const createimageList = (item) => {
     let voteArr = [...imageList];
     let counter = voteArr.slice(-1)[0];
@@ -32,13 +33,13 @@ function PollImageOptions(props) {
     setImageList(voteArr);
   };
 
-
+  // 이미지 선택지 삭제
   const deleteImageList = (item) => {
     setVote({
       ...vote,
-      imageList : imageList.splice(-1, 1)
-    })
-    
+      imageList: imageList.splice(-1, 1),
+    });
+
     let voteArr = [...imageList];
     let counter = voteArr.slice(-1)[0];
     counter -= 1;
@@ -46,13 +47,12 @@ function PollImageOptions(props) {
     setImageList([...voteArr]);
     setVote({
       ...vote,
-      voteSelects: [...vote.voteSelects]
-    })
-    // fileInput= fileInput.current.value(-1)
+      voteSelects: [...vote.voteSelects],
+    });
   };
 
+  // 파일 업로드 및 미리보기 생성
   const uploadImage = (e) => {
-    // const fileArr = e.target.files[0]; // 여기서 하나씩만 추가하지 않나
     let file = e.target.files[0];
     let reader = new FileReader();
     reader.onload = () => {
@@ -68,11 +68,6 @@ function PollImageOptions(props) {
     reader.readAsDataURL(file);
   };
 
-  // useEffect(() => {
-  //   console.log(fileInput);
-  //   // fileInput.current = fileInput.current.click()
-  // }, [fileInput]);
-
   return (
     <>
       <Typography variant="caption" paddingTop={1}>
@@ -82,32 +77,32 @@ function PollImageOptions(props) {
       <Stack direction={{ lg: 'row' }} sx={{ marginTop: 3 }}>
         {imageList &&
           imageList.map((item, i) => (
-              <ImageDiv key={i} >
-                <Avatar
-                  alt="vote-photo-option"
-                  sx={{ width: 200, height: 200 }}
-                  variant="rounded"
-                  src={item}
-                  onClick={() => {
-                    setIndex(i);
-                    fileInput.current.click();
-                  }}
-                >
-                  <AddPhotoAlternateIcon color="disabled" sx={{ fontSize: 40 }} />
-                  <Typography component="span" variant="subtitle1" color="text.secondary">
-                    Upload Image
-                  </Typography>
-                </Avatar>
+            <ImageDiv key={i}>
+              <Avatar
+                alt="vote-photo-option"
+                sx={{ width: 200, height: 200 }}
+                variant="rounded"
+                src={item}
+                onClick={() => {
+                  setIndex(i);
+                  fileInput.current.click();
+                }}
+              >
+                <AddPhotoAlternateIcon color="disabled" sx={{ fontSize: 40 }} />
+                <Typography component="span" variant="subtitle1" color="text.secondary">
+                  Upload Image
+                </Typography>
+              </Avatar>
 
-                <input
-                  type="file"
-                  style={{ display: 'none' }}
-                  accept="image/jpg,impge/png,image/jpeg"
-                  name="votePhotoOption"
-                  ref={fileInput}
-                  onChange={uploadImage}
-                />
-              </ImageDiv>
+              <input
+                type="file"
+                style={{ display: 'none' }}
+                accept="image/jpg,impge/png,image/jpeg"
+                name="votePhotoOption"
+                ref={fileInput}
+                onChange={uploadImage}
+              />
+            </ImageDiv>
           ))}
       </Stack>
       {imageList.length < 4 && (
@@ -118,16 +113,11 @@ function PollImageOptions(props) {
           size="small"
           onClick={createimageList}
         >
-          + 이미지 추가하기 
+          + 이미지 추가하기
         </Button>
       )}
-      <Button
-        onClick={deleteImageList}
-        size="small"
-        variant="outlined"
-        sx={{ mt: 2, ml:1 }}
-      >
-        - 이미지 삭제 
+      <Button onClick={deleteImageList} size="small" variant="outlined" sx={{ mt: 2, ml: 1 }}>
+        - 이미지 삭제
       </Button>
       <br /> <br />
     </>

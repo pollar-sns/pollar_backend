@@ -15,7 +15,6 @@ function UserPage() {
   const isLogged = useRecoilValue(isLoggedState);
   const navigate = useNavigate();
 
-  // const navigate = useNavigate();
   //전체 유저 불러오기
   const getAllUserInfo = async () => {
     const data = await getAllUsers(loggedUserId);
@@ -24,7 +23,6 @@ function UserPage() {
 
   useEffect(() => {
     if (!isLogged && !checkUserLogged()) {
-      // todo
       alert('회원에게만 제공되는 서비스입니다. ');
       navigate('/users/login');
     } else {
