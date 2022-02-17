@@ -80,26 +80,27 @@ export default function SearchDrawer({ user, isUserLogged }) {
   //검색어
   const handleInput = (e) => {
     setParam({
-      userId: user.user.userId,
+      userId: user.userId,
       searchInfo: e.target.value,
     });
   };
 
-  //검색한 결과 페이지 이동
-  const handleSearch = async () => {
-    if (option === 1) {
-      const data = await getUserSearchPage(param);
-      // console.log(data);
-    }
+  // //검색한 결과 페이지 이동
+  // const handleSearch = async () => {
+  //   if (option === 1) {
+  //     const data = await getUserSearchPage(param);
+  //     // console.log(data);
+  //   }
 
-    toggleDrawer('top', false);
-  };
+  //   toggleDrawer('top', false);
+  // };
 
   //검색바
   const getList = async () => {
     if (option === 1) {
+      console.log(param)
       const data = await getUserSearchBar(param);
-
+      console.log(data)
       setSearchList(data.searchUserList);
     } else if (option === 2) {
       const data = await getFeedSearchBar(param);

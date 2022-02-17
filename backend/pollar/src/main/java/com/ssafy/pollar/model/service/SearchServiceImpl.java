@@ -39,16 +39,15 @@ public class SearchServiceImpl implements SearchService{
         if(userNickname.trim().length()==0){
             return userDtoList;
         }
-        long userListLen = userList.size();
-        if(userList.size()>5){
-            userListLen = 5;
-        }
-        for(int i = 0 ; i < userListLen; i++){
+        for(int i = 0 ; i < userList.size(); i++){
             userId = userList.get(i).getUserId();
             searchUserNickname = userList.get(i).getUserNickname();
             userProfile = userList.get(i).getUserProfilePhoto();
             if(searchUserNickname.contains(userNickname)){
                 userDtoList.add(new UserDto(userId,searchUserNickname,userProfile));
+                if(userDtoList.size()>5){
+                    return userDtoList;
+                }
             }
         }
 
