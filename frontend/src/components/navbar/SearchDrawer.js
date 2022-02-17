@@ -89,7 +89,7 @@ export default function SearchDrawer(user) {
   const handleSearch = async () => {
     if (option === 1) {
       const data = await getUserSearchPage(param);
-      console.log(data);
+      // console.log(data);
     }
 
     toggleDrawer('top', false);
@@ -196,6 +196,7 @@ export default function SearchDrawer(user) {
         <>
           {searchList.map((vote, index) => (
             <Button
+              key={index}
               sx={{
                 width: 'auto',
                 justifyContent: 'flex-start',
@@ -272,7 +273,7 @@ export default function SearchDrawer(user) {
                 &nbsp;&nbsp;{vote.voteName}&nbsp;&nbsp;
               </Typography>
               {vote.voteCategoriesName.map((item, index) => (
-                <Chip label={item} sx={{ ml: 0.5 }} />
+                <Chip label={item} sx={{ ml: 0.5 }} key={index}/>
               ))}
             </Button>
           ))}

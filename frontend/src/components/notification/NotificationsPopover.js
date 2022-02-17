@@ -46,7 +46,6 @@ export default function NotificationsPopover() {
 
   const getList = async () => {
     const data = await getNotificationList();
-    console.log(data);
     // 전처리 후 저장) 알림 목록을 읽음 -> 안읽음 기준으로 정렬
     setNotifications(
       data.notificationList.sort(function (a, b) {

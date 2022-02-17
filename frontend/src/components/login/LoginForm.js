@@ -62,7 +62,7 @@ export default function LoginForm() {
   const handleLogin = async (loginInfo) => {
     try {
       const result = await login(loginInfo);
-      console.log(result);
+      // console.log(result);
       if (result.message == 'success') {
         setIsLoggedState(true);
         // 이전으로 돌아갈 수 있어야 하므로 history 유지

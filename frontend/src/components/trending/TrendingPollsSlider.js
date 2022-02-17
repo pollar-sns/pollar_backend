@@ -27,7 +27,6 @@ export default function TrendingPollsSlider() {
   /* Trending(인기) 투표 목록 요청 */
   const getPollList = async () => {
     const list = await getTrendingPollList();
-    console.log(list);
     setPollList(list);
   };
 

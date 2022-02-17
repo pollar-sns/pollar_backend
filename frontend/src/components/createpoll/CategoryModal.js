@@ -65,7 +65,6 @@ export default function CategoryModal(props) {
     );
     setInterestList(filteredList);
     // 삭제한 카테고리는 다시 전체 목록에 반영
-    console.log(filteredList);
   };
 
   /* 관심분야 선택 추가 */

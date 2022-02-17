@@ -67,6 +67,9 @@ import {
   ImageListItem,
   Avatar,
   CardActionArea,
+  Dialog,
+  DialogActions,
+  DialogTitle,
 } from '@mui/material';
 import PollImageButton from '../common/PollImageButton';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
@@ -97,8 +100,6 @@ const InfoStyle = styled('div')(({ theme }) => ({
 
 export default function PollTrendingCard({ poll, isLoggedUser }) {
   const navigate = useNavigate();
-
-  console.log(isLoggedUser);
 
   const {
     voteId,
@@ -157,13 +158,24 @@ export default function PollTrendingCard({ poll, isLoggedUser }) {
     navigate(`/poll/${voteId}`);
   };
 
+    // 로그인 알림
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+      navigate('/users/login');
+    };
+  
   const handleUnloggedUserClick = (event) => {
     event.stopPropagation();
     event.preventDefault();
     // todo
     if (!isLoggedUser) {
-      alert('로그인이 필요합니다. 로그인 화면으로 이동할까요?');
-      navigate('/users/login');
+      handleClickOpen();
     }
   };
 
@@ -232,6 +244,24 @@ export default function PollTrendingCard({ poll, isLoggedUser }) {
 
   return (
     <>
+      <Dialog
+        open={open}
+        // onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          <Typography variant="body1" textAlign="center">
+            회원에게만 제공되는 서비스입니다. <br />
+            로그인 화면으로 이동합니다.
+          </Typography>
+        </DialogTitle>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+          <Button onClick={handleClose} autoFocus>
+            확인
+          </Button>
+        </DialogActions>
+      </Dialog>
       <ImageListItem
         sx={{
           width: '100%',
