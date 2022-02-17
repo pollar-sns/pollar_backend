@@ -92,7 +92,7 @@ public class FollowingServiceImpl implements FollowingService {
             String followeeUserId = following.get(i).getFollowee().getUserId(); // 현재 프로필 아이디
             String followerUserNickname = following.get(i).getFollower().getUserNickname();
             String followeeUserNickname = following.get(i).getFollowee().getUserNickname();
-            String followUserProfilePhoto = following.get(i).getFollowee().getUserProfilePhoto();
+            String followUserProfilePhoto = following.get(i).getFollower().getUserProfilePhoto();
             Boolean isFollow = false;
 //            System.out.println(followerUserId +"follower"); 프로필 유저가 팔로잉 하고 있는 유저
             for(int j = 0; j < loggedFollowing.size() ; j++){ // 로그인 유저가 팔로우 하고 있는 목록들
