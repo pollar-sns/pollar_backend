@@ -23,7 +23,7 @@ instance.interceptors.request.use(
       // For Spring Boot back-end
       config.headers.Authorization = 'Bearer ' + user.accessToken;
     }
-    // console.log(config);
+
     return config;
   },
   (err) => {

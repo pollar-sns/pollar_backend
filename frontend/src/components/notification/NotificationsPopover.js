@@ -19,7 +19,6 @@ import {
 import MenuPopover from '../../components/MenuPopover';
 import NotificationItem from './NotificationItem';
 import { getNotificationList, readNotifications } from '../../services/api/NotificationApi';
-// import NOTIFICATIONS from '../../_mocks_/notification';
 
 // ----------------------------------------------------------------------
 
@@ -48,7 +47,6 @@ export default function NotificationsPopover() {
   const getList = async () => {
     const data = await getNotificationList();
     console.log(data);
-    //// setNotifications(data.notificationList);
     // 전처리 후 저장) 알림 목록을 읽음 -> 안읽음 기준으로 정렬
     setNotifications(
       data.notificationList.sort(function (a, b) {
@@ -115,7 +113,6 @@ export default function NotificationsPopover() {
         <Divider />
 
         <Box sx={{ maxHeight: 500, overflow: 'auto' }}>
-          {/* <Scrollbar sx={{ height: { xs: 340, sm: 'auto' } }}> */}
           <List
             disablePadding
             subheader={
@@ -141,7 +138,6 @@ export default function NotificationsPopover() {
               <NotificationItem key={notification.notificationId} notification={notification} />
             ))}
           </List>
-          {/* </Scrollbar> */}
 
           <Divider />
         </Box>

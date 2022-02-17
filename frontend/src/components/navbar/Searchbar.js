@@ -16,7 +16,7 @@ import {
   FormControl,
   Select,
   Stack,
-  Drawer
+  Drawer,
 } from '@mui/material';
 // ----------------------------------------------------------------------
 
@@ -42,7 +42,6 @@ const SearchbarStyle = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 5),
   },
 }));
-
 
 const SearchStyle = styled('div')(({ theme }) => ({
   zIndex: 99,
@@ -134,7 +133,6 @@ export default function Searchbar() {
           </Button>
         </SearchbarStyle>
       </Slide>
-
     </Stack>
 
     /* // </ClickAwayListener> */

@@ -15,22 +15,20 @@ export default function CategoryModal(props) {
   const [openDuplicatedAlert, setOpenDuplicatedAlert] = useState(false);
 
   const handleCommit = () => {
-    // setSelectedInterestList(interestList);
     // 관심분야 목록에서 id만 뽑아서 전달
     const categories = interestList.map((item) => item.categoryId);
     setVote({
       ...vote,
       voteCategories: categories,
     });
-    // const categoryname = interestList.map((item) => item.categoryNameSmall);
+
     setVoteInterest(interestList);
-    // setConfirm(categories);
+
     close();
   };
 
   const getList = async () => {
     const list = await getAllCategories();
-    // setCategoryList(list);
     // 대분류대로 배열에 삽입
     let bigCategoryList = {};
     list.forEach((item) =>
@@ -44,7 +42,7 @@ export default function CategoryModal(props) {
   function CategoryGroup({ bigCategoryGroup }) {
     return (
       <Box>
-        <Typography variant="subtitle1" align="left" sx={{ color: '#6667AB', mt: 1 , mb:1,}}>
+        <Typography variant="subtitle1" align="left" sx={{ color: '#6667AB', mt: 1, mb: 1 }}>
           {bigCategoryGroup[0]}
         </Typography>
         <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap' }}>
@@ -76,7 +74,6 @@ export default function CategoryModal(props) {
       setOpenLimitedAlert(true);
     } else {
       // 중복검사
-      // console.log(interestList);
       let existing = false;
       for (let i of interestList) {
         if (selected.categoryId === i.categoryId) {
@@ -98,7 +95,7 @@ export default function CategoryModal(props) {
 
   return (
     <>
-      <Stack sx={{ width: 800, height:500, margin:0,}} >
+      <Stack sx={{ width: 800, height: 500, margin: 0 }}>
         <Collapse in={openLimitedAlert}>
           <Alert
             severity="error"

@@ -13,17 +13,10 @@ export default function FollowButton({ isFollowButton, accountId, setTriggerRefr
       followerId: accountId,
     });
     if (result) {
-      console.log(result);
     } else {
       alert('ERROR');
     }
     setTriggerRefresh((curr) => !curr);
-    // })
-    // .catch((error) => {
-    //   // todo 500 페이지 만들기
-    //   navigate('/error', { replace: true });
-    //   // alert(error);
-    // });
   };
 
   /* 언팔로우 버튼 클릭 */
@@ -33,7 +26,6 @@ export default function FollowButton({ isFollowButton, accountId, setTriggerRefr
       followerId: accountId,
     });
     if (result) {
-      console.log(result);
     } else {
       alert('ERROR');
     }

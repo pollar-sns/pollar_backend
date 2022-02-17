@@ -8,11 +8,6 @@ import Snackbar from '@mui/material/Snackbar';
 const TextButton = styled(Button)(({ theme }) => ({
   position: 'relative',
   width: '100%',
-  // height: 200,
-  // [theme.breakpoints.down('sm')]: {
-  //   width: '100% !important', // Overrides inline-style
-  //   height: 100,
-  // },
   '&:hover, &.Mui-focusVisible': {
     zIndex: 1,
     '& .MuiImageBackdrop-root': {
@@ -29,15 +24,12 @@ const TextButton = styled(Button)(({ theme }) => ({
 
 const TextVoteResult = styled('span')(({ theme }) => ({
   // //? (선택지의) 투표율을 표현, sx로 설정할 부분
-  // width: '100%',
+
   left: 0,
   height: '100%',
   position: 'absolute',
   display: 'flex',
   alignItems: 'center',
-  // right: 60,
-  // fontSize: 16,
-  // justifyContent: 'center',
   textAlign: 'start',
   paddingLeft: 10,
 
@@ -46,7 +38,6 @@ const TextVoteResult = styled('span')(({ theme }) => ({
   opacity: 0.7,
   borderRadius: 7,
   transition: theme.transitions.create('opacity'),
-  // zIndex: 1,
 }));
 
 /**
@@ -119,25 +110,22 @@ export default function PollTextButton({
           ...alertState,
           voteSuccess: true,
         });
-        // alert('투표완료! 투표취소는 본인 프로필에서만 가능합니다');
         openSuccessAlert();
         setPollVotedState(true);
         setUserVote(true);
       } else {
-        // todo 에러처리
         setAlertState({
           ...alertState,
           voteFail: true,
         });
         openSuccessAlert();
         setPollVotedState(false);
-        setUserVote(false); // (필요없나)
+        setUserVote(false);
       }
     }
     /* 투표 취소 */
     // 사용자가 투표한 항목을 다시 눌렀을 때 취소 처리
     else {
-      // todo 대체
       setAlertState({
         ...alertState,
         cancleSuccess: true,

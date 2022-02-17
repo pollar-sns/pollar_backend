@@ -20,7 +20,6 @@ export default function SharePollDialog({ openDialog, pollId }) {
   const [open, setOpen] = useState();
   const [isCopied, setIsCopied] = useState(false);
 
-  // todo
   const shareUrl = `${process.env.REACT_APP_BASE_URL}/poll/${pollId}`;
 
   const handleClose = () => {
@@ -52,7 +51,6 @@ export default function SharePollDialog({ openDialog, pollId }) {
           <DialogContentText variant="body2">
             다른 사람들에게 이 투표를 공유해보세요!
           </DialogContentText>
-          {/* <Input readOnly type="text" value={shareUrl} /> */}
           <Paper
             component="form"
             sx={{
@@ -82,10 +80,6 @@ export default function SharePollDialog({ openDialog, pollId }) {
             </Tooltip>
           </Paper>
         </DialogContent>
-        {/* <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
-        </DialogActions> */}
       </Dialog>
     </div>
   );

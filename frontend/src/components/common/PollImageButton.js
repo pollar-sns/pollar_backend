@@ -10,10 +10,6 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   width: '100%',
   height: 200,
-  // [theme.breakpoints.down('sm')]: {
-  //   width: '100% !important', // Overrides inline-style
-  //   height: 100,
-  // },
   '&:hover, &.Mui-focusVisible': {
     zIndex: 1,
     '& .MuiImageBackdrop-root': {
@@ -22,9 +18,7 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
     '& .MuiImageMarked-root': {
       opacity: 1,
     },
-    '& .MuiTypography-root': {
-      // border: '4px solid currentColor',
-    },
+    '& .MuiTypography-root': {},
   },
 }));
 
@@ -62,25 +56,17 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
 }));
 
 const ImageMarked = styled('span')(({ theme }) => ({
-  // height: 3,
-  // width: 18,
-  // backgroundColor: theme.palette.common.white,
-  // position: 'absolute',
-  // bottom: -2,
-  // left: 'calc(50% - 9px)',
   opacity: 0,
   transition: theme.transitions.create('opacity'),
 }));
 
 const ImageVoteResult = styled('span')(({ theme }) => ({
-  //? (선택지의) 투표율을 표현, sx로 설정할 부분
   width: '100%',
   position: 'absolute',
   left: 0,
   right: 0,
   top: 0,
   bottom: 0,
-  // paddingTop: 10,
   fontSize: 16,
   borderRadius: 14,
   backgroundColor: theme.palette.warning.main,
@@ -154,17 +140,14 @@ export default function PollImageButton({
       // 서버로 해당 선택 데이터 전송
       const result = await requestPollVote(selection.selectionId);
       if (result === 'success') {
-        // todo alert 다 대체
         setAlertState({
           ...alertState,
           voteSuccess: true,
         });
-        // alert('투표완료! 투표취소는 본인 프로필에서만 가능합니다');
         openSuccessAlert();
         setPollVotedState(true);
         setUserVote(true);
       } else {
-        // todo 에러처리
         setAlertState({
           ...alertState,
           voteFail: true,
@@ -177,19 +160,16 @@ export default function PollImageButton({
     /* 투표 취소 */
     // 사용자가 투표한 항목을 다시 눌렀을 때 취소 처리
     else {
-      // todo 대체
       setAlertState({
         ...alertState,
         cancleSuccess: true,
       });
       openSuccessAlert();
-      // alert('투표를 취소하시겠습니까? :(');
       const result = await cancelPollVote(selection.selectionId);
       if (result === 'success') {
         setPollVotedState(false);
         setUserVote(false);
       } else {
-        // alert('투표 취소에 문제 발생. 잠시 후 다시 시도해주세요');
         setAlertState({
           ...alertState,
           cancleFail: true,
@@ -238,7 +218,6 @@ export default function PollImageButton({
       )}
       <ImageButton
         focusRipple
-        // key={selection.selectionId}
         onClick={handleClick}
         // 투표완료 OR 마감된 투표일 경우 hover 막음
         disabled={isVoted && !userVote}

@@ -30,7 +30,6 @@ export default function ProfileImageUploadButton({ size, userId, prevImage }) {
       // 서버 요청
       const result = await modifyProfilePhoto(formData);
       if (result) {
-        // if (result !== '') {
         //todo localStorage에 갱신
         const updatedData = getLoggedUserInfo();
         updatedData.userProfilePhoto = result;
@@ -48,7 +47,6 @@ export default function ProfileImageUploadButton({ size, userId, prevImage }) {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        // console.log(reader);
         setImage(reader.result);
       }
     };

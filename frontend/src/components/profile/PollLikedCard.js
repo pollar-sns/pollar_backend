@@ -34,7 +34,6 @@ import SharePollDialog from '../common/SharePollDialog';
 // ----------------------------------------------------------------------
 
 const TitleStyle = styled(Link)({
-  // height: 44,
   overflow: 'hidden',
   width: '100%',
   //? 1(개) 줄만 표시하겠다는 것
@@ -56,18 +55,16 @@ const AvatarStyle = styled(Avatar)(({ theme }) => ({
   zIndex: 9,
   width: 32,
   height: 32,
-  // position: 'absolute',
-  // left: theme.spacing(3),
+
   marginRight: 15,
   marginBottom: 5,
-  // bottom: theme.spacing(-3),
 }));
 
 const InfoStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'flex-end',
-  // marginTop: theme.spacing(3),
+
   color: theme.palette.text.disabled,
 }));
 
@@ -190,9 +187,6 @@ export default function PollLikedCard({ poll }) {
                       display: 'flex',
                       alignItems: 'center',
                       ml: index === 0 ? 0 : 1.5,
-                      // ...((latestPostLarge || latestPost) && {
-                      //   color: 'grey.500',
-                      // }),
                     }}
                   >
                     <Box component={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />

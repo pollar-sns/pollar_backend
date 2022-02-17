@@ -34,8 +34,10 @@ export default function PollCreatePage() {
   useEffect(() => {
     if (!isLogged && !checkUserLogged()) {
       // todo
-      openAlert();
-      navigate('/users/login');
+      // setInterval(()=> {
+      //   openAlert();
+      // },2000)
+      // navigate('/users/login');
     }
   }, []);
 
@@ -47,7 +49,7 @@ export default function PollCreatePage() {
           open={open}
           onClose={closeAlert}
           message="회원에게만 제공되는 서비스입니다. "
-          autoHideDuration={2000}
+          autoHideDuration={3000}
         />
       )}
       <Container>

@@ -88,7 +88,6 @@ export default function AccountPopover({ account }) {
   // 로그아웃 버튼 클릭 시
   const handleLogout = () => {
     // update Recoil atom data
-    //// resetLoggedUser();
     resetIsLoggedState();
     // remove JWT
     logout();
@@ -126,7 +125,6 @@ export default function AccountPopover({ account }) {
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           variant="dot"
         >
-          {/* //todo */}
           <Avatar src={account.userProfilePhoto} alt="PhotoURL" />
         </StyledBadge>
       </IconButton>
@@ -165,7 +163,6 @@ export default function AccountPopover({ account }) {
                 height: 24,
               }}
             />
-
             {option.label}
           </MenuItem>
         ))}

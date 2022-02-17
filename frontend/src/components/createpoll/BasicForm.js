@@ -46,13 +46,6 @@ function BasicForm(props) {
     userAnonymous: '투표가 익명으로 생성되며 투표자도 익명으로 투표됩니다.',
   };
 
-  console.log(voteInterest);
-  // useEffect(() => {
-  //   voteInterest.map((item) => {
-  //     console.log(item);
-  //   });
-  // }, [voteInterest]);
-
   return (
     <>
       <Box>
@@ -111,13 +104,22 @@ function BasicForm(props) {
           >
             투표 카테고리 *
           </Typography>
-          <Stack justifyContent="center" alignItems="center" direction={{ xs: 'column', sm: 'row' }}>
-            <Stack direction={{ xs: 'column', sm: 'row', }}>
+          <Stack
+            justifyContent="center"
+            alignItems="center"
+            direction={{ xs: 'column', sm: 'row' }}
+          >
+            <Stack direction={{ xs: 'column', sm: 'row' }}>
               {voteInterest.map((item, index) => (
-                <Chip key={index} label={item.categoryNameSmall} variant="filled" sx={{ mx:0.3}} />
+                <Chip
+                  key={index}
+                  label={item.categoryNameSmall}
+                  variant="filled"
+                  sx={{ mx: 0.3 }}
+                />
               ))}
             </Stack>
-            <Button onClick={handleOpen} variant="contained" sx={{ mx:3,}}>
+            <Button onClick={handleOpen} variant="contained" sx={{ mx: 3 }}>
               카테고리 선택
             </Button>
             <Modal
@@ -143,12 +145,12 @@ function BasicForm(props) {
         <Stack>
           <Stack paddingTop={2} direction={{ xs: 'column', sm: 'row' }}>
             <Stack>
-            <Typography
-              sx={{ fontSize: 22, fontWeight: 'bold', color: 'text.secondary' }}
-              paddingBottom={1}
-            >
-              투표 익명 옵션 선택
-            </Typography>
+              <Typography
+                sx={{ fontSize: 22, fontWeight: 'bold', color: 'text.secondary' }}
+                paddingBottom={1}
+              >
+                투표 익명 옵션 선택
+              </Typography>
               <FormControlLabel
                 label="익명으로 투표 생성하기"
                 control={
@@ -178,7 +180,7 @@ function BasicForm(props) {
                 }
               />
             </Stack>
-            <Stack spacing={2} sx={{ml:20}}>
+            <Stack spacing={2} sx={{ ml: 20 }}>
               <Typography
                 sx={{ fontSize: 22, fontWeight: 'bold', color: 'text.secondary' }}
                 paddingTop={1}
@@ -195,7 +197,6 @@ function BasicForm(props) {
           ) : (
             vote.voteAnonymousType && <FormHelperText>{anonymousMsg.voteAnonymous}</FormHelperText>
           )}
-
         </Stack>
         <br />
         <hr></hr>

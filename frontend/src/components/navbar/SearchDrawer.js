@@ -209,20 +209,20 @@ export default function SearchDrawer(user) {
               }}
               key={index}
             >
-              <Stack sx={{ justifyContent: 'center', alignItems: 'center', width:80,}}>
+              <Stack sx={{ justifyContent: 'center', alignItems: 'center', width: 80 }}>
                 {vote.userAnonymousType ? (
                   <>
-                  <Avatar
-                    shadow="xl"
-                    sx={{
-                      width: '2rem',
-                      height: '2rem',
-                      border: 1,
-                      borderColor: '#c5cae9',
-                    }}
-                  >
-                    ?
-                  </Avatar>
+                    <Avatar
+                      shadow="xl"
+                      sx={{
+                        width: '2rem',
+                        height: '2rem',
+                        border: 1,
+                        borderColor: '#c5cae9',
+                      }}
+                    >
+                      ?
+                    </Avatar>
 
                     <Typography
                       sx={{
@@ -273,7 +273,7 @@ export default function SearchDrawer(user) {
                 &nbsp;&nbsp;{vote.voteName}&nbsp;&nbsp;
               </Typography>
               {vote.voteCategoriesName.map((item, index) => (
-                <Chip label={item} sx={{ ml:0.5,}} />
+                <Chip label={item} sx={{ ml: 0.5 }} />
               ))}
             </Button>
           ))}
@@ -284,7 +284,6 @@ export default function SearchDrawer(user) {
 
   return (
     <Stack>
-      {/* <Button onClick={toggleDrawer('top', true)}>Top</Button> */}
       <IconButton onClick={toggleDrawer('top', true)}>
         <Icon icon={searchFill} width={20} height={20} />
       </IconButton>
@@ -298,9 +297,7 @@ export default function SearchDrawer(user) {
         <SearchbarStyle>
           <Box sx={{ width: 180, padding: 2, alignItems: 'center' }}>
             <FormControl fullWidth>
-              {/* <InputLabel>검색설정</InputLabel> */}
               <Select
-                // labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={option}
                 onChange={handleChange}

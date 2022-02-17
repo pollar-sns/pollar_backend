@@ -14,7 +14,6 @@ export default function SelectInterests({ setConfirm, setUser, user }) {
   const [openDuplicatedAlert, setOpenDuplicatedAlert] = useState(false);
 
   const handleCommit = () => {
-    // setSelectedInterestList(interestList);
     // 관심분야 목록에서 id만 뽑아서 전달
     const listCopy = interestList;
     const categories = listCopy.map((item) => item.categoryId);
@@ -24,7 +23,6 @@ export default function SelectInterests({ setConfirm, setUser, user }) {
 
   const getList = async () => {
     const list = await getAllCategories();
-    // setCategoryList(list);
     // 대분류대로 배열에 삽입
     let bigCategoryList = {};
     list.forEach((item) =>
@@ -50,7 +48,6 @@ export default function SelectInterests({ setConfirm, setUser, user }) {
           whiteSpace="nowrap"
           direction="row"
           spacing={1}
-          // display="inline-flex"
           sx={{ flexWrap: 'wrap' }}
         >
           {bigCategoryGroup[1].map((item) => (
@@ -73,7 +70,6 @@ export default function SelectInterests({ setConfirm, setUser, user }) {
     );
     // 삭제한 카테고리는 다시 전체 목록에 반영
     setInterestList(filteredList);
-    // console.log(filteredList);
   };
 
   /* 관심분야 선택 추가 */
@@ -95,9 +91,7 @@ export default function SelectInterests({ setConfirm, setUser, user }) {
   };
 
   useEffect(() => {
-    console.log(interestList);
     setInterestList(interestList);
-    // setInterestList(user.categories);
     // 관심분야 목록 API 호출
     getList();
   }, [user]);

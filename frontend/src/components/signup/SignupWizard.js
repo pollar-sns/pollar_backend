@@ -43,7 +43,6 @@ export default function SignupWizard() {
 
   const navigate = useNavigate();
 
-  //// const [next, setNext] = useState(false);
   const [user, setUser] = useState({
     userId: '',
     password: '',
@@ -73,8 +72,8 @@ export default function SignupWizard() {
     // 회원가입 완료 버튼 클릭 (2단계: 관심분야 선택에서 회원가입 요청됨)
     // if (activeStep === steps.length - 1) {
     if (activeStep === 1) {
-      console.log(user);
-      console.log('회원가입 요청 ');
+      // console.log(user);
+      // console.log('회원가입 요청 ');
       handleSignup();
     }
     // 이전 단계들

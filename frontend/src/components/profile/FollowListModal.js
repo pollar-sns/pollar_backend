@@ -12,7 +12,6 @@ const style = {
   width: 500,
   height: 800,
   bgcolor: 'background.paper',
-  // border: '2px solid #333',
   boxShadow: 24,
   borderRadius: 2,
   p: 4,

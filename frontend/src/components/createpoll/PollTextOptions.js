@@ -6,6 +6,7 @@ function PollTextOptions(props) {
 
   const [textList, setTextList] = useState([0]);
 
+  // 텍스트 선택지 추가
   const createTextList = (item) => {
     let voteArr = [...textList];
     let counter = voteArr.slice(-1)[0];
@@ -14,7 +15,7 @@ function PollTextOptions(props) {
     voteArr.push(counter);
     setTextList(voteArr);
   };
-
+  // vote 값 변경
   const changeList = () => {
     setVote({
       ...vote,
@@ -46,33 +47,28 @@ function PollTextOptions(props) {
               });
               changeList();
             }}
-            />
+          />
         ))}
-            {textList.length < 4 && (
-              <Button
-                variant="contained"
-                onClick={createTextList}
-                sx={{ mt: 2 }}
-                size="small"
-              >
-                + 선택지 추가하기
-              </Button>
-            )}
-            {textList.length > 2 && (
-              <Button
-              size="small"
-              variant="outlined"
-              sx={{ mt: 2, ml:1 }}
-                onClick={(e) => {
-                  setVote({
-                    ...vote,
-                    textList: textList.pop(),
-                  });
-                }}
-              >
-                - 선택지 삭제
-              </Button>
-            )}
+      {textList.length < 4 && (
+        <Button variant="contained" onClick={createTextList} sx={{ mt: 2 }} size="small">
+          + 선택지 추가하기
+        </Button>
+      )}
+      {textList.length > 2 && (
+        <Button
+          size="small"
+          variant="outlined"
+          sx={{ mt: 2, ml: 1 }}
+          onClick={(e) => {
+            setVote({
+              ...vote,
+              textList: textList.pop(),
+            });
+          }}
+        >
+          - 선택지 삭제
+        </Button>
+      )}
       <br />
       <br />
     </>

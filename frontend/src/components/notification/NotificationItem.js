@@ -47,10 +47,6 @@ function renderContent(notification) {
       title,
     };
   }
-  // return {
-  //   avatar: <img src={img} alt="123" />,
-  //   title,
-  // };
 }
 
 NotificationItem.propTypes = {
@@ -64,7 +60,6 @@ export default function NotificationItem({ notification }) {
     notificationCreateTime,
     notificationRead,
     notificationType,
-    // receiveId,
     sendId,
     voteId,
   } = notification;
@@ -86,8 +81,7 @@ export default function NotificationItem({ notification }) {
     } /* 팔로잉 관련 */ else if (notificationType === 4) {
       navigate(`/users/profile/${sendId}`);
     } else {
-      // todo
-      // console.log('일반 알림');
+
     }
   };
 

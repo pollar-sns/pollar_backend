@@ -34,7 +34,7 @@ const InfoStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'flex-end',
-  // marginTop: theme.spacing(3),
+
   color: theme.palette.text.disabled,
 }));
 
@@ -106,7 +106,6 @@ export default function PollDetailCard({ poll }) {
 
   /* 투표하기 */
   function handleVoteClick(state) {
-    // console.log(state);
     // 투표 결과 디스플레이 요청
     setIsVoted(state);
   }
@@ -115,7 +114,6 @@ export default function PollDetailCard({ poll }) {
   const handleRetrieveVote = async () => {
     // 투표 취소 정보 전송
     const result = await cancelPollVote(selectedItem);
-    console.log(result);
     if (result === 'success') setSelectedItem(0);
     setIsVoted(false);
     // 결과값 초기화
@@ -127,7 +125,7 @@ export default function PollDetailCard({ poll }) {
     total: 1 */
   const getPollResult = async () => {
     const data = await getPollSelectionStatus(voteId);
-    console.log(data);
+    // console.log(data);
     setPollResult(data);
   };
 
@@ -135,12 +133,6 @@ export default function PollDetailCard({ poll }) {
     if (isVoted) getPollResult();
     else setIsVoted(); // 투표 결과 숨김, 다시 투표가능한 상태
   }, [isVoted]);
-
-  useEffect(() => {
-    console.log();
-  }, [pollResult]);
-
-  console.log(isLiked)
 
   return (
     <>
@@ -272,14 +264,11 @@ export default function PollDetailCard({ poll }) {
                                   ? (pollResult.selectionCountsList[index] * 100) / pollResult.total
                                   : null
                               }
-                              //// sx={{ width: '100%', height: 'auto' }}
                             />
                           </Card>
                         </Grid>
                       ))}
                     </Grid>
-
-                    {/* </Stack> */}
                   </>
                 )}
               </Grid>
@@ -306,11 +295,8 @@ export default function PollDetailCard({ poll }) {
               </Button>
             </Stack>
           </CardContent>
-
-          {/* <CardActions sx={{ width: '100%' }}></CardActions> */}
         </Card>
         <SharePollDialog pollId={voteId} openDialog={openShareDialog} />
-        {/* </Grid> */}
       </ImageListItem>
     </>
   );

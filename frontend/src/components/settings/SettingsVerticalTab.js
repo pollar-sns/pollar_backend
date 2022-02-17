@@ -46,10 +46,6 @@ export default function SettingsVerticalTab() {
     setValue(newValue);
   };
 
-  useEffect(() => {
-    // getAccountUserInfo();
-  }, []);
-
   return (
     <Box
       sx={{
@@ -87,14 +83,12 @@ export default function SettingsVerticalTab() {
           닉네임과 비밀번호를 수정가능합니다.
         </Typography>
         <ProfileInfoSettings />
-        {/* <CardProfile /> */}
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Typography variant="h5">관심분야 설정</Typography>
         <Typography variant="caption" color="text.secondary" sx={{ pl: 0 }}>
           관심분야를 설정하고, 관련 투표들을 받아보세요! (최대 3개까지 지정가능)
         </Typography>
-        {/* <Divider sx={{ minWidth: '100%' }} /> */}
         <InterestsSettings />
       </TabPanel>
       <TabPanel value={value} index={2}>

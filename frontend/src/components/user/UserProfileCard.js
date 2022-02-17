@@ -49,7 +49,6 @@ export default function UserProfileCard() {
             height: 'auto',
             justifyContent: 'center',
             alignItems: 'center',
-            
           }}
         >
           <Grid container spacing={1} justify="center" align="center">

@@ -20,9 +20,6 @@ function Footer() {
             my={{ xs: 3, lg: 2 }}
             mx={10}
           >
-            {/* <Typography variant="h6" textTransform="uppercase" mb={{ xs: 2, lg: 3 }}>
-              Material Design
-            </Typography> */}
             <Stack
               component="ul"
               direction="row"
@@ -100,10 +97,6 @@ function Footer() {
             </Typography>
           </Grid>
           <Grid item xs={12} lg={6} ml="auto" textAlign={{ xs: 'center', lg: 'right' }}>
-            {/* <MKTypography variant="body1" fontWeight="bold" mb={6} sx={{ fontSize: '1.125rem' }}>
-              The reward for getting on the stage is fame. The price of fame is you can&apos;t get
-              off the stage.
-            </MKTypography> */}
             <Typography
               component={Link}
               href="#dribbble"
