@@ -15,7 +15,7 @@ export default function LikesTabPanel({ userId }) {
 
   useEffect(() => {
     getLikesList();
-  }, []);
+  }, [userId]);
 
   return (
     <>

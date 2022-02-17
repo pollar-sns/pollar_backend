@@ -28,7 +28,14 @@ export default function FollowAccountList({ listType, setOpenModal, listOwnerId 
   const [accountList, setAccountList] = useState([]);
   const isFollowerList = listType === 'follower';
 
+  const [triggerRefresh, setTriggerRefresh] = useState(true);
+
   const loggedUserId = getLoggedUserId();
+
+  // const preventClick = (event) => {
+  //   event.stopPropagation();
+  //   event.preventDefault();
+  // };
 
   const getAccountList = async () => {
     const list = isFollowerList
@@ -39,7 +46,7 @@ export default function FollowAccountList({ listType, setOpenModal, listOwnerId 
 
   useEffect(() => {
     getAccountList();
-  }, []);
+  }, [triggerRefresh]);
 
   /* 사용자 프로필을 클릭했을 시 해당 사용자의 프로필로 이동 */
   const handleAccountClick = (userId) => {
@@ -73,16 +80,18 @@ export default function FollowAccountList({ listType, setOpenModal, listOwnerId 
                   isFollowButton={!account.isFollow}
                   // 리스트의 종류에 따라서, accountId를 각각 다르게 꺼내와야 함
                   accountId={isFollowerList ? account.followingId : account.followerId}
+                  setTriggerRefresh={setTriggerRefresh}
                   // accountId={account.followingId}
                 />
               ) : null
             }
             disablePadding
-            onClick={() =>
-              handleAccountClick(isFollowerList ? account.followingId : account.followerId)
-            }
           >
-            <ListItemButton>
+            <ListItemButton
+              onClick={() =>
+                handleAccountClick(isFollowerList ? account.followingId : account.followerId)
+              }
+            >
               <ListItemAvatar>
                 <Avatar
                   // todo 사용자 프로필 추가 + listType에 따라서 갈리게

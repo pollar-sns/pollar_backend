@@ -16,7 +16,7 @@ export default function VotesTabPanel({ userId }) {
 
   useEffect(() => {
     getVotesList();
-  }, []);
+  }, [userId]);
 
   return (
     <>

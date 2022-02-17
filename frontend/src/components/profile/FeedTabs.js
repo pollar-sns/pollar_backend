@@ -2,7 +2,7 @@
 import Container from '@mui/material/Container';
 
 import { Box, Tab } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import UploadsTabPanel from './UploadsTabPanel';
 import VotesTabPanel from './VotesTabPanel';
