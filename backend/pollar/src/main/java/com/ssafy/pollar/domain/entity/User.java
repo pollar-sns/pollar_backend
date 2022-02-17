@@ -73,6 +73,9 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public void nickNameUpdate(String userNickname) {
+        this.userNickname = userNickname;
+    }
     // Jwt 토큰을 위해 UserDetails
 
     @Override

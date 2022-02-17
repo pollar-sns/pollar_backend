@@ -119,19 +119,9 @@ public class UserServiceImpl implements UserService{
     public void modifyUserInfo(UserDto userDto) throws Exception{
         User usercur = userRepository.findByUserId(userDto.getUserId()).get();
 
-        User user = User.builder()
-                .uid(usercur.getUid())
-                .userId(usercur.getUserId())
-                .password(usercur.getPassword())
-                .userNickname((userDto.getUserNickname()))
-                .userEmail((usercur.getUserEmail()))
-                .userBirthday((usercur.getUserBirthday()))
-                .userGender((usercur.getUserGender()))
-                .userProfilePhoto(userDto.getUserProfilePhoto())
-                .build();
-
+        usercur.nickNameUpdate(userDto.getUserNickname());
         // User에 user 정보 저장
-        userRepository.save(user);
+        userRepository.save(usercur);
     }
 
     @Override

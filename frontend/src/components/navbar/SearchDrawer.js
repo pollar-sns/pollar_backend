@@ -98,9 +98,7 @@ export default function SearchDrawer({ user, isUserLogged }) {
   //검색바
   const getList = async () => {
     if (option === 1) {
-      console.log(param)
       const data = await getUserSearchBar(param);
-      console.log(data)
       setSearchList(data.searchUserList);
     } else if (option === 2) {
       const data = await getFeedSearchBar(param);

@@ -141,11 +141,7 @@ export default function PollDetailForm(props) {
     else setIsVoted(); // 투표 결과 숨김, 다시 투표가능한 상태
   }, [isVoted]);
 
-  useEffect(() => {
-    console.log();
-  }, [pollResult]);
-
-  console.log(isLiked);
+  useEffect(() => {}, [pollResult]);
 
   return (
     <>

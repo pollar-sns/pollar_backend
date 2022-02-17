@@ -125,7 +125,6 @@ export default function PollDetailCard({ poll }) {
 
   /* 투표하기 */
   function handleVoteClick(state) {
-    console.log(state);
     // 투표 선택 정보 전송
     // const result = await requestPollVote(selectionId);
     // console.log(result);

@@ -11,7 +11,6 @@ export default function authHeader() {
     // for Node.js Express back-end
     //// return { 'x-access-token': user.accessToken };
   } else {
-    console.log('Auth token not found');
     return {};
   }
 }

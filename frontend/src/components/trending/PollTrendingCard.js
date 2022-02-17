@@ -158,18 +158,18 @@ export default function PollTrendingCard({ poll, isLoggedUser }) {
     navigate(`/poll/${voteId}`);
   };
 
-    // 로그인 알림
-    const [open, setOpen] = useState(false);
+  // 로그인 알림
+  const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-      navigate('/users/login');
-    };
-  
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    navigate('/users/login');
+  };
+
   const handleUnloggedUserClick = (event) => {
     event.stopPropagation();
     event.preventDefault();
@@ -204,7 +204,6 @@ export default function PollTrendingCard({ poll, isLoggedUser }) {
 
   /* 투표하기 */
   function handleVoteClick(state) {
-    console.log(state);
     // 투표 선택 정보 전송
     // const result = await requestPollVote(selectionId);
     // console.log(result);
