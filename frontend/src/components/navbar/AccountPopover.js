@@ -94,6 +94,8 @@ export default function AccountPopover({ account }) {
     logout();
     // redirect to 'HomePage'
     navigate('/', { replace: true });
+    // 이미 홈화면일 때 로그아웃이 되도 새로고침이 안되는 문제
+    window.location.reload();
     setOpen(false);
   };
 

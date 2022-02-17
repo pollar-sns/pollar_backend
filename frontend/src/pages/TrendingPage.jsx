@@ -27,8 +27,7 @@ export default function TrendingPage() {
             Trending
           </Typography>
           <Typography variant="body1" color="gray" opacity={0.8} mt={1} mb={3}>
-            We&apos;re constantly trying to express ourselves and actualize our dreams. If you have
-            the opportunity to play this game
+            현재 Pollar에서 핫한 투표들! 로그인하고 참여해보세요
           </Typography>
           <TrendingPollsSlider />
         </Grid>

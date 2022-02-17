@@ -74,7 +74,7 @@ export default function PollDetailCard({ poll }) {
     voteParticipateCount,
     voteLikeCount,
   } = poll;
-  console.log(poll)
+  console.log(poll);
   // 로그인한 사용자가 해당 프로필의 '좋아요'목록에 대해서 '좋아요'를 눌렀는지 여부
   const [isLiked, setIsLiked] = useState(isUserLiked);
   // 공유하기 다이얼로그 창
@@ -136,15 +136,15 @@ export default function PollDetailCard({ poll }) {
   }
 
   /* 투표 취소 시 */
-  const handleRetrieveVote = async () => {
-    // 투표 취소 정보 전송
-    const result = await cancelPollVote(selectedItem);
-    console.log(result);
-    if (result === 'success') setSelectedItem(0);
-    setIsVoted(false);
-    // 결과값 초기화
-    setPollResult();
-  };
+  // const handleRetrieveVote = async () => {
+  //   // 투표 취소 정보 전송
+  //   const result = await cancelPollVote(selectedItem);
+  //   console.log(result);
+  //   if (result === 'success') setSelectedItem(0);
+  //   setIsVoted(false);
+  //   // 결과값 초기화
+  //   setPollResult();
+  // };
 
   /* 사용자가 해당 투표에 대해서 투표를 했을 경우, 투표 결과를 디스플레이 */
   /* selectionCountsList: (2) [0, 1]
@@ -160,9 +160,9 @@ export default function PollDetailCard({ poll }) {
     else setIsVoted(); // 투표 결과 숨김, 다시 투표가능한 상태
   }, [isVoted]);
 
-  useEffect(() => {
-    console.log();
-  }, [pollResult]);
+  // useEffect(() => {
+  //   console.log();
+  // }, [pollResult]);
 
   return (
     <>

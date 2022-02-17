@@ -55,6 +55,11 @@ instance.interceptors.response.use(
           logout();
           break;
       }
+    } else {
+      // ex. 서버 키지 않은 경우
+      console.log('서버 안킴', error);
+      history.push('/error/500');
+      window.location.reload();
     }
     // return Promise.reject(error.response.data);
   }

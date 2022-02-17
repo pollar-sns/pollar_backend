@@ -12,7 +12,7 @@ import NeumorphicPaper from '../common/NeumorphicPaper';
 import RecentsTabPanel from './RecentsTabPanel';
 import InterestsTabPanel from './InterestsTabPanel';
 import FollowingTabPanel from './FollowingTabPanel';
-import { getLoggedUserId } from '../../utils/loggedUser';
+import { checkUserLogged, getLoggedUserId } from '../../utils/loggedUser';
 
 const blue = {
   // 50: '#b6b6d7',
@@ -115,7 +115,7 @@ export default function PollListTabs() {
 
   useEffect(() => {
     // 로그인된 사용자인지 검사
-    setIsUserLogged(typeof getLoggedUserId() !== 'undefined');
+    setIsUserLogged(checkUserLogged());
   }, []);
 
   return (

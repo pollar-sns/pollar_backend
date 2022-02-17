@@ -8,8 +8,18 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import PollTrendingCard from './PollTrendingCard';
 import { getTrendingPollList } from '../../services/api/PollApi';
 import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
+import { isLoggedState } from '../../atoms/atoms';
+import { useNavigate } from 'react-router-dom';
+import { checkUserLogged } from '../../utils/loggedUser';
 
 export default function TrendingPollsSlider() {
+  // 로그인된 사용자인지 여부
+  const isLogged = useRecoilValue(isLoggedState);
+  const [isLoggedUser, setIsLoggedUser] = useState(false);
+
+  const navigate = useNavigate();
+
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const [pollList, setPollList] = useState([]);
@@ -29,9 +39,24 @@ export default function TrendingPollsSlider() {
 
   const check = (index) => setSelectedIndex(index);
 
+  // useEffect(() => {
+  //   getPollList();
+  // }, []);
+
   useEffect(() => {
+    // todo 콘솔 찍어보는 용으로 아래 쓰고, 이 아래부분으로 간결하게 대체
+    setIsLoggedUser(isLogged || !checkUserLogged());
+    // if (!isLogged && !checkUserLogged()) {
+    //   console.log(
+    //     '로그인안한 사용자. 투표 불가능 / 좋아요 불가능 / 클릭 시 로그인 창으로 redirect'
+    //   );
+    //   setIsLoggedUser(false);
+    // } else {
+    //   console.log('로그인한 사용자. 투표 가능');
+    //   setIsLoggedUser(true);
+    // }
     getPollList();
-  }, []);
+  }, [isLogged]);
 
   return (
     <>
@@ -46,6 +71,7 @@ export default function TrendingPollsSlider() {
           >
             {pollList.map((poll, index) => (
               <input
+                key={index}
                 type="radio"
                 name="slider"
                 id={`trending${index + 1}`}
@@ -54,8 +80,8 @@ export default function TrendingPollsSlider() {
               />
             ))}
             {pollList.map((poll, index) => (
-              <label htmlFor={`trending${index + 1}`} id={`slide${index + 1}`}>
-                <PollTrendingCard poll={poll} />
+              <label key={index} htmlFor={`trending${index + 1}`} id={`slide${index + 1}`}>
+                <PollTrendingCard poll={poll} isLoggedUser={isLoggedUser} />
               </label>
             ))}
           </section>
