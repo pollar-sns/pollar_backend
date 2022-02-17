@@ -70,7 +70,6 @@ export default function Navbar({ onOpenSidebar, isFullLayout }) {
   // JWT 검사로 변경 필요
   const [loggedUserInfo, setLoggedUserInfo] = useState();
 
-  // console.log(loggedUserInfo.userId)
   useEffect(() => {
     // localStorage에서 정보 가져옴
     const localStorageUserInfo = getLoggedUserInfo();
