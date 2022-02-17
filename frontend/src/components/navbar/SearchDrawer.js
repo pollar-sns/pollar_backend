@@ -273,7 +273,7 @@ export default function SearchDrawer({ user, isUserLogged }) {
                 &nbsp;&nbsp;{vote.voteName}&nbsp;&nbsp;
               </Typography>
               {vote.voteCategoriesName.map((item, index) => (
-                <Chip label={item} sx={{ ml: 0.5 }} key={index}/>
+                <Chip label={item} sx={{ ml: 0.5 }} key={index} />
               ))}
             </Button>
           ))}

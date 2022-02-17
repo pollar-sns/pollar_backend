@@ -81,15 +81,16 @@ function UserPage() {
             backdropFilter: 'saturate(200%) blur(30px)',
             boxShadow: '2px 2px 20px 10px rgba(0, 0, 0, 0.1)',
             overflow: 'visible',
-            height: 500,
+            height: "auto",
             bgcolor: '#f1f3fa',
             flexGrow: 1,
           }}
+          overflow="auto"
         >
           <Typography variant="h3" gutterBottom color="primary">
             Pollar Members
           </Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} >
             {userInfo.map((user, index) => (
               <UserDetailCard key={index} user={user} />
             ))}
