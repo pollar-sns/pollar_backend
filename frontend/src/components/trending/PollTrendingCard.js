@@ -98,6 +98,8 @@ const InfoStyle = styled('div')(({ theme }) => ({
 export default function PollTrendingCard({ poll, isLoggedUser }) {
   const navigate = useNavigate();
 
+  console.log(isLoggedUser);
+
   const {
     voteId,
     voteName,
