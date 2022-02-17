@@ -32,11 +32,13 @@ export default function ProfileImageUploadButton({ size, userId, prevImage }) {
       if (result) {
         //todo localStorage에 갱신
         const updatedData = getLoggedUserInfo();
-        updatedData.userProfilePhoto = result;
-        setLoggedUserInfo(updatedData);
+        if (typeof updatedData === 'undefined') {
+          updatedData.userProfilePhoto = result;
+          setLoggedUserInfo(updatedData);
 
-        // recoil에 해당 정보 알림
-        setIsUserInfoUpdated((curr) => !curr);
+          // recoil에 해당 정보 알림
+          setIsUserInfoUpdated((curr) => !curr);
+        }
       }
     } else {
       //업로드 취소할 시
