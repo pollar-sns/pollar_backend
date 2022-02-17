@@ -24,12 +24,12 @@ export default function NotificationSettings() {
 
   const getUserSettings = async () => {
     const data = await getNotificationSetting();
-    console.log(data.userNotificationState.allNotificationState);
+    // console.log(data.userNotificationState.allNotificationState);
     setTotalNotificationOn(data.userNotificationState.allNotificationState);
   };
 
   const handleTotalSettingChange = async () => {
-    console.log(totalNotificationOn);
+    // console.log(totalNotificationOn);
     if (totalNotificationOn) {
       const result = await setNotificationOn();
       if (result === 'success') setOpenSuccessAlert(true);

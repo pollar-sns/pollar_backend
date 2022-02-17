@@ -54,7 +54,7 @@ export const voteCreate = async (form) => {
 
 // 이미지 투표 생성
 export const voteImageCreate = async (form) => {
-  console.log(form);
+  // console.log(form);
   const response = await instance.post(COMMON + '/create', form, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -107,6 +107,6 @@ export const getVoteInfo = async (voteId) => {
   }
   // voteId를 pathvariable로 보내서 vote dto를 받아옴
   const response = await instance.get(COMMON + `/${voteId}`, params);
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 };

@@ -120,7 +120,7 @@ export default function PollDetailForm(props) {
   const handleRetrieveVote = async () => {
     // 투표 취소 정보 전송
     const result = await cancelPollVote(selectedItem);
-    console.log(result);
+    // console.log(result);
     if (result === 'success') setSelectedItem(0);
     setIsVoted(false);
     // 결과값 초기화
@@ -132,7 +132,7 @@ export default function PollDetailForm(props) {
     total: 1 */
   const getPollResult = async () => {
     const data = await getPollSelectionStatus(vote.voteId);
-    console.log(data);
+    // console.log(data);
     setPollResult(data);
   };
 

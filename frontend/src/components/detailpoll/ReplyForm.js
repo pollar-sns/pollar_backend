@@ -43,7 +43,6 @@ export default function ReplyForm({ replies }) {
       alert('댓글 생성 실패');
     }
   };
-  console.log(reply);
 
   return (
     <>

@@ -4,7 +4,16 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-import { Box, Container, Typography, Card, Snackbar } from '@mui/material';
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+} from '@mui/material';
 import { checkUserLogged, getLoggedUserId } from '../utils/loggedUser';
 
 export default function PollCreatePage() {
@@ -12,46 +21,45 @@ export default function PollCreatePage() {
   const isLogged = useRecoilValue(isLoggedState);
   const navigate = useNavigate();
   // alert
-  const [alert, setAlert] = useState({
-    open: false,
-    vertical: 'center',
-    horizontal: 'center',
-  });
-  const { vertical, horizontal, open } = alert;
+  // 로그인 알림
+  const [loginOpen, setLoginOpen] = useState(false);
 
-  const openAlert = () => {
-    setAlert({
-      ...alert,
-      open: true,
-    });
+  const handleClickOpen = () => {
+    setLoginOpen(true);
   };
-  const closeAlert = () => {
-    setAlert({
-      ...alert,
-      open: false,
-    });
+
+  const handleClose = () => {
+    setLoginOpen(false);
+    navigate('/users/login');
   };
   useEffect(() => {
     if (!isLogged && !checkUserLogged()) {
-      // todo
-      // setInterval(()=> {
-      //   openAlert();
-      // },2000)
-      navigate('/users/login');
+      handleClickOpen()
+      
     }
   }, []);
+  
 
   return (
     <>
-      {alert.open && (
-        <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          open={open}
-          onClose={closeAlert}
-          message="회원에게만 제공되는 서비스입니다. "
-          autoHideDuration={3000}
-        />
-      )}
+      <Dialog
+        open={loginOpen}
+        // onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          <Typography variant="body1" textAlign="center">
+            회원에게만 제공되는 서비스입니다. <br />
+            로그인 화면으로 이동합니다.
+          </Typography>
+        </DialogTitle>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+          <Button onClick={handleClose} autoFocus>
+            확인
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Container>
         <Box sx={{ width: '100%', typography: 'body1' }}>
           <Card

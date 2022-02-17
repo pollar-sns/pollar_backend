@@ -72,7 +72,7 @@ export default function NotificationItem({ notification }) {
       const result = await readNotifications([notificationId]);
       // 알림과 관련된 action 처리
       if (result.data === 'success') {
-        console.log('읽음처리');
+        // console.log('읽음처리');
       }
     }
     /* 피드(투표) 관련 */

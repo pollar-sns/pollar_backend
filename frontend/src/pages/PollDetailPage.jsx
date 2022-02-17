@@ -1,6 +1,6 @@
 import { Typography, Box, Stack, Card } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import Container from '@mui/material/Container';
+import { Dialog, DialogActions, DialogTitle, Button } from '@mui/material';
 import PollDetail from '../components/detailpoll/PollDetail';
 import { getVoteInfo } from '../services/api/PollApi';
 import { useEffect, useState } from 'react';
@@ -11,8 +11,6 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { isLoggedState } from '../atoms/atoms';
 import { checkUserLogged, getLoggedUserId } from '../utils/loggedUser';
-import PollDetailForm from '../components/detailpoll/PollDetailForm';
-import Detail from '../components/detailpoll/Detail';
 import PollDetailCard from '../components/detailpoll/PollDetailCard';
 
 export default function PollDetailPage() {
@@ -36,11 +34,22 @@ export default function PollDetailPage() {
     setReplies(replyList);
   };
 
+  // 로그인 알림
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    navigate('/users/login');
+  };
+
   useEffect(() => {
     if (!isLogged && !checkUserLogged()) {
       // todo
-      alert('회원에게만 제공되는 서비스입니다. ');
-      navigate('/users/login');
+      handleClickOpen();
     } else {
       getVote();
       loadReply();
@@ -49,6 +58,24 @@ export default function PollDetailPage() {
 
   return (
     <>
+      <Dialog
+        open={open}
+        // onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          <Typography variant="body1" textAlign="center">
+            회원에게만 제공되는 서비스입니다. <br />
+            로그인 화면으로 이동합니다.
+          </Typography>
+        </DialogTitle>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+          <Button onClick={handleClose} autoFocus>
+            확인
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Stack direction="row" spacing={5}>
         {/* <Detail vote={voteInfo} /> */}
         {/* <PollDetailForm vote={voteInfo} /> */}

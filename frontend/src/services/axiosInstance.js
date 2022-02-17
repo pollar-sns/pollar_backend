@@ -43,7 +43,7 @@ instance.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          console.log(error.response);
+          // console.log(error.response);
           //  1. Redirect user to LOGIN
           alert('로그인 안된 사용자. 이 페이지에 접근불가');
           history.push('/users/login');
@@ -57,7 +57,7 @@ instance.interceptors.response.use(
       }
     } else {
       // ex. 서버 키지 않은 경우
-      console.log('서버 안킴', error);
+      // console.log('서버 안킴', error);
       history.push('/error/500');
       window.location.reload();
     }

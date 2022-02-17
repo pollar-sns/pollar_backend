@@ -44,10 +44,10 @@ export default function UserDetailCard(props) {
               </Grid>
               <Grid item xs={12} justify="center">
                 <Typography sx={{ fontSize: 15}} variant="overline" textAlign="center">
-                  <p>{user.userNickname}</p>
+                  {user.userNickname}
                 </Typography>
-                <Typography component="caption" variant="caption" color="text.secondary">
-                  <p>@{user.userId}</p>
+                <Typography  sx={{ fontSize: 10 }} color="text.secondary">
+                  @{user.userId}
                 </Typography>
               </Grid>
               <Grid item xs={4} justify="center">
@@ -55,7 +55,7 @@ export default function UserDetailCard(props) {
                   <Typography component="span" color="primary">
                     {user.createVoteCount}
                   </Typography>
-                  <Typography component="span" variant="caption" color="text.secondary">
+                  <Typography component="span" sx={{ fontSize: 10 }} color="text.secondary">
                     게시글
                   </Typography>
                 </Stack>
@@ -65,7 +65,7 @@ export default function UserDetailCard(props) {
                   <Typography component="span" color="primary">
                     {user.participateVoteCount}
                   </Typography>
-                  <Typography component="span" variant="caption" color="text.secondary">
+                  <Typography component="span" sx={{ fontSize: 10 }} color="text.secondary">
                     투표수
                   </Typography>
                 </Stack>
@@ -75,7 +75,7 @@ export default function UserDetailCard(props) {
                   <Typography component="span" color="primary">
                     {user.followerCount}
                   </Typography>
-                  <Typography component="span" variant="caption" color="text.secondary">
+                  <Typography component="span" sx={{ fontSize: 10 }} color="text.secondary">
                     팔로워
                   </Typography>
                 </Stack>

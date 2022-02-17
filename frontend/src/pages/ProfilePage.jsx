@@ -1,6 +1,6 @@
 import Container from '@mui/material/Container';
 
-import { Box, Card } from '@mui/material';
+import { Box, Card, Dialog, DialogActions, DialogTitle, Button, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -65,11 +65,22 @@ export default function ProfilePage() {
     setProfileInfo(data);
   };
 
+  // 로그인 알림
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    navigate('/users/login');
+  };
+
   useEffect(() => {
     // 로그인된 사용자인지 검사
     if (!isLogged && !checkUserLogged()) {
-      alert('회원에게만 제공되는 서비스입니다. ');
-      navigate('/users/login');
+      handleClickOpen();
     }
     setProfileId(userId);
     checkIfOwnerAccount();
@@ -79,6 +90,24 @@ export default function ProfilePage() {
 
   return (
     <>
+      <Dialog
+        open={open}
+        // onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          <Typography variant="body1" textAlign="center">
+            회원에게만 제공되는 서비스입니다. <br />
+            로그인 화면으로 이동합니다.
+          </Typography>
+        </DialogTitle>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+          <Button onClick={handleClose} autoFocus>
+            확인
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Box bgColor="white">
         <Container>
           <Card sx={style}>
