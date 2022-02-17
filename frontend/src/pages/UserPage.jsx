@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Container, Typography, Card, Grid } from '@mui/material';
-import { getLoggedUserId } from '../utils/loggedUser';
+import { checkUserLogged, getLoggedUserId } from '../utils/loggedUser';
 import { getAllUsers } from '../services/api/SearchApi';
 import UserDetailCard from '../components/user/UserDetailCard';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +23,7 @@ function UserPage() {
   };
 
   useEffect(() => {
-    if (!isLogged && getLoggedUserId() === null) {
+    if (!isLogged && !checkUserLogged()) {
       // todo
       alert('회원에게만 제공되는 서비스입니다. ');
       navigate('/users/login');

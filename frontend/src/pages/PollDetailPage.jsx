@@ -10,7 +10,7 @@ import ReplyForm from '../components/detailpoll/ReplyForm';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { isLoggedState } from '../atoms/atoms';
-import { getLoggedUserId } from '../utils/loggedUser';
+import { checkUserLogged, getLoggedUserId } from '../utils/loggedUser';
 import PollDetailForm from '../components/detailpoll/PollDetailForm';
 import Detail from '../components/detailpoll/Detail';
 
@@ -19,40 +19,54 @@ export default function PollDetailPage() {
   const isLogged = useRecoilValue(isLoggedState);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isLogged && getLoggedUserId() === null) {
-      // todo
-      alert('회원에게만 제공되는 서비스입니다. ');
-      navigate('/users/login');
-    }
-  }, []);
-
   let { id } = useParams(); // url에 있는 path variable을 가져옴
-  const [voteInfo, setVoteInfo] = useState();
-  const [categories, setCategories] = useState();
+  const [voteInfo, setVoteInfo] = useState(undefined);
+  const [categories, setCategories] = useState(undefined);
   const [replies, setReplies] = useState([]);
 
   const getVote = async () => {
     // voteInfo랑 categories 가져오기
     const data = await getVoteInfo(id);
     setVoteInfo(data);
+    console.log(data);
   };
   const loadReply = async () => {
     const replyList = await getRelies(id);
     setReplies(replyList);
   };
-  console.log(voteInfo)
+
   useEffect(() => {
-    getVote();
-    loadReply();
+    if (!isLogged && !checkUserLogged()) {
+      // todo
+      alert('회원에게만 제공되는 서비스입니다. ');
+      navigate('/users/login');
+    } else {
+      getVote();
+      loadReply();
+    }
   }, [id]);
 
   return (
     <>
       <Stack direction="row">
-            <Detail vote={voteInfo} />
-            {/* <PollDetailForm vote={voteInfo} /> */}
-            <ReplyForm replies={replies} />
+        <Card>
+          <Box
+            component="div"
+            paddingBottom={3}
+            paddingLeft={2}
+            paddingRight={2}
+            style={{
+              overflowY: 'scroll', // added scroll
+            }}
+          >
+            {voteInfo ? (
+              <>
+                {/* <PollDetailForm vote={voteInfo} /> */}
+                <ReplyForm replies={replies} />
+              </>
+            ) : null}
+          </Box>
+        </Card>
       </Stack>
     </>
   );

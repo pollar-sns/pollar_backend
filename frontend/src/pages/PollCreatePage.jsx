@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { Box, Container, Typography, Card, Snackbar } from '@mui/material';
-import { getLoggedUserId } from '../utils/loggedUser';
+import { checkUserLogged, getLoggedUserId } from '../utils/loggedUser';
 
 export default function PollCreatePage() {
   // 로그인된 사용자만 사용가능 (recoil state watch하자)
@@ -32,7 +32,7 @@ export default function PollCreatePage() {
     });
   };
   useEffect(() => {
-    if (!isLogged && getLoggedUserId() === null) {
+    if (!isLogged && !checkUserLogged()) {
       // todo
       openAlert();
       navigate('/users/login');

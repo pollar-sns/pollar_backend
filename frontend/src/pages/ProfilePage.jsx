@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import FeedTabs from '../components/profile/FeedTabs';
 import Profile from '../components/profile/Profile';
 import { getProfileInfo } from '../services/api/ProfileApi';
-import { getLoggedUserId } from '../utils/loggedUser';
+import { checkUserLogged, getLoggedUserId } from '../utils/loggedUser';
 import { getTotalUploadsCount, getTotalVotesCount } from '../services/api/PollApi';
 import { useRecoilValue } from 'recoil';
 import { isLoggedState } from '../atoms/atoms';
@@ -71,7 +71,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     // 로그인된 사용자인지 검사
-    if (!isLogged && getLoggedUserId() === null) {
+    if (!isLogged && !checkUserLogged()) {
       // todo
       alert('회원에게만 제공되는 서비스입니다. ');
       navigate('/users/login');
