@@ -96,7 +96,7 @@ export default function FollowAccountList({ listType, setOpenModal, listOwnerId 
                 <Avatar
                   // todo 사용자 프로필 추가 + listType에 따라서 갈리게
                   alt={`Avatar n°${account.followingNickname + 1}`}
-                  src={`/static/images/avatar/${account.followingNickname + 1}.jpg`}
+                  src={account.followUserProfilePhoto}
                 />
               </ListItemAvatar>
               <ListItemText
