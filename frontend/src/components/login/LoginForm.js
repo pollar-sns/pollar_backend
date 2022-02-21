@@ -25,6 +25,7 @@ import { LoadingButton } from '@mui/lab';
 import { login } from '../../services/api/AuthApi';
 import { useSetRecoilState } from 'recoil';
 import { isLoggedState, loggedUserState } from '../../atoms/atoms';
+import { createBrowserHistory } from 'history';
 
 // ----------------------------------------------------------------------
 export default function LoginForm() {
@@ -59,21 +60,21 @@ export default function LoginForm() {
     setShowPassword((show) => !show);
   };
 
+  const history = createBrowserHistory();
+
   const handleLogin = async (loginInfo) => {
-    try {
       const result = await login(loginInfo);
       // console.log(result);
       if (result.message == 'success') {
+        // const nv = await navigate(-1);
+        history.go(-1);
         setIsLoggedState(true);
+        window.location.reload();
         // 이전으로 돌아갈 수 있어야 하므로 history 유지
-        navigate(-1);
         //// navigate('/', { replace: true });
       } else {
         setOpenAlert(true);
       }
-    } catch (error) {
-      setOpenAlert(true);
-    }
   };
 
   return (
