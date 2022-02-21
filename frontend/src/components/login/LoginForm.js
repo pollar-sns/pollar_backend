@@ -67,11 +67,16 @@ export default function LoginForm() {
     // console.log(result);
     if (result.message == 'success') {
       // const nv = await navigate(-1);
-      history.go(-1);
-      setIsLoggedState(true);
-      window.location.reload();
-      // 이전으로 돌아갈 수 있어야 하므로 history 유지
-      //// navigate('/', { replace: true });
+      try {
+        // history.go(-1);
+        navigate('/');
+        setIsLoggedState(true);
+
+        // 이전으로 돌아갈 수 있어야 하므로 history 유지
+      } catch {
+      } finally {
+        window.location.reload();
+      }
     } else {
       setOpenAlert(true);
     }
