@@ -63,18 +63,23 @@ export default function LoginForm() {
   const history = createBrowserHistory();
 
   const handleLogin = async (loginInfo) => {
-      const result = await login(loginInfo);
-      // console.log(result);
-      if (result.message == 'success') {
-        // const nv = await navigate(-1);
-        history.go(-1);
+    const result = await login(loginInfo);
+    // console.log(result);
+    if (result.message == 'success') {
+      // const nv = await navigate(-1);
+      try {
+        // history.go(-1);
+        navigate('/');
         setIsLoggedState(true);
-        window.location.reload();
+
         // 이전으로 돌아갈 수 있어야 하므로 history 유지
-        //// navigate('/', { replace: true });
-      } else {
-        setOpenAlert(true);
+      } catch {
+      } finally {
+        window.location.reload();
       }
+    } else {
+      setOpenAlert(true);
+    }
   };
 
   return (
