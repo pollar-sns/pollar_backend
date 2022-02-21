@@ -83,7 +83,7 @@ export default function Navbar({ onOpenSidebar, isFullLayout }) {
     } else {
       // 로그아웃된 상태라면, 사용자 정보 초기화
       setLoggedUserInfo();
-    }
+    }  
   }, [isLogged, isUserInfoUpdated]); //? 로그아웃 시, 감지를 하기 위해서 recoil을 deps에 추가하는 방식으로 설계함
 
   return (
