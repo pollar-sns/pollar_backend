@@ -60,20 +60,16 @@ export default function LoginForm() {
   };
 
   const handleLogin = async (loginInfo) => {
-    try {
       const result = await login(loginInfo);
       // console.log(result);
       if (result.message == 'success') {
+        navigate(-1);
         setIsLoggedState(true);
         // 이전으로 돌아갈 수 있어야 하므로 history 유지
-        navigate(-1);
         //// navigate('/', { replace: true });
       } else {
         setOpenAlert(true);
       }
-    } catch (error) {
-      setOpenAlert(true);
-    }
   };
 
   return (
